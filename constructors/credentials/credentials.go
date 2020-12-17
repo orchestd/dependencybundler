@@ -1,11 +1,12 @@
 package credentials
 
 import (
-	"bitbucket.org/HeilaSystems/dependencybundler/interfaces/credentials"
+	"bitbucket.org/HeilaSystems/configurations/credentials"
+	credentialsConstructor "bitbucket.org/HeilaSystems/dependencybundler/interfaces/credentials"
 	"os"
 )
 
-func DefaultCredentials(builder credentials.Builder) credentials.CredentialsGetter {
+func DefaultCredentials(builder credentials.Builder) credentialsConstructor.CredentialsGetter {
 	env, isExist := os.LookupEnv("HEILA_ENV")
 	if !isExist {
 		panic("Cannot initialize new credentials, missing environment variable HEILA_ENV ")

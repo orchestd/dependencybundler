@@ -1,17 +1,5 @@
 package credentials
 
-type Builder interface {
-	DevMode() Builder
-	Build() (CredentialsGetter, error)
-}
+import "bitbucket.org/HeilaSystems/configurations/credentials"
 
-type CredentialsGetter interface {
-	GetCredentials() Credentials
-	Implementation() interface{}
-}
-type Credentials struct {
-	DbUsername string `envconfig:"DB_USERNAME"`
-	DbPassword string `envconfig:"DB_PASSWORD"`
-	DbHost     string `envconfig:"DB_HOST"`
-	DbName     string `envconfig:"DB_NAME"`
-}
+type CredentialsGetter credentials.CredentialsGetter

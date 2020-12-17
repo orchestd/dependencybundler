@@ -1,6 +1,7 @@
 package cache
 
 import (
+	"bitbucket.org/HeilaSystems/cacheStorage"
 	"bitbucket.org/HeilaSystems/dependencybundler/interfaces/cache"
 	"bitbucket.org/HeilaSystems/dependencybundler/interfaces/credentials"
 	"context"
@@ -8,7 +9,7 @@ import (
 )
 
 
-func DefaultCacheStorageClient(lc fx.Lifecycle, credentials credentials.CredentialsGetter,builder cache.CacheStorageBuilder) (cache.CacheStorageGetter, cache.CacheStorageSetter) {
+func DefaultCacheStorageClient(lc fx.Lifecycle, credentials credentials.CredentialsGetter,builder cacheStorage.CacheStorageBuilder) (cache.CacheStorageGetter, cache.CacheStorageSetter) {
 	creds := credentials.GetCredentials()
 	cs := builder.SetDatabaseName(creds.DbName).SetHost(creds.DbHost).SetUsername(creds.DbUsername).SetPassword(creds.DbPassword).Build()
 
