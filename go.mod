@@ -9,3 +9,6 @@ require (
 	github.com/gin-gonic/gin v1.6.3
 	go.uber.org/fx v1.13.1
 )
+replace (
+	bitbucket.org/HeilaSystems/transport v0.0.0 => ../transport
+)
