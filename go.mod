@@ -6,7 +6,7 @@ require (
 	bitbucket.org/HeilaSystems/cacheStorage v0.11.0
 	bitbucket.org/HeilaSystems/configurations v0.0.10
 	bitbucket.org/HeilaSystems/log v0.0.10
-	bitbucket.org/HeilaSystems/session v0.0.10
+	bitbucket.org/HeilaSystems/session v0.0.11
 	bitbucket.org/HeilaSystems/trace v0.0.10
 	bitbucket.org/HeilaSystems/transport v0.0.10
 	github.com/felixge/httpsnoop v1.0.1 // indirect
