@@ -11,3 +11,5 @@ type IRouter gin.IRouter
 var HandleFunc =  http.HandleFunc
 
 type HttpClient client.HttpClient
+type HTTPClientInterceptor client.HTTPClientInterceptor
+type IHttpLog http.IHttpLog
