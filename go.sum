@@ -12,6 +12,8 @@ bitbucket.org/HeilaSystems/configurations v0.0.1 h1:a6rtM/rh+i3cLGr2FRZJiYJHUG7U
 bitbucket.org/HeilaSystems/configurations v0.0.1/go.mod h1:5EgWGFESD28jWEAZJM4JtZbDOU4Q/3fJm2EigKpsYQQ=
 bitbucket.org/HeilaSystems/configurations v0.0.10 h1:OBNQnpmdcVNmfaRDmydBSGvuNUuaiLHEJGaBgT75sW8=
 bitbucket.org/HeilaSystems/configurations v0.0.10/go.mod h1:m5N8E37vcdHBVFrURNpKSSx8lUI1ytOfQKng3VMxcmg=
+bitbucket.org/HeilaSystems/configurations v0.0.11 h1:khPlcgK8rAFYIcBTFLPchwgyE9DoiqE2htXE9D1/bjk=
+bitbucket.org/HeilaSystems/configurations v0.0.11/go.mod h1:m5N8E37vcdHBVFrURNpKSSx8lUI1ytOfQKng3VMxcmg=
 bitbucket.org/HeilaSystems/confreader v1.101.0/go.mod h1:KRa9pJRVPKX9sONRxNaLajnR8luFw80FLgAtzj3VvWg=
 bitbucket.org/HeilaSystems/dbcon v1.3.3 h1:kh6WYEHnOwOnZEApuSUXdevf7fHuKa4jwRC2A/jFhL0=
 bitbucket.org/HeilaSystems/dbcon v1.3.3/go.mod h1:JIOMf/FBYbq5uFYM0cD9BXRRKjrnbtgdd97y1qwvdXo=
@@ -27,6 +29,7 @@ bitbucket.org/HeilaSystems/dependencybundler v0.0.0/go.mod h1:AEv6Eu/NBI3sOpd7M9
 bitbucket.org/HeilaSystems/dependencybundler v0.0.2/go.mod h1:yw73TD6SSIBSYBqif7ek8Bn6cUV5JWj8gH9Mbm3KRUc=
 bitbucket.org/HeilaSystems/dependencybundler v0.0.4/go.mod h1:VIEjhVhEnt9+fJ63VfXcwnLiAsFvv7Q8TWK8ZIXWRhs=
 bitbucket.org/HeilaSystems/dependencybundler v0.0.10/go.mod h1:O462YS7Hub+7rM+qJvo+ahgdm8SxnHmYo3yfyzA4ltQ=
+bitbucket.org/HeilaSystems/dependencybundler v0.0.11/go.mod h1:/Y4aowAzfuRAYDzMMyRZHgXRjDOqqkzQ9rI7+zBkovU=
 bitbucket.org/HeilaSystems/dictionary v1.0.0-Oct2018-2nd-store-fixes h1:QmNHf0Bcdy5o4eE57xxDa21UO/bI0Y7NwiwudvyY1Gc=
 bitbucket.org/HeilaSystems/dictionary v1.0.0-Oct2018-2nd-store-fixes/go.mod h1:wo03SVCegO7IptTg2kjpLm0EWhWwYqGsb11vLrMIamo=
 bitbucket.org/HeilaSystems/errors v1.1.1-servicetdErr h1:Qef990E6KPgzYF6Du5RTiTOeawgFaYFN4wBTodw1cdo=
@@ -57,6 +60,8 @@ bitbucket.org/HeilaSystems/servicereply v0.0.2/go.mod h1:pTbrM3riyOUudSz2LHyUgR3
 bitbucket.org/HeilaSystems/session v0.0.0-20201231123045-a9b2aeaef337 h1:Lu3qRRyHSLs3dHt7AZpLlft5lRYe69Lj7Re8Ftd6eX4=
 bitbucket.org/HeilaSystems/session v0.0.10 h1:Qnoe4ahvxaoxNG26FXz7pdYJvd9XnBe4jGjpwJxUXwo=
 bitbucket.org/HeilaSystems/session v0.0.10/go.mod h1:g0EArECKIwnz049UWONcsTpJLSyqRHXccnp5AlO1PjM=
+bitbucket.org/HeilaSystems/session v0.0.11 h1:JcTFun3+PWhzbFRETyC6Nav39rhbrxKtBq4+rdV+EE0=
+bitbucket.org/HeilaSystems/session v0.0.11/go.mod h1:EDal3brEc+8kbxhEvA6YkemxL9wvq+PzFDHlJXaebg0=
 bitbucket.org/HeilaSystems/trace v0.0.10 h1:EukF2K1XuZ6qFP1JvLnbeNR3sDi6i0+zh/KHIvnTj08=
 bitbucket.org/HeilaSystems/trace v0.0.10/go.mod h1:CNpbceWn46za3D9WBVKS3rfsX1omZEmP/5kX0GxdwcM=
 bitbucket.org/HeilaSystems/transport v0.0.0 h1:1QlGjLPe3m14Euk7Rxid4Z/wGdz5KZ3EzOVaZR8EFcs=
