@@ -8,7 +8,7 @@ require (
 	bitbucket.org/HeilaSystems/log v0.0.10
 	bitbucket.org/HeilaSystems/session v0.0.11
 	bitbucket.org/HeilaSystems/trace v0.0.10
-	bitbucket.org/HeilaSystems/transport v0.0.11
+	bitbucket.org/HeilaSystems/transport v0.0.12
 	github.com/felixge/httpsnoop v1.0.1 // indirect
 	github.com/gin-gonic/gin v1.6.3
 	github.com/go-masonry/mortar v0.1.3

@@ -1,15 +1,19 @@
 package trace
 
-import "github.com/gin-gonic/gin"
+import (
+	"fmt"
+	"github.com/gin-gonic/gin"
+)
 
 const TokenHeaderName  = "token"
 func JwtToken() gin.HandlerFunc {
 	return func(c *gin.Context) {
-		token := c.Request.Header.Get(TokenHeaderName)
+		fmt.Println(c.Request.Header)
+		token := c.GetHeader(TokenHeaderName)
 		if token != "" {
 			c.Set(TokenHeaderName,token)
 		}
-		c.Writer.Header().Set("Token", token)
+		c.Writer.Header().Set(TokenHeaderName, token)
 		c.Next()
 	}
 }

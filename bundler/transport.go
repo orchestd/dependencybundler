@@ -14,7 +14,8 @@ import (
 
 const ClientInterceptorsGroup = "clientInterceptors"
 const ServerInterceptors = "serverInterceptors"
-func TransportFxOption(monolithConstructor ...interface{} ) fx.Option {
+
+func TransportFxOption(monolithConstructor ...interface{}) fx.Option {
 	var optionArr []fx.Option
 	for _, v := range monolithConstructor {
 		optionArr = append(optionArr, fx.Provide(v))
@@ -23,7 +24,10 @@ func TransportFxOption(monolithConstructor ...interface{} ) fx.Option {
 	return fx.Options(
 
 		//HTTP server bundler
-		fx.Provide( fx.Annotated{Group: ClientInterceptorsGroup , Target: clientMiddlewares.DefaultContextValuesToHeaders}),
+
+		fx.Provide(fx.Annotated{Group: ClientInterceptorsGroup, Target: clientMiddlewares.DefaultContextValuesToHeaders}),
+		fx.Provide(fx.Annotated{Group: ClientInterceptorsGroup, Target: clientMiddlewares.DefaultTokenClientInterceptors}),
+
 		fx.Provide(func() server.HttpBuilder {
 			builder := http.Builder()
 			return builder
@@ -31,16 +35,16 @@ func TransportFxOption(monolithConstructor ...interface{} ) fx.Option {
 		fx.Provide(transportConstructor.DefaultTransport),
 
 		//HTTP client bundlerDefaultHeadersToContext
-		fx.Provide( fx.Annotated{Group: ServerInterceptors , Target:serverMiddlewares.DefaultHeadersToContext}),
-		fx.Provide(fx.Annotated{Group: ServerInterceptors , Target:serverMiddlewares.DefaultBasicRequestId}),
-		fx.Provide(fx.Annotated{Group: ServerInterceptors , Target:serverMiddlewares.DefaultJwtToken}),
-		fx.Provide( fx.Annotated{Group: ServerInterceptors , Target:serverMiddlewares.DefaultLogHandlerMiddleware}),
-		fx.Provide( fx.Annotated{Group: ServerInterceptors , Target:trace.HttpTracingUnaryServerInterceptor}),
+		fx.Provide(fx.Annotated{Group: ServerInterceptors, Target: serverMiddlewares.DefaultHeadersToContext}),
+		fx.Provide(fx.Annotated{Group: ServerInterceptors, Target: serverMiddlewares.DefaultBasicRequestId}),
+		fx.Provide(fx.Annotated{Group: ServerInterceptors, Target: serverMiddlewares.DefaultJwtToken}),
+		fx.Provide(fx.Annotated{Group: ServerInterceptors, Target: serverMiddlewares.DefaultLogHandlerMiddleware}),
+		fx.Provide(fx.Annotated{Group: ServerInterceptors, Target: trace.HttpTracingUnaryServerInterceptor}),
 		fx.Provide(func() client.HTTPClientBuilder {
 			builder := httpClient.HTTPClientBuilder()
 			return builder
 		}),
 
 		userConstructors,
-		)
+	)
 }

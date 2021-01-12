@@ -35,10 +35,13 @@ func DefaultTransport(deps transportDeps)  (transportConstructor.IRouter,transpo
 	if len(deps.ClientInterceptors) > 0 {
 		deps.ClientBuilder = deps.ClientBuilder.AddInterceptors(deps.ClientInterceptors...)
 	}
-
+	deps.ClientBuilder = deps.ClientBuilder.SetConfig(deps.Conf)
 	if len(deps.ServerInterceptors) > 0 {
 		deps.ServerBuilder = deps.ServerBuilder.AddInterceptors(deps.ServerInterceptors...)
 	}
-
-	return deps.ServerBuilder.Build(deps.Lc),deps.ClientBuilder.Build()
+	client, err := deps.ClientBuilder.Build()
+	if err != nil {
+		panic(err)
+	}
+	return deps.ServerBuilder.Build(deps.Lc),client
 }

@@ -13,3 +13,7 @@ func DefaultContextValuesToHeaders(config configuration.Config) client.HTTPClien
 	}
 	return contextValuesToHeaders.ContextValuesToHeaders(headers)
 }
+
+func DefaultTokenClientInterceptors() client.HTTPClientInterceptor {
+	return contextValuesToHeaders.TokenClientInterceptors()
+}
