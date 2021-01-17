@@ -14,6 +14,7 @@ import (
 
 const ClientInterceptorsGroup = "clientInterceptors"
 const ServerInterceptors = "serverInterceptors"
+const ServerContextInterceptors = "serverContextInterceptors"
 
 func TransportFxOption(monolithConstructor ...interface{}) fx.Option {
 	var optionArr []fx.Option
@@ -26,6 +27,7 @@ func TransportFxOption(monolithConstructor ...interface{}) fx.Option {
 		//HTTP server bundler
 
 		fx.Provide(fx.Annotated{Group: ClientInterceptorsGroup, Target: clientMiddlewares.DefaultContextValuesToHeaders}),
+		fx.Provide(fx.Annotated{Group: ClientInterceptorsGroup, Target: trace.TracerRESTClientInterceptor}),
 		fx.Provide(fx.Annotated{Group: ClientInterceptorsGroup, Target: clientMiddlewares.DefaultTokenClientInterceptors}),
 
 		fx.Provide(func() server.HttpBuilder {
@@ -35,11 +37,11 @@ func TransportFxOption(monolithConstructor ...interface{}) fx.Option {
 		fx.Provide(transportConstructor.DefaultTransport),
 
 		//HTTP client bundlerDefaultHeadersToContext
-		fx.Provide(fx.Annotated{Group: ServerInterceptors, Target: serverMiddlewares.DefaultHeadersToContext}),
-		fx.Provide(fx.Annotated{Group: ServerInterceptors, Target: serverMiddlewares.DefaultBasicRequestId}),
-		fx.Provide(fx.Annotated{Group: ServerInterceptors, Target: serverMiddlewares.DefaultJwtToken}),
+		fx.Provide(fx.Annotated{Group: ServerContextInterceptors, Target: serverMiddlewares.DefaultHeadersToContext}),
+		fx.Provide(fx.Annotated{Group: ServerContextInterceptors, Target: serverMiddlewares.DefaultBasicRequestId}),
+		fx.Provide(fx.Annotated{Group: ServerContextInterceptors, Target: serverMiddlewares.DefaultJwtToken}),
 		fx.Provide(fx.Annotated{Group: ServerInterceptors, Target: serverMiddlewares.DefaultLogHandlerMiddleware}),
-		fx.Provide(fx.Annotated{Group: ServerInterceptors, Target: trace.HttpTracingUnaryServerInterceptor}),
+		fx.Provide(fx.Annotated{Group: ServerContextInterceptors, Target: trace.HttpTracingUnaryServerInterceptor}),
 		fx.Provide(func() client.HTTPClientBuilder {
 			builder := httpClient.HTTPClientBuilder()
 			return builder

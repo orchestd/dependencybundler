@@ -8,7 +8,7 @@ require (
 	bitbucket.org/HeilaSystems/log v0.0.10
 	bitbucket.org/HeilaSystems/session v0.0.11
 	bitbucket.org/HeilaSystems/trace v0.0.10
-	bitbucket.org/HeilaSystems/transport v0.0.13
+	bitbucket.org/HeilaSystems/transport v0.0.14
 	github.com/felixge/httpsnoop v1.0.1 // indirect
 	github.com/gin-gonic/gin v1.6.3
 	github.com/go-masonry/mortar v0.1.3
@@ -18,3 +18,4 @@ require (
 	go.uber.org/fx v1.13.1
 	google.golang.org/grpc v1.34.0
 )
+

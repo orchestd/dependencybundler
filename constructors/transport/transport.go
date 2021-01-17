@@ -16,8 +16,8 @@ type transportDeps struct {
 	ClientBuilder      client.HTTPClientBuilder
 	Conf               configuration.Config
 	ClientInterceptors []client.HTTPClientInterceptor`group:"clientInterceptors"`
+	ServerContextInterceptors[]gin.HandlerFunc `group:"serverContextInterceptors"`
 	ServerInterceptors []gin.HandlerFunc `group:"serverInterceptors"`
-
 }
 func DefaultTransport(deps transportDeps)  (transportConstructor.IRouter,transportConstructor.HttpClient) {
 	if confPort,err := deps.Conf.Get("port").String();err == nil {
@@ -35,10 +35,17 @@ func DefaultTransport(deps transportDeps)  (transportConstructor.IRouter,transpo
 	if len(deps.ClientInterceptors) > 0 {
 		deps.ClientBuilder = deps.ClientBuilder.AddInterceptors(deps.ClientInterceptors...)
 	}
+
 	deps.ClientBuilder = deps.ClientBuilder.SetConfig(deps.Conf)
+
+	if len(deps.ServerContextInterceptors) > 0 {
+		deps.ServerBuilder = deps.ServerBuilder.AddContextInterceptors(deps.ServerContextInterceptors...)
+	}
+
 	if len(deps.ServerInterceptors) > 0 {
 		deps.ServerBuilder = deps.ServerBuilder.AddInterceptors(deps.ServerInterceptors...)
 	}
+
 	client, err := deps.ClientBuilder.Build()
 	if err != nil {
 		panic(err)

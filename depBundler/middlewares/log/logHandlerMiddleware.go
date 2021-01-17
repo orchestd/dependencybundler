@@ -33,10 +33,9 @@ func GinLogHandlerMiddleware(logger log.Logger) gin.HandlerFunc {
 		start := time.Now().UTC()
 		path := c.Request.URL.Path
 		c.Next()
-		transactionID, _ := c.Get("RequestId")
 
 		rawBody := blw.body
-		jsonmsg := json.RawMessage(rawBody.Bytes())
+		jsonmsg := json.RawMessage(string(rawBody.Bytes()))
 
 		end := time.Now().UTC()
 		latency := end.Sub(start)
@@ -47,7 +46,6 @@ func GinLogHandlerMiddleware(logger log.Logger) gin.HandlerFunc {
 			"method":     c.Request.Method,
 			"path":       path,
 			"ip":         c.ClientIP(),
-			"requestId": transactionID,
 			"duration":   latency,
 			"user_agent": c.Request.UserAgent(),
 		})
@@ -67,9 +65,9 @@ func GinLogHandlerMiddleware(logger log.Logger) gin.HandlerFunc {
 			entry = entry.WithField("source",srvErr.GetSource()).WithField("logValues",srvErr.GetLogValues())
 		}
 		if c.Writer.Status() >= 500{
-			entry.Error(c,errorMsg)
+			entry.Error(c.Request.Context(),errorMsg)
 		}else {
-			entry.Info(c,"%s finished " , c.FullPath())
+			entry.Info(c.Request.Context(),"%s finished " , c.FullPath())
 		}
 	}
 }

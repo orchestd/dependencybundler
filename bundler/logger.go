@@ -3,6 +3,7 @@ package bundler
 import (
 	"bitbucket.org/HeilaSystems/dependencybundler/constructors/logger"
 	"bitbucket.org/HeilaSystems/dependencybundler/constructors/logger/middlewares"
+	"bitbucket.org/HeilaSystems/dependencybundler/constructors/trace"
 	"bitbucket.org/HeilaSystems/dependencybundler/depBundler"
 	"bitbucket.org/HeilaSystems/dependencybundler/interfaces/configuration"
 	"bitbucket.org/HeilaSystems/log"
@@ -39,7 +40,8 @@ func LoggerFxOption() fx.Option {
 			return bzerolog.DefaultZeroLogBuilder(defaultLogSetting)
 		}),
 		fx.Provide( fx.Annotated{Group: depBundler.FxGroupLoggerContextExtractors , Target: middlewares.DefaultLoggerIncomingContextExtractor}),
-		//trace.TraceInfoContextExtractorFxOption(),
+
+		trace.TraceInfoContextExtractorFxOption(),
 
 		fx.Provide(logger.DefaultLogger),
 
