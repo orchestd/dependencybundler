@@ -40,7 +40,6 @@ func GinLogHandlerMiddleware(logger log.Logger) gin.HandlerFunc {
 		end := time.Now().UTC()
 		latency := end.Sub(start)
 		entry := logger.WithFields(map[string]interface{}{
-			"request"  : reqJson,
 			"response" : jsonmsg,
 			"status":     c.Writer.Status(),
 			"method":     c.Request.Method,
@@ -49,6 +48,9 @@ func GinLogHandlerMiddleware(logger log.Logger) gin.HandlerFunc {
 			"duration":   latency,
 			"user_agent": c.Request.UserAgent(),
 		})
+		if c.Request.Method != "GET" && c.Request.Method != "DELETE" {
+			entry = entry.WithField("request"  , reqJson)
+		}
 		if d, ok := c.Deadline(); ok {
 			entry = entry.WithField("deadline", d)
 		}
