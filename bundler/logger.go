@@ -13,7 +13,7 @@ import (
 
 func LoggerFxOption() fx.Option {
 	return fx.Options(
-		fx.Provide(func(config configuration.Config) log.Builder{
+		fx.Provide(func(config configuration.Config) log.Builder {
 			defaultLogSetting := bzerolog.LogSettings{
 				LogToFile:         false,
 				FileJsonFormat:    false,
@@ -21,25 +21,27 @@ func LoggerFxOption() fx.Option {
 				ConsoleJsonFormat: false,
 				CompressLogsFile:  false,
 			}
-			if fileLog ,err := config.Get(depBundler.LogToFile).Bool();err == nil {
+			if fileLog, err := config.Get(depBundler.LogToFile).Bool(); err == nil {
 				defaultLogSetting.LogToFile = fileLog
 			}
-			if fileJsonFormat ,err := config.Get(depBundler.FileJsonFormat).Bool();err == nil {
+			if fileJsonFormat, err := config.Get(depBundler.FileJsonFormat).Bool(); err == nil {
 				defaultLogSetting.FileJsonFormat = fileJsonFormat
 			}
-			if consoleLog ,err := config.Get(depBundler.LogToConsole).Bool();err == nil {
+			if consoleLog, err := config.Get(depBundler.LogToConsole).Bool(); err == nil {
 				defaultLogSetting.LogToConsole = consoleLog
 			}
-			if consoleJsonFormat ,err := config.Get(depBundler.ConsoleJsonFormat).Bool();err == nil {
+
+			if consoleJsonFormat, err := config.Get(depBundler.ConsoleJsonFormat).Bool(); err == nil {
 				defaultLogSetting.ConsoleJsonFormat = consoleJsonFormat
 			}
-			if compressLogs ,err := config.Get(depBundler.CompressLogs).Bool();err == nil {
+			
+			if compressLogs, err := config.Get(depBundler.CompressLogs).Bool(); err == nil {
 				defaultLogSetting.CompressLogsFile = compressLogs
 			}
 
 			return bzerolog.DefaultZeroLogBuilder(defaultLogSetting)
 		}),
-		fx.Provide( fx.Annotated{Group: depBundler.FxGroupLoggerContextExtractors , Target: middlewares.DefaultLoggerIncomingContextExtractor}),
+		fx.Provide(fx.Annotated{Group: depBundler.FxGroupLoggerContextExtractors, Target: middlewares.DefaultLoggerIncomingContextExtractor}),
 
 		trace.TraceInfoContextExtractorFxOption(),
 

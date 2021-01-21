@@ -9,7 +9,7 @@ type DependencyBundlerConfiguration struct {
 	LogToConsole bool `json:"logToConsole"`
 	FileJsonFormat bool `json:"fileJsonFormat"`
 	ConsoleJsonFormat bool `json:"consoleJsonFormat"`
-	CompressLogs bool `json:"compressLogs"`
+	CompressLogs interface{} `json:"compressLogs"`
 	DockerName string `json:"DOCKER_NAME"`
 }
 
