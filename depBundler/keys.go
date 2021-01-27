@@ -11,7 +11,7 @@ const (
 	ConsoleJsonFormat = "consoleJsonFormat"
 	CompressLogs = "compressLogs"
 	SessionCollection = "sessionCollection"
-
+	DisableConsoleColor = "disableConsoleColor"
 	MinimumSeverityLevel = "minimumSeverityLevel"
  	FxGroupLoggerContextExtractors = "loggerContextExtractors"
 

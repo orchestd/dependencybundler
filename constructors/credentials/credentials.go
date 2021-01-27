@@ -6,17 +6,12 @@ import (
 	"os"
 )
 
-func DefaultCredentials(builder credentials.Builder) credentialsConstructor.CredentialsGetter {
-	env, isExist := os.LookupEnv("HEILA_ENV")
-	if !isExist {
-		panic("Cannot initialize new credentials, missing environment variable HEILA_ENV ")
+func DefaultCredentials(builder credentials.Builder) (credentialsConstructor.CredentialsGetter,error) {
+	env, isExist := os.LookupEnv("ENABLE_SECRET_MANAGER")
+	if isExist && env == "true" {
+		pID, _ := os.LookupEnv("PROJECT_ID")
+		version , _ := os.LookupEnv("SECRET_MANAGER_VERSION")
+		builder = builder.UseGcpSecretManager(pID).SetSecretManagerVersion(version)
 	}
-	if env == "LOCAL" || env == "DEV" {
-		builder.DevMode()
-	}
-	if creds , err :=  builder.Build();err != nil {
-		panic(err)
-	}else{
-		return creds
-	}
+	return builder.Build()
 }

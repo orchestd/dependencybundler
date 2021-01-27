@@ -6,6 +6,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"github.com/gin-gonic/gin"
+	"google.golang.org/api/logging/v2"
 	"io"
 	"io/ioutil"
 	"time"
@@ -26,12 +27,13 @@ func GinLogHandlerMiddleware(logger log.Logger) gin.HandlerFunc {
 		bodyCopy := new(bytes.Buffer)
 		io.Copy(bodyCopy, c.Request.Body)
 		bodyData := bodyCopy.Bytes()
+
 		c.Request.Body = ioutil.NopCloser(bytes.NewReader(bodyData))
 		blw := &bodyLogWriter{body: bytes.NewBuffer([]byte{}), ResponseWriter: c.Writer}
 		c.Writer = blw
 		reqJson := json.RawMessage(bodyData)
 		start := time.Now().UTC()
-		path := c.Request.URL.Path
+		//path := c.Request.URL.Path
 		c.Next()
 
 		rawBody := blw.body
@@ -39,21 +41,37 @@ func GinLogHandlerMiddleware(logger log.Logger) gin.HandlerFunc {
 
 		end := time.Now().UTC()
 		latency := end.Sub(start)
-		entry := logger.WithFields(map[string]interface{}{
+		//gEntry := logging.Entry{HTTPRequest:&logging.HTTPRequest{
+		//	Request:                        c.Request,
+		//	Status:                         c.Writer.Status(),
+		//	ResponseSize:                   int64(c.Writer.Size()),
+		//	Latency:                        latency,
+		//	RemoteIP:                       c.ClientIP(),
+		//}}
+		httpRequest := map[string]interface{}{
 			"response" : jsonmsg,
-			"status":     c.Writer.Status(),
-			"method":     c.Request.Method,
-			"path":       path,
-			"ip":         c.ClientIP(),
-			"duration":   latency,
-			"user_agent": c.Request.UserAgent(),
-		})
+		}
 		if c.Request.Method != "GET" && c.Request.Method != "DELETE" {
-			entry = entry.WithField("request"  , reqJson)
+			httpRequest["request"] = reqJson
 		}
 		if d, ok := c.Deadline(); ok {
-			entry = entry.WithField("deadline", d)
+			httpRequest["deadline"] =  d
 		}
+		entry := logger.WithFields(httpRequest)
+		httpRequestStruct := logging.HttpRequest{
+			Latency:                        latency.String(),
+			Protocol:                      	c.Request.Proto,
+			Referer:                        c.Request.Referer(),
+			RemoteIp:                       c.ClientIP(),
+			RequestMethod : c.Request.Method,
+			RequestUrl:                     c.Request.URL.String(),
+			ResponseSize:                   int64(c.Writer.Size()),
+			Status:                         int64(c.Writer.Status()),
+			UserAgent:                      c.Request.UserAgent(),
+			ForceSendFields:                nil,
+			NullFields:                     nil,
+		}
+		entry = entry.WithField("httpRequest" , httpRequestStruct)
 		var errorMsg string
 		if len(c.Errors.String()) > 0 {
 			srvErr,ok := c.Errors[0].Meta.(transport.IHttpLog)

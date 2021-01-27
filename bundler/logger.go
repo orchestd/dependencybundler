@@ -20,6 +20,7 @@ func LoggerFxOption() fx.Option {
 				LogToConsole:      true,
 				ConsoleJsonFormat: false,
 				CompressLogsFile:  false,
+				DisableConsoleColor: false,
 			}
 			if fileLog, err := config.Get(depBundler.LogToFile).Bool(); err == nil {
 				defaultLogSetting.LogToFile = fileLog
@@ -37,6 +38,9 @@ func LoggerFxOption() fx.Option {
 			
 			if compressLogs, err := config.Get(depBundler.CompressLogs).Bool(); err == nil {
 				defaultLogSetting.CompressLogsFile = compressLogs
+			}
+			if disableConsoleColor, err := config.Get(depBundler.DisableConsoleColor).Bool(); err == nil {
+				defaultLogSetting.DisableConsoleColor = disableConsoleColor
 			}
 
 			return bzerolog.DefaultZeroLogBuilder(defaultLogSetting)

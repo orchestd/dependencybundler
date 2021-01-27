@@ -10,6 +10,11 @@ type DependencyBundlerConfiguration struct {
 	FileJsonFormat bool `json:"fileJsonFormat"`
 	ConsoleJsonFormat bool `json:"consoleJsonFormat"`
 	CompressLogs interface{} `json:"compressLogs"`
+	DisableConsoleColor bool `json:"disableConsoleColor"`
+
 	DockerName string `json:"DOCKER_NAME"`
+	ProjectId *string `json:"PROJECT_ID,omitempty"`
+	SecretManager bool `json:"ENABLE_SECRET_MANAGER,omitempty"`
+	SecretManagerVersion *string `json:"SECRET_MANAGER_VERSION,omitempty"`
 }
 
