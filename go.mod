@@ -4,7 +4,7 @@ go 1.14
 
 require (
 	bitbucket.org/HeilaSystems/cacheStorage v0.13.0
-	bitbucket.org/HeilaSystems/configurations v0.0.13
+	bitbucket.org/HeilaSystems/configurations v0.0.14
 	bitbucket.org/HeilaSystems/log v0.0.11
 	bitbucket.org/HeilaSystems/session v0.0.14
 	bitbucket.org/HeilaSystems/trace v0.0.10
@@ -13,5 +13,6 @@ require (
 	github.com/go-masonry/mortar v0.1.3
 	github.com/opentracing/opentracing-go v1.2.0
 	go.uber.org/fx v1.13.1
+	google.golang.org/api v0.30.0
 	google.golang.org/grpc v1.34.0
 )
