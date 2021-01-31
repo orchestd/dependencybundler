@@ -4,6 +4,7 @@ import (
 	transportConstructor "bitbucket.org/HeilaSystems/dependencybundler/constructors/transport"
 	clientMiddlewares "bitbucket.org/HeilaSystems/dependencybundler/constructors/transport/middlewares/client"
 	serverMiddlewares "bitbucket.org/HeilaSystems/dependencybundler/constructors/transport/middlewares/server"
+	"bitbucket.org/HeilaSystems/dependencybundler/depBundler/middlewares/context"
 	"bitbucket.org/HeilaSystems/dependencybundler/depBundler/middlewares/trace"
 	"bitbucket.org/HeilaSystems/transport/client"
 	httpClient "bitbucket.org/HeilaSystems/transport/client/http"
@@ -29,6 +30,7 @@ func TransportFxOption(monolithConstructor ...interface{}) fx.Option {
 		fx.Provide(fx.Annotated{Group: ClientInterceptorsGroup, Target: clientMiddlewares.DefaultContextValuesToHeaders}),
 		fx.Provide(fx.Annotated{Group: ClientInterceptorsGroup, Target: trace.TracerRESTClientInterceptor}),
 		fx.Provide(fx.Annotated{Group: ClientInterceptorsGroup, Target: clientMiddlewares.DefaultTokenClientInterceptors}),
+		fx.Provide(fx.Annotated{Group: ClientInterceptorsGroup, Target: clientMiddlewares.DefaultServiceNameToHeader}),
 
 		fx.Provide(func() server.HttpBuilder {
 			builder := http.Builder()
@@ -42,6 +44,9 @@ func TransportFxOption(monolithConstructor ...interface{}) fx.Option {
 		fx.Provide(fx.Annotated{Group: ServerContextInterceptors, Target: serverMiddlewares.DefaultJwtToken}),
 		fx.Provide(fx.Annotated{Group: ServerInterceptors, Target: serverMiddlewares.DefaultLogHandlerMiddleware}),
 		fx.Provide(fx.Annotated{Group: ServerContextInterceptors, Target: trace.HttpTracingUnaryServerInterceptor}),
+		fx.Provide(fx.Annotated{Group: ServerContextInterceptors, Target: context.CallerToContext}),
+
+
 		fx.Provide(func() client.HTTPClientBuilder {
 			builder := httpClient.HTTPClientBuilder()
 			return builder
