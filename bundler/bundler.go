@@ -1,6 +1,7 @@
 package bundler
 
 import (
+	"bitbucket.org/HeilaSystems/debug"
 	"context"
 	"go.uber.org/fx"
 	"log"
@@ -15,7 +16,8 @@ func CreateApplication(confStruct interface{}, HandlersFunc interface{} , monoli
 		TransportFxOption(monolithConstructor...),
 		SessionFxOption(),
 		TracerFxOption(),
-		fx.Invoke(HandlersFunc),
+		DebugFxOption(),
+		fx.Invoke(HandlersFunc,debug.InitHandlers),
 		)
 
 	c := context.Background()

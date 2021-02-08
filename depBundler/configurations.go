@@ -11,6 +11,7 @@ type DependencyBundlerConfiguration struct {
 	ConsoleJsonFormat bool `json:"consoleJsonFormat"`
 	CompressLogs interface{} `json:"compressLogs"`
 	DisableConsoleColor bool `json:"disableConsoleColor"`
+	DebugMode bool `json:"debugMode"`
 
 	DockerName string `json:"DOCKER_NAME"`
 	ProjectId *string `json:"PROJECT_ID,omitempty"`

@@ -24,6 +24,7 @@ func HttpTracingUnaryServerInterceptor(deps tracingDeps) gin.HandlerFunc {
 		op := "HTTP " + c.Request.Method
 		sp := deps.Tracer.StartSpan(op, ext.RPCServerOption(ctx))
 		ext.HTTPMethod.Set(sp, c.Request.Method)
+
 		ext.HTTPUrl.Set(sp, (c.Request.URL.String()))
 		componentName,_ := deps.Config.Get("DOCKER_NAME").String()
 		ext.Component.Set(sp, componentName)
@@ -46,12 +47,18 @@ func HttpTracingUnaryServerInterceptor(deps tracingDeps) gin.HandlerFunc {
 
 		c.Next()
 		ext.HTTPStatusCode.Set(sp, uint16(c.Writer.Status()))
-
 		rawBody := blw.body
 		if len(c.Errors.String()) > 0 {
+			c.Errors.String()
 			if c.Errors[0].Err != nil {
 				ext.LogError(sp, c.Errors[0].Err)
 			}
+		}
+		if s := c.Request.Context().Value("status");s != nil {
+			sp.SetTag("dependencyBundler.status" , s)
+		}
+		if um := c.Request.Context().Value("userMessageId");um != nil {
+			sp.SetTag("dependencyBundler.id" , um)
 		}
 		addBodyToSpan(sp , "response-headers" , c.Writer.Header())
 		addBodyToSpan(sp, "response", rawBody.Bytes())
