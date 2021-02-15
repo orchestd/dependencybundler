@@ -24,7 +24,11 @@ func HttpTracingUnaryServerInterceptor(deps tracingDeps) gin.HandlerFunc {
 		op := "HTTP " + c.Request.Method
 		sp := deps.Tracer.StartSpan(op, ext.RPCServerOption(ctx))
 		ext.HTTPMethod.Set(sp, c.Request.Method)
-
+		host := c.Request.Host
+		if host == "" && c.Request.URL != nil {
+			host = c.Request.URL.Host
+		}
+		ext.PeerHostname.Set(sp,host)
 		ext.HTTPUrl.Set(sp, (c.Request.URL.String()))
 		componentName,_ := deps.Config.Get("DOCKER_NAME").String()
 		ext.Component.Set(sp, componentName)

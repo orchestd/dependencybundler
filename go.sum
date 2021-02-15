@@ -13,6 +13,8 @@ bitbucket.org/HeilaSystems/configurations v0.0.12 h1:rbfRwbz5szU5V4yjiMtlZUEP0Ne
 bitbucket.org/HeilaSystems/configurations v0.0.12/go.mod h1:Of5+Hoz/HUUdagP3O8QvABiU1iRBB6FCf1MTWwckWHA=
 bitbucket.org/HeilaSystems/configurations v0.0.14 h1:UKmezJJuU+M65E62dGNInwiReXcZOWPYgXNEeJ34qbk=
 bitbucket.org/HeilaSystems/configurations v0.0.14/go.mod h1:z9JpmSoDDxg6mS7Tzv3xS/iEm3XkOtm4EgI97WfZhLM=
+bitbucket.org/HeilaSystems/configurations v0.0.15 h1:+2nXxNDQC9XAoFKQE2YNhV62S2X8vTnJoY1ZxcrKZx4=
+bitbucket.org/HeilaSystems/configurations v0.0.15/go.mod h1:vNCGO8fQhkmtB0gxnKBHGEK8pucEpJ2HPsbs/OjSswA=
 bitbucket.org/HeilaSystems/debug v0.0.1 h1:dOLveQdh3xbs9J3mApZkPqHoYnhrlUQ90XrqfJMoVEc=
 bitbucket.org/HeilaSystems/debug v0.0.1/go.mod h1:IepmTV3mY/8g2xLnNOEDvxmA7P16OWfQj2e5S9XXrlc=
 bitbucket.org/HeilaSystems/dependencybundler v0.0.10/go.mod h1:O462YS7Hub+7rM+qJvo+ahgdm8SxnHmYo3yfyzA4ltQ=
@@ -24,6 +26,7 @@ bitbucket.org/HeilaSystems/dependencybundler v0.0.22/go.mod h1:uR/UBoMRPgddS0HNY
 bitbucket.org/HeilaSystems/dependencybundler v0.0.24/go.mod h1:14NlzFtXFmJv3BAbeN48t+h1sOPB7qNfGvsVUGbBfcw=
 bitbucket.org/HeilaSystems/dependencybundler v0.0.26/go.mod h1:TgbcTU0BrF0R1YAcb+taMNvHkXnp9bYMm+yGP/Hb5R8=
 bitbucket.org/HeilaSystems/dependencybundler v0.0.28/go.mod h1:F1LYiD6RXJxzk6TZ/rixKupEnYGz0Fm90hpHveRv80Q=
+bitbucket.org/HeilaSystems/dependencybundler v0.0.29/go.mod h1:oqlwhAv4X70mQhpUvlB7fP047ctsAcySeLMcL/X7acM=
 bitbucket.org/HeilaSystems/log v0.0.10 h1:DRVaoptB2doZ2jhzj0eYrv9Kr3QaylTScg37jTpZmdA=
 bitbucket.org/HeilaSystems/log v0.0.10/go.mod h1:lq5QKhEoOzWJIgcrEIcq4zci1P4cV2Q69kSYNvZMUSc=
 bitbucket.org/HeilaSystems/log v0.0.11 h1:N2hY5JZ+mHdknlAjXVVYuk7XXKTlMPoCUvTuCjfXLeA=
