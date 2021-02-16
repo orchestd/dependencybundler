@@ -13,6 +13,7 @@ require (
 	github.com/gin-gonic/gin v1.6.3
 	github.com/go-masonry/mortar v0.1.3
 	github.com/opentracing/opentracing-go v1.2.0
+	github.com/uber/jaeger-client-go v2.25.0+incompatible
 	go.uber.org/fx v1.13.1
 	google.golang.org/api v0.30.0
 	google.golang.org/grpc v1.34.0
