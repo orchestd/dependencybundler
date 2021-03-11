@@ -20,7 +20,7 @@ func HttpTracingUnaryServerInterceptor(deps tracingDeps) gin.HandlerFunc {
 		}
 		carrier := opentracing.HTTPHeadersCarrier(c.Request.Header)
 		ctx, _ := deps.Tracer.Extract(opentracing.HTTPHeaders, carrier)
-		op := "HTTP " + c.Request.Method
+		op := "HTTP " + c.Request.Method +c.Request.URL.String()
 		sp := deps.Tracer.StartSpan(op, ext.RPCServerOption(ctx))
 		ext.HTTPMethod.Set(sp, c.Request.Method)
 		host := c.Request.Host
