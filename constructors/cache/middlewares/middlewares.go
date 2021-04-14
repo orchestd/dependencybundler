@@ -17,6 +17,6 @@ type CacheWrapperDeps struct {
 	SetterMiddlewares  []cacheStorage.CacheStorageSetterMiddleware `group:"cacheStorageSetterMiddlewares"`
 }
 
-func DefaultCacheWrapper(deps CacheWrapperDeps) (cache.CacheStroageGetterWrapper, cache.CacheStroageSetterWrapper) {
+func DefaultCacheWrapper(deps CacheWrapperDeps) (cache.CacheStorageGetterWrapper, cache.CacheStorageSetterWrapper) {
 	return middlewares.CreateCacheGetterWrapper(deps.CacheStorageGetter,deps.GetterMiddlewares...), middlewares.CreateCacheSetterWrapper(deps.CacheStorageSetter, deps.SetterMiddlewares...)
 }
