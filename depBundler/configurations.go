@@ -17,5 +17,8 @@ type DependencyBundlerConfiguration struct {
 	ProjectId *string `json:"PROJECT_ID,omitempty"`
 	SecretManager bool `json:"ENABLE_SECRET_MANAGER,omitempty"`
 	SecretManagerVersion *string `json:"SECRET_MANAGER_VERSION,omitempty"`
+	DbUsername *string `json:"DB_USERNAME,omitempty"`
+	DbHost *string `json:"DB_HOST,omitempty"`
+
 }
 

@@ -5,3 +5,5 @@ import "bitbucket.org/HeilaSystems/cacheStorage"
 type CacheStorageGetter cacheStorage.CacheStorageGetter
 type CacheStorageSetter cacheStorage.CacheStorageSetter
 type CacheStorage cacheStorage.CacheStorage
+type CacheStroageGetterWrapper cacheStorage.CacheStorageGetterWrapper
+type CacheStroageSetterWrapper cacheStorage.CacheStorageSetterWrapper
