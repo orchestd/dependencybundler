@@ -8,7 +8,7 @@ import (
 	cache2 "bitbucket.org/HeilaSystems/session/sessionresolver/repos/cache"
 )
 
-func DefaultCacheSessionRepo(config configuration.Config, getter cache.CacheStorageGetter , setter cache.CacheStorageSetter) (session.SessionRepo, error) {
+func DefaultCacheSessionRepo(config configuration.Config, getter cache.CacheStroageGetterWrapper , setter cache.CacheStroageSetterWrapper) (session.SessionRepo, error) {
 	collectionName, err := config.Get(depBundler.SessionCollection).String()
 	if err != nil {
 		return nil, err

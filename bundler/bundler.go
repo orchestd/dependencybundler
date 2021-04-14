@@ -14,8 +14,9 @@ func CreateApplication(confStruct interface{}, HandlersFunc interface{} , monoli
 		ConfigFxOption(confStruct),
 		LoggerFxOption(),
 		TransportFxOption(monolithConstructor...),
-		SessionFxOption(),
+		CacheTraceMiddlewareOption(),
 		TracerFxOption(),
+		SessionFxOption(),
 		DebugFxOption(),
 		fx.Invoke(HandlersFunc,debug.InitHandlers),
 		)
