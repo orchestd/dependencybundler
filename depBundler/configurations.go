@@ -2,7 +2,7 @@ package depBundler
 
 type DependencyBundlerConfiguration struct {
 	Port string `json:"port"`
-	ContextHeaders []string `json:"contextHeaders"`
+	ContextHeaders []string `json:"contextHeaders,omitempty"`
 	SessionCollection string `json:"sessionCollection"`
 	LogToFile bool `json:"logToFile"`
 	MinimumSeverityLevel string `json:"minimumSeverityLevel"`
@@ -10,8 +10,8 @@ type DependencyBundlerConfiguration struct {
 	FileJsonFormat bool `json:"fileJsonFormat"`
 	ConsoleJsonFormat bool `json:"consoleJsonFormat"`
 	CompressLogs interface{} `json:"compressLogs"`
-	DisableConsoleColor bool `json:"disableConsoleColor"`
-	DebugMode bool `json:"debugMode"`
+	DisableConsoleColor bool `json:"disableConsoleColor,omitempty"`
+	DebugMode bool `json:"debugMode,omitempty"`
 
 	DockerName string `json:"DOCKER_NAME"`
 	ProjectId *string `json:"PROJECT_ID,omitempty"`
