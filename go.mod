@@ -7,7 +7,7 @@ require (
 	bitbucket.org/HeilaSystems/configurations v0.1.2
 	bitbucket.org/HeilaSystems/debug v0.0.1
 	bitbucket.org/HeilaSystems/log v0.0.11
-	bitbucket.org/HeilaSystems/session v0.5.0
+	bitbucket.org/HeilaSystems/session v0.7.1
 	bitbucket.org/HeilaSystems/trace v0.0.10
 	bitbucket.org/HeilaSystems/transport v0.2.0
 	bitbucket.org/HeilaSystems/validations v0.1.0
