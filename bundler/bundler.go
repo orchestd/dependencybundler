@@ -18,6 +18,7 @@ func CreateApplication(confStruct interface{}, HandlersFunc interface{} , monoli
 		TracerFxOption(),
 		SessionFxOption(),
 		DebugFxOption(),
+		ValidationsFxOption(),
 		fx.Invoke(HandlersFunc,debug.InitHandlers),
 		)
 
