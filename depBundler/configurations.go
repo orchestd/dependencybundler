@@ -3,6 +3,7 @@ package depBundler
 type DependencyBundlerConfiguration struct {
 	Port string `json:"port"`
 	ContextHeaders []string `json:"contextHeaders,omitempty"`
+	MonitorTags map[string]string `json:"monitorTags,omitempty"`
 	SessionCollection string `json:"sessionCollection"`
 	LogToFile bool `json:"logToFile"`
 	MinimumSeverityLevel string `json:"minimumSeverityLevel"`

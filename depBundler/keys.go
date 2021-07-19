@@ -17,5 +17,5 @@ const (
  	FxGroupLoggerContextExtractors = "loggerContextExtractors"
 	CacheStorageGetterMiddlewares = "cacheStorageGetterMiddlewares"
 	CacheStorageSetterMiddlewares = "cacheStorageSetterMiddlewares"
-
+	MonitorTags = "monitorTags"
 )
