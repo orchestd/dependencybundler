@@ -2,6 +2,7 @@ package bundler
 
 import (
 	"bitbucket.org/HeilaSystems/debug"
+	"bitbucket.org/HeilaSystems/monitoring/bprometheus/utils"
 	"context"
 	"go.uber.org/fx"
 	"log"
@@ -19,7 +20,8 @@ func CreateApplication(confStruct interface{}, HandlersFunc interface{} , monoli
 		SessionFxOption(),
 		DebugFxOption(),
 		ValidationsFxOption(),
-		fx.Invoke(HandlersFunc,debug.InitHandlers),
+		MonitoringFxOption(),
+		fx.Invoke(HandlersFunc,debug.InitHandlers,utils.MetricsHandler),
 		)
 
 	c := context.Background()
