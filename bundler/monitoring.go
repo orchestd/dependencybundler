@@ -4,8 +4,11 @@ import (
 	"bitbucket.org/HeilaSystems/dependencybundler/constructors/monitoring"
 	"bitbucket.org/HeilaSystems/dependencybundler/depBundler"
 	"bitbucket.org/HeilaSystems/dependencybundler/interfaces/configuration"
+	"bitbucket.org/HeilaSystems/dependencybundler/interfaces/transport"
 	monitoring2 "bitbucket.org/HeilaSystems/monitoring"
 	"bitbucket.org/HeilaSystems/monitoring/bprometheus"
+	"github.com/gin-gonic/gin"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"go.uber.org/fx"
 )
 
@@ -20,4 +23,18 @@ func MonitoringFxOption() fx.Option {
 		}),
 		fx.Provide(monitoring.DefaultMonitor),
 	)
+}
+
+
+func MetricsHandler(router transport.IRouter){
+	if router == nil {
+		return
+	}
+	router.GET("/metrics",PrometheusHandler())
+}
+func PrometheusHandler()  gin.HandlerFunc {
+	h:= promhttp.Handler()
+	return func(c *gin.Context) {
+		h.ServeHTTP(c.Writer, c.Request)
+	}
 }
