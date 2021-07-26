@@ -4,7 +4,6 @@ import (
 	"bitbucket.org/HeilaSystems/dependencybundler/constructors/monitoring"
 	"bitbucket.org/HeilaSystems/dependencybundler/depBundler"
 	"bitbucket.org/HeilaSystems/dependencybundler/interfaces/configuration"
-	"bitbucket.org/HeilaSystems/dependencybundler/interfaces/transport"
 	monitoring2 "bitbucket.org/HeilaSystems/monitoring"
 	"bitbucket.org/HeilaSystems/monitoring/bprometheus"
 	"github.com/gin-gonic/gin"
