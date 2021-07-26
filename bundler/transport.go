@@ -5,7 +5,9 @@ import (
 	clientMiddlewares "bitbucket.org/HeilaSystems/dependencybundler/constructors/transport/middlewares/client"
 	serverMiddlewares "bitbucket.org/HeilaSystems/dependencybundler/constructors/transport/middlewares/server"
 	"bitbucket.org/HeilaSystems/dependencybundler/depBundler/middlewares/context"
+	"bitbucket.org/HeilaSystems/dependencybundler/depBundler/middlewares/metrics"
 	"bitbucket.org/HeilaSystems/dependencybundler/depBundler/middlewares/trace"
+	"bitbucket.org/HeilaSystems/dependencybundler/interfaces/transport"
 	"bitbucket.org/HeilaSystems/transport/client"
 	httpClient "bitbucket.org/HeilaSystems/transport/client/http"
 	"bitbucket.org/HeilaSystems/transport/server"
@@ -16,6 +18,7 @@ import (
 const ClientInterceptorsGroup = "clientInterceptors"
 const ServerInterceptors = "serverInterceptors"
 const ServerContextInterceptors = "serverContextInterceptors"
+const SystemHandlers = "systemHandlers"
 
 func TransportFxOption(monolithConstructor ...interface{}) fx.Option {
 	var optionArr []fx.Option
@@ -38,6 +41,7 @@ func TransportFxOption(monolithConstructor ...interface{}) fx.Option {
 		}),
 		fx.Provide(transportConstructor.DefaultTransport),
 
+		fx.Provide(fx.Annotated{Group: SystemHandlers, Target: transport.NewHttpHandler("GET" , "metrics" , PrometheusHandler())}),
 		//HTTP client bundlerDefaultHeadersToContext
 		fx.Provide(fx.Annotated{Group: ServerContextInterceptors, Target: serverMiddlewares.DefaultHeadersToContext}),
 		fx.Provide(fx.Annotated{Group: ServerContextInterceptors, Target: serverMiddlewares.DefaultBasicRequestId}),
@@ -45,6 +49,8 @@ func TransportFxOption(monolithConstructor ...interface{}) fx.Option {
 		fx.Provide(fx.Annotated{Group: ServerInterceptors, Target: serverMiddlewares.DefaultLogHandlerMiddleware}),
 		fx.Provide(fx.Annotated{Group: ServerContextInterceptors, Target: trace.HttpTracingUnaryServerInterceptor}),
 		fx.Provide(fx.Annotated{Group: ServerContextInterceptors, Target: context.CallerToContext}),
+		fx.Provide(fx.Annotated{Group: ServerContextInterceptors, Target: metrics.AverageRequestDurationMetric}),
+
 
 
 		fx.Provide(func() client.HTTPClientBuilder {

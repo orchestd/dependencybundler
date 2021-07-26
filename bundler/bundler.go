@@ -20,7 +20,7 @@ func CreateApplication(confStruct interface{}, HandlersFunc interface{} , monoli
 		DebugFxOption(),
 		ValidationsFxOption(),
 		MonitoringFxOption(),
-		fx.Invoke(HandlersFunc,debug.InitHandlers,MetricsHandler),
+		fx.Invoke(HandlersFunc,debug.InitHandlers),
 		)
 
 	c := context.Background()

@@ -21,6 +21,7 @@ type transportDeps struct {
 	ClientInterceptors        []client.HTTPClientInterceptor `group:"clientInterceptors"`
 	ServerContextInterceptors []gin.HandlerFunc              `group:"serverContextInterceptors"`
 	ServerInterceptors        []gin.HandlerFunc              `group:"serverInterceptors"`
+	SystemHandlers        []server.IHandler              `group:"systemHandlers"`
 }
 
 func DefaultTransport(deps transportDeps) (transportConstructor.IRouter, transportConstructor.HttpClient) {
@@ -53,6 +54,10 @@ func DefaultTransport(deps transportDeps) (transportConstructor.IRouter, transpo
 
 	if len(deps.ServerInterceptors) > 0 {
 		deps.ServerBuilder = deps.ServerBuilder.AddInterceptors(deps.ServerInterceptors...)
+	}
+
+	if len(deps.SystemHandlers) > 0 {
+		deps.ServerBuilder = deps.ServerBuilder.AddSystemHandlers(deps.SystemHandlers...)
 	}
 
 	client, err := deps.ClientBuilder.Build()
