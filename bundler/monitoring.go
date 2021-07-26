@@ -25,13 +25,6 @@ func MonitoringFxOption() fx.Option {
 	)
 }
 
-
-func MetricsHandler(router transport.IRouter){
-	if router == nil {
-		return
-	}
-	router.GET("/metrics",PrometheusHandler())
-}
 func PrometheusHandler()  gin.HandlerFunc {
 	h:= promhttp.Handler()
 	return func(c *gin.Context) {
