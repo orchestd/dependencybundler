@@ -9,6 +9,7 @@ import (
 	"context"
 	"github.com/gin-gonic/gin"
 	"go.uber.org/fx"
+	"time"
 )
 
 type transportDeps struct {
@@ -31,16 +32,16 @@ func DefaultTransport(deps transportDeps) (transportConstructor.IRouter, transpo
 		deps.ServerBuilder = deps.ServerBuilder.SetPort(confPort)
 	}
 
-	if confReadTimeout, err := deps.Conf.Get("readTimeOut").Duration(); err != nil {
-		deps.Logger.WithError(err).Debug(context.Background(), "Cannot get readTimeout from configuration, setting read time out to 30 seconds")
+	if confReadTimeout, err := deps.Conf.Get("readTimeOutMs").Duration(); err != nil {
+		deps.Logger.WithError(err).Debug(context.Background(), "Cannot get readTimeOutMs from configuration, setting read time out to 30 seconds")
 	} else {
-		deps.ServerBuilder = deps.ServerBuilder.SetReadTimeout(confReadTimeout)
+		deps.ServerBuilder = deps.ServerBuilder.SetReadTimeout(confReadTimeout*time.Millisecond)
 	}
 
-	if confWriteTimeout, err := deps.Conf.Get("writeTimeOut").Duration(); err != nil {
-		deps.Logger.WithError(err).Debug(context.Background(), "Cannot get writeTimeOut from configuration, setting write time out to 30 seconds")
+	if confWriteTimeout, err := deps.Conf.Get("writeTimeOutMs").Duration(); err != nil {
+		deps.Logger.WithError(err).Debug(context.Background(), "Cannot get writeTimeOutMs from configuration, setting write time out to 30 seconds")
 	} else {
-		deps.ServerBuilder = deps.ServerBuilder.SetWriteTimeout(confWriteTimeout)
+		deps.ServerBuilder = deps.ServerBuilder.SetWriteTimeout(confWriteTimeout*time.Millisecond)
 	}
 	deps.ServerBuilder = deps.ServerBuilder.SetLogger(deps.Logger)
 	if len(deps.ClientInterceptors) > 0 {
