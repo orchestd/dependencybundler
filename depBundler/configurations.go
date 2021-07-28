@@ -2,6 +2,8 @@ package depBundler
 
 type DependencyBundlerConfiguration struct {
 	Port string `json:"port"`
+	ReadTimeOut string `json:"readTimeOut,omitempty"`
+	writeTimeOut string `json:"writeTimeOut,omitempty"`
 	ContextHeaders []string `json:"contextHeaders,omitempty"`
 	MonitorTags map[string]string `json:"monitorTags,omitempty"`
 	SessionCollection string `json:"sessionCollection"`
