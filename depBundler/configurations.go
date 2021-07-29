@@ -16,6 +16,7 @@ type DependencyBundlerConfiguration struct {
 	DisableConsoleColor bool `json:"disableConsoleColor,omitempty"`
 	DebugMode bool `json:"debugMode,omitempty"`
 
+	HeilaEnv string `json:"HEILA_ENV"`
 	DockerName string `json:"DOCKER_NAME"`
 	ProjectId *string `json:"PROJECT_ID,omitempty"`
 	SecretManager bool `json:"ENABLE_SECRET_MANAGER,omitempty"`
