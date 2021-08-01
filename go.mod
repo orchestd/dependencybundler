@@ -11,7 +11,7 @@ require (
 	bitbucket.org/HeilaSystems/session v0.10.0
 	bitbucket.org/HeilaSystems/trace v0.0.10
 	bitbucket.org/HeilaSystems/transport v0.3.1
-	bitbucket.org/HeilaSystems/validations v0.1.0
+	bitbucket.org/HeilaSystems/validations v0.2.0
 	github.com/gin-gonic/gin v1.7.2
 	github.com/go-masonry/mortar v0.1.3
 	github.com/opentracing/opentracing-go v1.2.0
