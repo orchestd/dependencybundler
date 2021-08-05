@@ -20,7 +20,7 @@ type transportDeps struct {
 	Conf                      configuration.Config
 	Logger                    log.Logger
 	ClientInterceptors        []client.HTTPClientInterceptor `group:"clientInterceptors"`
-	ServerContextInterceptors []gin.HandlerFunc              `group:"serverContextInterceptors"`
+	ServerDebugInterceptors []gin.HandlerFunc              `group:"serverDebugInterceptors"`
 	ServerInterceptors        []gin.HandlerFunc              `group:"serverInterceptors"`
 	SystemHandlers        []server.IHandler              `group:"systemHandlers"`
 }
@@ -49,9 +49,14 @@ func DefaultTransport(deps transportDeps) (transportConstructor.IRouter, transpo
 	}
 	deps.ClientBuilder = deps.ClientBuilder.SetConfig(deps.Conf)
 
-	if len(deps.ServerContextInterceptors) > 0 {
-		deps.ServerBuilder = deps.ServerBuilder.AddContextInterceptors(deps.ServerContextInterceptors...)
+	if debug, err := deps.Conf.Get("debugMode").Bool();err !=nil {
+		deps.Logger.WithError(err).Debug(context.Background() , "Cannot get debug mode from configurations, setting mode to false")
+	} else if debug {
+		if len(deps.ServerDebugInterceptors) > 0 {
+			deps.ServerBuilder = deps.ServerBuilder.AddInterceptors(deps.ServerDebugInterceptors...)
+		}
 	}
+
 
 	if len(deps.ServerInterceptors) > 0 {
 		deps.ServerBuilder = deps.ServerBuilder.AddInterceptors(deps.ServerInterceptors...)
