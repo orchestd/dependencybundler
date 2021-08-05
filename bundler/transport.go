@@ -17,7 +17,7 @@ import (
 
 const ClientInterceptorsGroup = "clientInterceptors"
 const ServerInterceptors = "serverInterceptors"
-const ServerContextInterceptors = "serverContextInterceptors"
+const ServerDebugInterceptors = "serverDebugInterceptors"
 const SystemHandlers = "systemHandlers"
 
 func TransportFxOption(monolithConstructor ...interface{}) fx.Option {
@@ -43,13 +43,13 @@ func TransportFxOption(monolithConstructor ...interface{}) fx.Option {
 
 		fx.Provide(fx.Annotated{Group: SystemHandlers, Target: transport.NewHttpHandler("GET" , "metrics" , PrometheusHandler())}),
 		//HTTP client bundlerDefaultHeadersToContext
-		fx.Provide(fx.Annotated{Group: ServerContextInterceptors, Target: serverMiddlewares.DefaultHeadersToContext}),
-		fx.Provide(fx.Annotated{Group: ServerContextInterceptors, Target: serverMiddlewares.DefaultBasicRequestId}),
-		fx.Provide(fx.Annotated{Group: ServerContextInterceptors, Target: serverMiddlewares.DefaultJwtToken}),
+		fx.Provide(fx.Annotated{Group: ServerInterceptors, Target: serverMiddlewares.DefaultHeadersToContext}),
+		fx.Provide(fx.Annotated{Group: ServerInterceptors, Target: serverMiddlewares.DefaultBasicRequestId}),
+		fx.Provide(fx.Annotated{Group: ServerInterceptors, Target: serverMiddlewares.DefaultJwtToken}),
 		fx.Provide(fx.Annotated{Group: ServerInterceptors, Target: serverMiddlewares.DefaultLogHandlerMiddleware}),
-		fx.Provide(fx.Annotated{Group: ServerContextInterceptors, Target: trace.HttpTracingUnaryServerInterceptor}),
-		fx.Provide(fx.Annotated{Group: ServerContextInterceptors, Target: context.CallerToContext}),
-		fx.Provide(fx.Annotated{Group: ServerContextInterceptors, Target: metrics.AverageRequestDurationMetric}),
+		fx.Provide(fx.Annotated{Group: ServerInterceptors, Target: trace.HttpTracingUnaryServerInterceptor}),
+		fx.Provide(fx.Annotated{Group: ServerInterceptors, Target: context.CallerToContext}),
+		fx.Provide(fx.Annotated{Group: ServerInterceptors, Target: metrics.AverageRequestDurationMetric}),
 
 
 
