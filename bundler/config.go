@@ -16,6 +16,5 @@ func ConfigFxOption(appconfstruct interface{}) fx.Option {
 			return builder
 		}),
 		fx.Provide(configConstructor.DefaultConfiguration),
-		fx.Provide(configConstructor.CorsConf),
 	)
 }

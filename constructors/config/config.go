@@ -6,7 +6,6 @@ import (
 	"bitbucket.org/HeilaSystems/dependencybundler/depBundler"
 	cache2 "bitbucket.org/HeilaSystems/dependencybundler/interfaces/cache"
 	"bitbucket.org/HeilaSystems/dependencybundler/interfaces/configuration"
-	"github.com/gin-contrib/cors"
 	"os"
 )
 
@@ -26,11 +25,4 @@ func DefaultConfiguration(getter cache2.CacheStorageGetter, builder config.Build
 	}
 	localCfg := configuration.Config(cfg)
 	return localCfg
-}
-
-func CorsConf() cors.Config {
-	corsConfig := cors.DefaultConfig()
-	corsConfig.AllowAllOrigins = true
-	corsConfig.AllowHeaders = append(corsConfig.AllowHeaders, "token")
-	return corsConfig
 }
