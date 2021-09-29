@@ -1,7 +1,5 @@
 package depBundler
 
-import "bitbucket.org/HeilaSystems/session/sessionresolver"
-
 const (
 	DockerNameEnv = "DOCKER_NAME"
 	HeilaEnv = "HEILA_ENV"
@@ -20,5 +18,4 @@ const (
 	CacheStorageGetterMiddlewares = "cacheStorageGetterMiddlewares"
 	CacheStorageSetterMiddlewares = "cacheStorageSetterMiddlewares"
 	MonitorTags = "monitorTags"
-	SessionTimeLayoutYYYYMMDD_HHMMSS = sessionresolver.TimeLayoutYYYYMMDD_HHMMSS
 )
