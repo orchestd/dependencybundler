@@ -8,6 +8,6 @@ import (
 func CorsMiddleware() gin.HandlerFunc {
 	corsConfig := ginCors.DefaultConfig()
 	corsConfig.AllowAllOrigins = true
-	corsConfig.AllowHeaders = append(corsConfig.AllowHeaders, "token")
+	corsConfig.AllowHeaders = append(corsConfig.AllowHeaders, []string{"token", "access-token", "refresh-token"}...)
 	return ginCors.New(corsConfig)
 }
