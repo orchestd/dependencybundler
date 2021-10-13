@@ -15,8 +15,9 @@ func NewConfDSP() confDSP {
 }
 
 func (dsp confDSP) Register() (sr servicereply.ServiceReply) {
-	return
+	return servicereply.NewNil()
 }
+
 func (dsp confDSP) GetAddress(serviceName string) (sr servicereply.ServiceReply) {
 	if overrideHost := os.Getenv(serviceName + urlKeyword); len(overrideHost) > 0 {
 		serviceName = overrideHost
