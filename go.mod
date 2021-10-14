@@ -21,4 +21,5 @@ require (
 	go.uber.org/fx v1.13.1
 	google.golang.org/api v0.30.0
 	google.golang.org/grpc v1.34.0
+	
 )
