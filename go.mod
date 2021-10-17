@@ -9,7 +9,7 @@ require (
 	bitbucket.org/HeilaSystems/log v0.0.11
 	bitbucket.org/HeilaSystems/monitoring v0.1.0
 	bitbucket.org/HeilaSystems/servicereply v0.0.3
-	bitbucket.org/HeilaSystems/session v0.15.3
+	bitbucket.org/HeilaSystems/session v0.15.4
 	bitbucket.org/HeilaSystems/trace v0.0.10
 	bitbucket.org/HeilaSystems/transport v0.6.1
 	bitbucket.org/HeilaSystems/validations v0.2.0
@@ -21,5 +21,5 @@ require (
 	go.uber.org/fx v1.13.1
 	google.golang.org/api v0.30.0
 	google.golang.org/grpc v1.34.0
-	
+
 )
