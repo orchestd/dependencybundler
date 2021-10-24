@@ -10,7 +10,7 @@ func NewNoDSP() noDSP {
 }
 
 func (dsp noDSP) Register() (sr servicereply.ServiceReply) {
-	return
+	return servicereply.NewNil()
 }
 func (dsp noDSP) GetAddress(serviceName string) (sr servicereply.ServiceReply) {
 	return servicereply.NewNil().WithReplyValues(servicereply.ValuesMap{address: serviceName})
