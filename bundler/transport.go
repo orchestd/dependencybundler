@@ -45,6 +45,8 @@ func TransportFxOption(monolithConstructor ...interface{}) fx.Option {
 
 		fx.Provide(fx.Annotated{Group: SystemHandlers, Target: transport.NewHttpHandler("GET", "metrics", PrometheusHandler())}),
 		//HTTP client bundlerDefaultHeadersToContext
+		fx.Provide(fx.Annotated{Group: SystemHandlers, Target: transport.NewHttpHandler("GET", "isAlive", http.IsAliveGinHandler)}),
+
 		fx.Provide(fx.Annotated{Group: ServerInterceptors, Target: serverMiddlewares.DefaultHeadersToContext}),
 		fx.Provide(fx.Annotated{Group: ServerInterceptors, Target: serverMiddlewares.DefaultBasicRequestId}),
 		fx.Provide(fx.Annotated{Group: ServerInterceptors, Target: serverMiddlewares.DefaultJwtToken}),
