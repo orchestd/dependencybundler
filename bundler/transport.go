@@ -17,7 +17,8 @@ import (
 )
 
 const ClientInterceptorsGroup = "clientInterceptors"
-const ServerInterceptors = "serverInterceptors"
+const ApiInterceptors = "apiInterceptors"
+const RouterInterceptors = "routerInterceptors"
 const ServerDebugInterceptors = "serverDebugInterceptors"
 const SystemHandlers = "systemHandlers"
 
@@ -47,13 +48,13 @@ func TransportFxOption(monolithConstructor ...interface{}) fx.Option {
 		//HTTP client bundlerDefaultHeadersToContext
 		fx.Provide(fx.Annotated{Group: SystemHandlers, Target: transport.NewHttpHandler("GET", "isAlive", http.IsAliveGinHandler)}),
 
-		fx.Provide(fx.Annotated{Group: ServerInterceptors, Target: serverMiddlewares.DefaultHeadersToContext}),
-		fx.Provide(fx.Annotated{Group: ServerInterceptors, Target: serverMiddlewares.DefaultBasicRequestId}),
-		fx.Provide(fx.Annotated{Group: ServerInterceptors, Target: serverMiddlewares.DefaultJwtToken}),
-		fx.Provide(fx.Annotated{Group: ServerInterceptors, Target: serverMiddlewares.DefaultLogHandlerMiddleware}),
-		fx.Provide(fx.Annotated{Group: ServerInterceptors, Target: trace.HttpTracingUnaryServerInterceptor}),
-		fx.Provide(fx.Annotated{Group: ServerInterceptors, Target: context.CallerToContext}),
-		fx.Provide(fx.Annotated{Group: ServerInterceptors, Target: metrics.AverageRequestDurationMetric}),
+		fx.Provide(fx.Annotated{Group: ApiInterceptors, Target: serverMiddlewares.DefaultHeadersToContext}),
+		fx.Provide(fx.Annotated{Group: ApiInterceptors, Target: serverMiddlewares.DefaultBasicRequestId}),
+		fx.Provide(fx.Annotated{Group: ApiInterceptors, Target: serverMiddlewares.DefaultJwtToken}),
+		fx.Provide(fx.Annotated{Group: ApiInterceptors, Target: serverMiddlewares.DefaultLogHandlerMiddleware}),
+		fx.Provide(fx.Annotated{Group: ApiInterceptors, Target: trace.HttpTracingUnaryServerInterceptor}),
+		fx.Provide(fx.Annotated{Group: ApiInterceptors, Target: context.CallerToContext}),
+		fx.Provide(fx.Annotated{Group: ApiInterceptors, Target: metrics.AverageRequestDurationMetric}),
 
 		fx.Provide(func() client.HTTPClientBuilder {
 			builder := httpClient.HTTPClientBuilder()
