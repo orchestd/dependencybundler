@@ -60,7 +60,7 @@ func (dsp simpleHttpDSP) GetAddress(serviceName string) (sr servicereply.Service
 	if serviceName == discoveryServiceName {
 		retVal = discoveryServiceAddress
 	} else {
-		req := gin.H{"serviceName": dsp.serviceName}
+		req := gin.H{"serviceName": serviceName}
 		var res struct {
 			Address string `json:"address"`
 		}
