@@ -24,4 +24,7 @@ type DependencyBundlerConfiguration struct {
 	DbUsername               *string `json:"DB_USERNAME,omitempty"`
 	DbHost                   *string `json:"DB_HOST,omitempty"`
 	DiscoveryServiceProvider *string `json:"discoveryServiceProvider"`
+
+	CacheDBName *string `json:"CACHE_DB_NAME,omitempty"`
+	SqlDBName   *string `json:"SQL_DB_NAME,omitempty"`
 }
