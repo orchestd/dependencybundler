@@ -7,7 +7,8 @@ import (
 	"os"
 )
 
-func DefaultConfiguration(/*getter cache2.CacheStorageGetter, */builder config.Builder) configuration.Config {
+/*func DefaultConfiguration(getter cache2.CacheStorageGetter, builder config.Builder) configuration.Config {*/
+func DefaultConfiguration(builder config.Builder) configuration.Config {
 	dockerName, isExist := os.LookupEnv(depBundler.DockerNameEnv)
 	if !isExist {
 		panic("missing DOCKER_NAME environment variable")
@@ -17,7 +18,8 @@ func DefaultConfiguration(/*getter cache2.CacheStorageGetter, */builder config.B
 		panic("missing HEILA_ENV environment variable")
 	}
 	//repo := cache.NewCacheVariablesParamsResolver(dockerName, env, "1", getter)
-	cfg, err := builder.SetEnv(env).SetServiceName(dockerName)/*.SetRepo(repo)*/.Build()
+	//cfg, err := builder.SetEnv(env).SetServiceName(dockerName).SetRepo(repo).Build()
+	cfg, err := builder.SetEnv(env).SetServiceName(dockerName).Build()
 	if err != nil {
 		panic(err)
 	}
