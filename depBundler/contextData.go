@@ -1,19 +1,22 @@
 package depBundler
 
 import (
-	"bitbucket.org/HeilaSystems/dependencybundler/bundler"
 	"bitbucket.org/HeilaSystems/session/models"
+	"bitbucket.org/HeilaSystems/session/sessionresolver"
 	"context"
 	"encoding/json"
 	"fmt"
 	"time"
 )
 
+var DataVersionsKey = sessionresolver.DataVersionsKey
+var DataNowKey = sessionresolver.DataNowKey
+
 type ContextData struct {
 }
 
 func (cd ContextData) GetVersionsFromContext(c context.Context) (models.Versions, bool, error) {
-	v := c.Value(bundler.DataVersionsKey)
+	v := c.Value(DataVersionsKey)
 	if v == nil {
 		return nil, false, nil
 	}
@@ -41,7 +44,7 @@ func (cd ContextData) GetVersionForCollectionFromContext(c context.Context, coll
 
 func (cd ContextData) GetDateNow(c context.Context) (time.Time, bool, error) {
 	t := time.Time{}
-	v := c.Value(bundler.DataNowKey)
+	v := c.Value(DataNowKey)
 	if v == nil {
 		return t, false, nil
 	}
