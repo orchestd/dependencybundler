@@ -25,7 +25,11 @@ const SystemHandlers = "systemHandlers"
 func TransportFxOption(monolithConstructor ...interface{}) fx.Option {
 	var optionArr []fx.Option
 	for _, v := range monolithConstructor {
-		optionArr = append(optionArr, fx.Provide(v))
+		if o, ok := v.(fx.Option); ok{
+			optionArr = append(optionArr, o)
+		} else {
+			optionArr = append(optionArr, fx.Provide(v))
+		}
 	}
 	userConstructors := fx.Options(optionArr...)
 	return fx.Options(
