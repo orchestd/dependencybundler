@@ -2,6 +2,7 @@ package bundler
 
 import (
 	"bitbucket.org/HeilaSystems/debug"
+	"bitbucket.org/HeilaSystems/dependencybundler/constructors/session"
 	"bitbucket.org/HeilaSystems/dependencybundler/interfaces/cache"
 	"bitbucket.org/HeilaSystems/dependencybundler/interfaces/validations"
 	"bitbucket.org/HeilaSystems/validations/cacheValidator"
@@ -20,6 +21,7 @@ func CreateApplication(confStruct interface{}, HandlersFunc interface{}, monolit
 		CacheTraceMiddlewareOption(),
 		TracerFxOption(),
 		SessionFxOption(),
+		fx.Provide(session.NewContextData),
 		DebugFxOption(),
 		ValidationsFxOption(),
 		MonitoringFxOption(),
