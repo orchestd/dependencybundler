@@ -17,6 +17,3 @@ func SessionFxOption()fx.Option {
 		fx.Provide(session2.DefaultSession),
 		)
 }
-
-var DataVersionsKey = sessionresolver.DataVersionsKey
-var DataNowKey = sessionresolver.DataNowKey
