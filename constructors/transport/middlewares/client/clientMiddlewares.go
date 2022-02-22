@@ -1,8 +1,8 @@
 package client
 
 import (
+	"bitbucket.org/HeilaSystems/dependencybundler/bundler/contextHeader"
 	"bitbucket.org/HeilaSystems/dependencybundler/interfaces/configuration"
-	"bitbucket.org/HeilaSystems/session/sessionresolver"
 	"bitbucket.org/HeilaSystems/transport/client"
 	"bitbucket.org/HeilaSystems/transport/client/http/interceptors/contextValuesToHeaders"
 )
@@ -12,7 +12,7 @@ func DefaultContextValuesToHeaders(config configuration.Config) client.HTTPClien
 	if err != nil {
 		return contextValuesToHeaders.ContextValuesToHeaders([]string{})
 	}
-	headers = append(headers, sessionresolver.DataNowKey)
+	headers = append(headers, contextHeader.AlwaysCopyHeaders...)
 	return contextValuesToHeaders.ContextValuesToHeaders(headers)
 }
 
