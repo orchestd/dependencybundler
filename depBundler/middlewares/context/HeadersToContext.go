@@ -2,6 +2,7 @@ package context
 
 import (
 	"bitbucket.org/HeilaSystems/dependencybundler/interfaces/configuration"
+	"bitbucket.org/HeilaSystems/session/sessionresolver"
 	"context"
 	"github.com/gin-gonic/gin"
 )
@@ -13,6 +14,7 @@ func HeadersToContext(config configuration.Config) gin.HandlerFunc {
 			c.Next()
 			return
 		}
+		headers = append(headers, sessionresolver.DataNowKey)
 		for _, header := range headers {
 			h := c.GetHeader(header)
 			if len(h) > 0 {
