@@ -9,7 +9,7 @@ require (
 	bitbucket.org/HeilaSystems/log v0.0.11
 	bitbucket.org/HeilaSystems/monitoring v0.1.0
 	bitbucket.org/HeilaSystems/servicereply v0.0.3
-	bitbucket.org/HeilaSystems/session v0.16.0
+	bitbucket.org/HeilaSystems/session v0.16.1
 	bitbucket.org/HeilaSystems/trace v0.0.10
 	bitbucket.org/HeilaSystems/transport v0.9.0
 	bitbucket.org/HeilaSystems/validations v0.3.0

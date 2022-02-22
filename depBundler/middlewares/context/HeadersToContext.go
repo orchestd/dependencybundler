@@ -1,6 +1,7 @@
 package context
 
 import (
+	"bitbucket.org/HeilaSystems/dependencybundler/bundler/contextHeader"
 	"bitbucket.org/HeilaSystems/dependencybundler/interfaces/configuration"
 	"context"
 	"github.com/gin-gonic/gin"
@@ -13,6 +14,7 @@ func HeadersToContext(config configuration.Config) gin.HandlerFunc {
 			c.Next()
 			return
 		}
+		headers = append(headers, contextHeader.AlwaysCopyHeaders...)
 		for _, header := range headers {
 			h := c.GetHeader(header)
 			if len(h) > 0 {
