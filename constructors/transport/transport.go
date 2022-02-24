@@ -66,7 +66,7 @@ func DefaultTransport(deps transportDeps) (transportConstructor.IRouter, transpo
 	if deps.Conf.Get("assetRoots").IsSet() {
 		if err := deps.Conf.Get("assetRoots").Unmarshal(&assetRoots); err != nil {
 			deps.Logger.WithError(err).Info(context.Background(), "Cannot Unmarshal assetRoots from configuration")
-			panic("Cannot read statics from configuration")
+			panic("Cannot read assetRoots from configuration")
 		} else {
 			for _, a := range assetRoots {
 				if a.AllowOnProd {
@@ -87,8 +87,8 @@ func DefaultTransport(deps transportDeps) (transportConstructor.IRouter, transpo
 				staticHandlers[a.UrlPath] = a.FolderPath
 			}
 		}
-		deps.ServerBuilder = deps.ServerBuilder.SetStatics(staticHandlers)
 	}
+	deps.ServerBuilder = deps.ServerBuilder.SetStatics(staticHandlers)
 
 	if len(deps.ApiInterceptors) > 0 {
 		deps.ServerBuilder = deps.ServerBuilder.AddApiInterceptors(deps.ApiInterceptors...)
