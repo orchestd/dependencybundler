@@ -27,4 +27,6 @@ type DependencyBundlerConfiguration struct {
 
 	CacheDBName *string `json:"CACHE_DB_NAME,omitempty"`
 	SqlDBName   *string `json:"SQL_DB_NAME,omitempty"`
+
+	AssetRoots interface{} `json:"assetRoots,omitempty"`
 }
