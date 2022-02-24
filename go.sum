@@ -45,6 +45,7 @@ bitbucket.org/HeilaSystems/dependencybundler v0.13.0/go.mod h1:Y9LIVs5x4q5HUg3Ld
 bitbucket.org/HeilaSystems/dependencybundler v0.19.0/go.mod h1:yxdGBWQUcwSqcWK3pvrK0ovvfZARifZ9/PRotDGi4jk=
 bitbucket.org/HeilaSystems/dependencybundler v0.19.1/go.mod h1:yxdGBWQUcwSqcWK3pvrK0ovvfZARifZ9/PRotDGi4jk=
 bitbucket.org/HeilaSystems/dependencybundler v0.22.0/go.mod h1:lY4Hj2WS21Ekei7qHKJMYJt5g/+C8Sdq0bJXyA60Ps4=
+bitbucket.org/HeilaSystems/dependencybundler v0.25.0/go.mod h1:y6hO1zGJSp3SVY1h8Tbpgd6UeVwIZDP++7WF+dQC/Bk=
 bitbucket.org/HeilaSystems/errors v1.1.1-servicetdErr/go.mod h1:WhRks6QmNKrn9Hi1zgbI4QYpVX8LeDkbcn22knrBTpo=
 bitbucket.org/HeilaSystems/helper v1.1.0 h1:l+v/tGmPGlMTkIDXdIYBb9cAjXfi0wghyI/aXRwOm6A=
 bitbucket.org/HeilaSystems/helper v1.1.0/go.mod h1:Mrdv1gbUUwbdXnKE2xK4iHg/N5KRsQioiwocEGykegY=
@@ -93,8 +94,9 @@ bitbucket.org/HeilaSystems/transport v0.3.1/go.mod h1:zxMMZgwDF3n8YApRiUpNBQaRmn
 bitbucket.org/HeilaSystems/transport v0.4.0/go.mod h1:3CJsBuKC19j+JI3tTtfB5VW6gJ1UMjKi1KO2cbCEApI=
 bitbucket.org/HeilaSystems/transport v0.7.0/go.mod h1:EkV+IXpL3seAo0Di6yPZkNrd2xwnNQF+I1Vi2gA7HRY=
 bitbucket.org/HeilaSystems/transport v0.8.0/go.mod h1:EkV+IXpL3seAo0Di6yPZkNrd2xwnNQF+I1Vi2gA7HRY=
-bitbucket.org/HeilaSystems/transport v0.9.0 h1:bx45huxuCek6LsV0pQdTzlVH03nFer5YkJP5eWNhB+A=
 bitbucket.org/HeilaSystems/transport v0.9.0/go.mod h1:/seY4jQ3ok0+u1PMnNx0tYhU4RxVqC8Q+MhPo76MNEI=
+bitbucket.org/HeilaSystems/transport v0.10.0 h1:07M2lwAYWpth916d1ARvonudRSzG0VwU22UZqVqHdaw=
+bitbucket.org/HeilaSystems/transport v0.10.0/go.mod h1:K9KwCPeGw8AqUzox4RVX65D6wuW7N2nHdxGrVj3dtgM=
 bitbucket.org/HeilaSystems/utils v0.0.1 h1:MY4Q8migdhUFaNgxgRV+kpNJJGjipio4XIc11Nbkw/c=
 bitbucket.org/HeilaSystems/utils v0.0.1/go.mod h1:ywKcDVFgVV8S4PxYllt0zT+x5X8GGpEP/3yLz1w37dU=
 bitbucket.org/HeilaSystems/validations v0.1.0/go.mod h1:fs1jlB1J5rnSMKyPESJe6Qpr7aUNb8T4OhmognnGhHI=

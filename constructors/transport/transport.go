@@ -29,6 +29,12 @@ type transportDeps struct {
 	DiscoveryServiceProvider transportConstructor.DiscoveryServiceProvider
 }
 
+type AssetRoot struct {
+	UrlPath     string
+	FolderPath  string
+	AllowOnProd bool
+}
+
 func DefaultTransport(deps transportDeps) (transportConstructor.IRouter, transportConstructor.HttpClient) {
 	if confPort, err := deps.Conf.Get("port").String(); err != nil {
 		deps.Logger.WithError(err).Info(context.Background(), "Cannot get port from configuration, setting port to 8080")
@@ -53,12 +59,35 @@ func DefaultTransport(deps transportDeps) (transportConstructor.IRouter, transpo
 	}
 	deps.ClientBuilder = deps.ClientBuilder.SetConfig(deps.Conf)
 
+	var staticHandlers = make(map[string]string)
+
+	var assetRoots []AssetRoot
+
+	if deps.Conf.Get("assetRoots").IsSet() {
+		if err := deps.Conf.Get("assetRoots").Unmarshal(&assetRoots); err != nil {
+			deps.Logger.WithError(err).Info(context.Background(), "Cannot Unmarshal assetRoots from configuration")
+			panic("Cannot read statics from configuration")
+		} else {
+			for _, a := range assetRoots {
+				if a.AllowOnProd {
+					staticHandlers[a.UrlPath] = a.FolderPath
+				}
+			}
+		}
+	}
+
 	if debug, err := deps.Conf.Get("debugMode").Bool(); err != nil {
 		deps.Logger.WithError(err).Debug(context.Background(), "Cannot get debug mode from configurations, setting mode to false")
 	} else if debug {
 		if len(deps.ServerDebugInterceptors) > 0 {
 			deps.ServerBuilder = deps.ServerBuilder.AddApiInterceptors(deps.ServerDebugInterceptors...)
 		}
+		for _, a := range assetRoots {
+			if !a.AllowOnProd {
+				staticHandlers[a.UrlPath] = a.FolderPath
+			}
+		}
+		deps.ServerBuilder = deps.ServerBuilder.SetStatics(staticHandlers)
 	}
 
 	if len(deps.ApiInterceptors) > 0 {
