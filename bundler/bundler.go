@@ -6,9 +6,7 @@ import (
 	"bitbucket.org/HeilaSystems/dependencybundler/interfaces/cache"
 	"bitbucket.org/HeilaSystems/dependencybundler/interfaces/validations"
 	"bitbucket.org/HeilaSystems/validations/cacheValidator"
-	"context"
 	"go.uber.org/fx"
-	"log"
 )
 
 func CreateApplication(confStruct interface{}, HandlersFunc interface{}, monolithConstructor ...interface{}) {
@@ -25,14 +23,11 @@ func CreateApplication(confStruct interface{}, HandlersFunc interface{}, monolit
 		DebugFxOption(),
 		ValidationsFxOption(),
 		MonitoringFxOption(),
-		fx.Invoke(HandlersFunc, debug.InitHandlers),
 		fx.Provide(func(storage cache.CacheStorageGetter) validations.ValidatorRunner {
 			return cacheValidator.NewCacheValidatorRunner(storage)
 		}),
+		fx.Invoke(HandlersFunc, debug.InitHandlers),
 	)
 
-	c := context.Background()
-	if err := app.Start(c); err != nil {
-		log.Fatal(err)
-	}
+	app.Run()
 }
