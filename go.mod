@@ -11,7 +11,7 @@ require (
 	bitbucket.org/HeilaSystems/servicereply v0.0.3
 	bitbucket.org/HeilaSystems/session v0.16.1
 	bitbucket.org/HeilaSystems/trace v0.0.10
-	bitbucket.org/HeilaSystems/transport v0.11.0
+	bitbucket.org/HeilaSystems/transport v0.11.1
 	bitbucket.org/HeilaSystems/validations v0.3.0
 	github.com/gin-contrib/cors v1.3.1
 	github.com/gin-gonic/gin v1.7.2
