@@ -1,8 +1,8 @@
 package trace
 
 import (
-	"bitbucket.org/HeilaSystems/dependencybundler/depBundler"
 	"bitbucket.org/HeilaSystems/log"
+	"bitbucket.org/HeilaSystems/sharedlib/consts"
 	"bitbucket.org/HeilaSystems/trace/bjaeger"
 	"go.uber.org/fx"
 )
@@ -10,7 +10,7 @@ import (
 func TraceInfoContextExtractorFxOption() fx.Option {
 	return fx.Provide(
 		fx.Annotated{
-			Group: depBundler.FxGroupLoggerContextExtractors,
+			Group: consts.FxGroupLoggerContextExtractors,
 			Target: func() log.ContextExtractor {
 				return bjaeger.TraceInfoExtractorFromContext
 			},

@@ -1,11 +1,11 @@
 package providers
 
 import (
-	"bitbucket.org/HeilaSystems/dependencybundler/depBundler"
 	"bitbucket.org/HeilaSystems/dependencybundler/interfaces/configuration"
 	"bitbucket.org/HeilaSystems/dependencybundler/interfaces/transport"
 	"bitbucket.org/HeilaSystems/log"
 	"bitbucket.org/HeilaSystems/servicereply"
+	"bitbucket.org/HeilaSystems/sharedlib/consts"
 	"context"
 	"fmt"
 	"github.com/gin-gonic/gin"
@@ -36,8 +36,8 @@ func NewSimpleHttpDSP(client transport.HttpClient, conf configuration.Config, lo
 		s.port = confPort
 	}
 
-	if dn, err := conf.Get(depBundler.DockerNameEnv).String(); err != nil {
-		logger.WithError(err).Debug(context.Background(), errBase+"Cannot get "+depBundler.DockerNameEnv+" from configurations")
+	if dn, err := conf.Get(consts.DockerNameEnv).String(); err != nil {
+		logger.WithError(err).Debug(context.Background(), errBase+"Cannot get "+consts.DockerNameEnv+" from configurations")
 		//should panic ?
 	} else {
 		s.serviceName = dn

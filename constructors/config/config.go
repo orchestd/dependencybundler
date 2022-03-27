@@ -2,18 +2,18 @@ package config
 
 import (
 	"bitbucket.org/HeilaSystems/configurations/config"
-	"bitbucket.org/HeilaSystems/dependencybundler/depBundler"
 	"bitbucket.org/HeilaSystems/dependencybundler/interfaces/configuration"
+	"bitbucket.org/HeilaSystems/sharedlib/consts"
 	"os"
 )
 
 /*func DefaultConfiguration(getter cache2.CacheStorageGetter, builder config.Builder) configuration.Config {*/
 func DefaultConfiguration(builder config.Builder) configuration.Config {
-	dockerName, isExist := os.LookupEnv(depBundler.DockerNameEnv)
+	dockerName, isExist := os.LookupEnv(consts.DockerNameEnv)
 	if !isExist {
 		panic("missing DOCKER_NAME environment variable")
 	}
-	env, isExist := os.LookupEnv(depBundler.HeilaEnv)
+	env, isExist := os.LookupEnv(consts.HeilaEnv)
 	if !isExist {
 		panic("missing HEILA_ENV environment variable")
 	}

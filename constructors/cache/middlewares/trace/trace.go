@@ -3,8 +3,8 @@ package trace
 import (
 	"bitbucket.org/HeilaSystems/cacheStorage"
 	"bitbucket.org/HeilaSystems/cacheStorage/mongodb/middlewares/trace"
-	"bitbucket.org/HeilaSystems/dependencybundler/depBundler"
 	"bitbucket.org/HeilaSystems/dependencybundler/interfaces/configuration"
+	"bitbucket.org/HeilaSystems/sharedlib/consts"
 	"github.com/opentracing/opentracing-go"
 	"strings"
 )
@@ -21,17 +21,17 @@ func DefaultCacheSetterMiddleware( tracer opentracing.Tracer,config configuratio
 
 func getWrapperConf(config configuration.Config)trace.CacheWrapperConfiguration {
 	var wrapperConf trace.CacheWrapperConfiguration
-	if 	dockerName,err := config.Get(depBundler.DockerNameEnv).String();err == nil {
+	if 	dockerName,err := config.Get(consts.DockerNameEnv).String();err == nil {
 		wrapperConf.ServiceName=dockerName
 	}
-	if dbHost ,err := config.Get(depBundler.DbHostEnv).String();err == nil {
+	if dbHost ,err := config.Get(consts.DbHostEnv).String();err == nil {
 		if dbHostArr:=strings.Split(dbHost,"@"); len(dbHostArr) > 1 {
 			dbHost = dbHostArr[1]
 		}
 		wrapperConf.DbHost=dbHost
 	}
 
-	if dbUser,err := config.Get(depBundler.DbUsernameEnv).String();err == nil {
+	if dbUser,err := config.Get(consts.DbUsernameEnv).String();err == nil {
 		wrapperConf.DbUser=dbUser
 	}
 	return wrapperConf
