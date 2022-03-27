@@ -2,10 +2,10 @@ package bundler
 
 import (
 	"bitbucket.org/HeilaSystems/dependencybundler/constructors/monitoring"
-	"bitbucket.org/HeilaSystems/dependencybundler/depBundler"
 	"bitbucket.org/HeilaSystems/dependencybundler/interfaces/configuration"
 	monitoring2 "bitbucket.org/HeilaSystems/monitoring"
 	"bitbucket.org/HeilaSystems/monitoring/bprometheus"
+	"bitbucket.org/HeilaSystems/sharedlib/consts"
 	"github.com/gin-gonic/gin"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"go.uber.org/fx"
@@ -14,7 +14,7 @@ import (
 func MonitoringFxOption() fx.Option {
 	return fx.Options(
 		fx.Provide(func(config configuration.Config)(monitoring2.Builder,error){
-			name,err :=  config.Get(depBundler.DockerNameEnv).String()
+			name,err :=  config.Get(consts.DockerNameEnv).String()
 			if err != nil {
 				return nil,err
 			}

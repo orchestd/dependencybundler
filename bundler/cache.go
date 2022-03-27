@@ -5,7 +5,7 @@ import (
 	"bitbucket.org/HeilaSystems/dependencybundler/constructors/cache"
 	"bitbucket.org/HeilaSystems/dependencybundler/constructors/cache/middlewares"
 	"bitbucket.org/HeilaSystems/dependencybundler/constructors/cache/middlewares/trace"
-	"bitbucket.org/HeilaSystems/dependencybundler/depBundler"
+	"bitbucket.org/HeilaSystems/sharedlib/consts"
 	"go.uber.org/fx"
 )
 
@@ -18,8 +18,8 @@ func CacheFxOption() fx.Option {
 
 func CacheTraceMiddlewareOption() fx.Option {
 	return fx.Options(
-		fx.Provide(fx.Annotated{Group: depBundler.CacheStorageGetterMiddlewares, Target: trace.DefaultCacheGetterTraceMiddleware}),
-		fx.Provide(fx.Annotated{Group: depBundler.CacheStorageSetterMiddlewares, Target: trace.DefaultCacheSetterMiddleware}),
+		fx.Provide(fx.Annotated{Group: consts.CacheStorageGetterMiddlewares, Target: trace.DefaultCacheGetterTraceMiddleware}),
+		fx.Provide(fx.Annotated{Group: consts.CacheStorageSetterMiddlewares, Target: trace.DefaultCacheSetterMiddleware}),
 		fx.Provide(middlewares.DefaultCacheWrapper),
 	)
 }

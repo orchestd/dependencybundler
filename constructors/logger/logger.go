@@ -5,6 +5,7 @@ import (
 	"bitbucket.org/HeilaSystems/dependencybundler/interfaces/configuration"
 	log2 "bitbucket.org/HeilaSystems/dependencybundler/interfaces/log"
 	"bitbucket.org/HeilaSystems/log"
+	"bitbucket.org/HeilaSystems/sharedlib/consts"
 	"context"
 	"go.uber.org/fx"
 )
@@ -21,7 +22,7 @@ type loggerDeps struct {
 
 func DefaultLogger(deps loggerDeps) log2.Logger {
 	var logLevel = log.DebugLevel
-	if levelValue := deps.Config.Get(depBundler.MinimumSeverityLevel); levelValue.IsSet() {
+	if levelValue := deps.Config.Get(consts.MinimumSeverityLevel); levelValue.IsSet() {
 		if key  ,err := levelValue.String();err == nil {
 			logLevel = log.ParseLevel(key)
 		}

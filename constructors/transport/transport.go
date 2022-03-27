@@ -2,10 +2,10 @@ package transport
 
 import (
 	discoveryServiceProviders "bitbucket.org/HeilaSystems/dependencybundler/constructors/discoveryService/providers"
-	"bitbucket.org/HeilaSystems/dependencybundler/depBundler"
 	"bitbucket.org/HeilaSystems/dependencybundler/interfaces/configuration"
 	"bitbucket.org/HeilaSystems/dependencybundler/interfaces/log"
 	transportConstructor "bitbucket.org/HeilaSystems/dependencybundler/interfaces/transport"
+	"bitbucket.org/HeilaSystems/sharedlib/consts"
 	"bitbucket.org/HeilaSystems/transport/client"
 	"bitbucket.org/HeilaSystems/transport/server"
 	"context"
@@ -108,7 +108,7 @@ func DefaultTransport(deps transportDeps) (transportConstructor.IRouter, transpo
 	}
 
 	var dsp transportConstructor.DiscoveryServiceProvider
-	if dspType, err := deps.Conf.Get(depBundler.DiscoveryServiceProvider).String(); err != nil {
+	if dspType, err := deps.Conf.Get(consts.DiscoveryServiceProvider).String(); err != nil {
 		deps.Logger.WithError(err).Debug(context.Background(), "Cannot get discoveryServiceProvider from configurations, setting to none")
 	} else {
 		switch dspType {

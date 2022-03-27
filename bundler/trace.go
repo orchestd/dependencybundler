@@ -1,9 +1,9 @@
 package bundler
 
 import (
-	"bitbucket.org/HeilaSystems/dependencybundler/depBundler"
 	"bitbucket.org/HeilaSystems/dependencybundler/interfaces/configuration"
 	"bitbucket.org/HeilaSystems/dependencybundler/interfaces/log"
+	"bitbucket.org/HeilaSystems/sharedlib/consts"
 	"bitbucket.org/HeilaSystems/trace/bjaeger"
 	"context"
 
@@ -17,7 +17,7 @@ func TracerFxOption() fx.Option {
 }
 
 func JaegerBuilder(lc fx.Lifecycle, config configuration.Config, logger log.Logger) (opentracing.Tracer, error) {
-	dockerName, err := config.Get(depBundler.DockerNameEnv).String()
+	dockerName, err := config.Get(consts.DockerNameEnv).String()
 	if err != nil {
 		return nil, err
 	}
