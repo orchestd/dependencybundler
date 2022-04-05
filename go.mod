@@ -24,3 +24,12 @@ require (
 	google.golang.org/api v0.30.0
 	google.golang.org/grpc v1.34.0
 )
+
+replace (
+	bitbucket.org/HeilaSystems/cacheStorage v0.16.2 => ../cacheStorage
+    bitbucket.org/HeilaSystems/configurations v0.3.0 => ../configurations
+    bitbucket.org/HeilaSystems/log v0.0.11 => ../log
+    bitbucket.org/HeilaSystems/monitoring v0.1.0 => ../monitoring
+    bitbucket.org/HeilaSystems/session v0.16.1 => ../session
+    bitbucket.org/HeilaSystems/transport v0.11.1 => ../transport
+)
