@@ -1,32 +1,21 @@
 package depBundler
 
+import (
+	cacheStorageConfiguration "bitbucket.org/HeilaSystems/cacheStorage/configuration"
+	"bitbucket.org/HeilaSystems/configurations/config/envConfiguration"
+	"bitbucket.org/HeilaSystems/configurations/credentials/credentialsConfiguration"
+	logConfiguration "bitbucket.org/HeilaSystems/log/configuration"
+	monitoringConfiguration "bitbucket.org/HeilaSystems/monitoring/configuration"
+	sessionConfiguration "bitbucket.org/HeilaSystems/session/configuration"
+	transportConfiguration "bitbucket.org/HeilaSystems/transport/configuration"
+)
+
 type DependencyBundlerConfiguration struct {
-	Port                 string            `json:"port"`
-	ReadTimeOutMs        string            `json:"readTimeOutMs,omitempty"`
-	WriteTimeOutMs       string            `json:"writeTimeOutMs,omitempty"`
-	ContextHeaders       []string          `json:"contextHeaders,omitempty"`
-	MonitorTags          map[string]string `json:"monitorTags,omitempty"`
-	SessionCollection    string            `json:"sessionCollection"`
-	LogToFile            bool              `json:"logToFile"`
-	MinimumSeverityLevel string            `json:"minimumSeverityLevel"`
-	LogToConsole         bool              `json:"logToConsole"`
-	FileJsonFormat       bool              `json:"fileJsonFormat"`
-	ConsoleJsonFormat    bool              `json:"consoleJsonFormat"`
-	CompressLogs         interface{}       `json:"compressLogs"`
-	DisableConsoleColor  bool              `json:"disableConsoleColor,omitempty"`
-	DebugMode            bool              `json:"debugMode,omitempty"`
-
-	HeilaEnv                 string  `json:"HEILA_ENV"`
-	DockerName               string  `json:"DOCKER_NAME"`
-	ProjectId                *string `json:"PROJECT_ID,omitempty"`
-	SecretManager            bool    `json:"ENABLE_SECRET_MANAGER,omitempty"`
-	SecretManagerVersion     *string `json:"SECRET_MANAGER_VERSION,omitempty"`
-	DbUsername               *string `json:"DB_USERNAME,omitempty"`
-	DbHost                   *string `json:"DB_HOST,omitempty"`
-	DiscoveryServiceProvider *string `json:"discoveryServiceProvider"`
-
-	CacheDBName *string `json:"CACHE_DB_NAME,omitempty"`
-	SqlDBName   *string `json:"SQL_DB_NAME,omitempty"`
-
-	AssetRoots interface{} `json:"assetRoots,omitempty"`
+	credentialsConfiguration.CredentialsConfiguration
+	envConfiguration.EnvConfiguration
+	cacheStorageConfiguration.CacheStorageConfiguration
+	sessionConfiguration.SessionConfiguration
+	monitoringConfiguration.MonitoringConfiguration
+	logConfiguration.LogConfiguration
+	transportConfiguration.TransportConfiguration
 }
