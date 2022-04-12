@@ -16,9 +16,14 @@ func DefaultCacheStorageClient(lc fx.Lifecycle, credentials credentials.Credenti
 	if err != nil {
 		panic("env variable CACHE_DB_NAME must be defined")
 	}
+	host, err := config.Get("CACHE_HOST").String()
+	if err != nil {
+		panic("env variable CACHE_HOST must be defined")
+	}
+
 	lc.Append(fx.Hook{
 		OnStart: func(c context.Context) error {
-			return cacheStorage.Connect(c,creds.CacheConnectionString, dbName)
+			return cacheStorage.Connect(c, host, creds.CacheUserName, creds.CacheUserPw, dbName)
 		},
 		OnStop: func(c context.Context) error {
 			return cacheStorage.Close(c)
