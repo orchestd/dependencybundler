@@ -11,7 +11,8 @@ func DefaultCredentials(builder credentials.Builder) (credentialsConstructor.Cre
 	if isExist && env == "true" {
 		pID, _ := os.LookupEnv("PROJECT_ID")
 		version , _ := os.LookupEnv("SECRET_MANAGER_VERSION")
-		builder = builder.UseGcpSecretManager(pID).SetSecretManagerVersion(version)
+		secretName , _ := os.LookupEnv("SECRET_NAME")
+		builder = builder.UseGcpSecretManager(pID).SetSecretManagerVersion(version).SetSecretName(secretName)
 	}
 	return builder.Build()
 }
