@@ -4,7 +4,7 @@ go 1.14
 
 require (
 	bitbucket.org/HeilaSystems/cacheStorage v0.17.0
-	bitbucket.org/HeilaSystems/configurations v0.6.1
+	bitbucket.org/HeilaSystems/configurations v0.7.0
 	bitbucket.org/HeilaSystems/debug v0.0.1
 	bitbucket.org/HeilaSystems/log v0.1.0
 	bitbucket.org/HeilaSystems/monitoring v0.2.0
@@ -12,7 +12,7 @@ require (
 	bitbucket.org/HeilaSystems/session v0.17.0
 	bitbucket.org/HeilaSystems/sharedlib v0.3.0
 	bitbucket.org/HeilaSystems/trace v0.0.10
-	bitbucket.org/HeilaSystems/transport v0.12.1
+	bitbucket.org/HeilaSystems/transport v0.13.0
 	bitbucket.org/HeilaSystems/validations v0.3.0
 	github.com/gin-contrib/cors v1.3.1
 	github.com/gin-gonic/gin v1.7.2

@@ -2,6 +2,7 @@ package transport
 
 import (
 	"bitbucket.org/HeilaSystems/transport/client"
+	clientHTTP "bitbucket.org/HeilaSystems/transport/client/http"
 	"bitbucket.org/HeilaSystems/transport/discoveryService"
 	"bitbucket.org/HeilaSystems/transport/server"
 	"bitbucket.org/HeilaSystems/transport/server/http"
@@ -21,3 +22,6 @@ type HTTPClientInterceptor client.HTTPClientInterceptor
 type IHttpLog http.IHttpLog
 type DiscoveryServiceProvider discoveryService.DiscoveryServiceProvider
 type HttpServerSettings http.HttpServerSettings
+
+const ContentTypeJSON = clientHTTP.ContentTypeJSON
+const ContentTypeXML = clientHTTP.ContentTypeXML
