@@ -21,7 +21,7 @@ func DefaultCacheSetterMiddleware( tracer opentracing.Tracer,config configuratio
 
 func getWrapperConf(config configuration.Config)trace.CacheWrapperConfiguration {
 	var wrapperConf trace.CacheWrapperConfiguration
-	if 	dockerName,err := config.Get(consts.DockerNameEnv).String();err == nil {
+	if 	dockerName,err := config.Get(consts.ServiceNameEnv).String();err == nil {
 		wrapperConf.ServiceName=dockerName
 	}
 	if dbHost ,err := config.Get(consts.DbHostEnv).String();err == nil {

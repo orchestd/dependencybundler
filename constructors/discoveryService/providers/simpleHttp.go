@@ -36,8 +36,8 @@ func NewSimpleHttpDSP(client transport.HttpClient, conf configuration.Config, lo
 		s.port = confPort
 	}
 
-	if dn, err := conf.Get(consts.DockerNameEnv).String(); err != nil {
-		logger.WithError(err).Debug(context.Background(), errBase+"Cannot get "+consts.DockerNameEnv+" from configurations")
+	if dn, err := conf.Get(consts.ServiceNameEnv).String(); err != nil {
+		logger.WithError(err).Debug(context.Background(), errBase+"Cannot get "+consts.ServiceNameEnv+" from configurations")
 		//should panic ?
 	} else {
 		s.serviceName = dn

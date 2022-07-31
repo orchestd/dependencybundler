@@ -29,7 +29,7 @@ func HttpTracingUnaryServerInterceptor(deps tracingDeps) gin.HandlerFunc {
 		}
 		ext.PeerHostname.Set(sp, host)
 		ext.HTTPUrl.Set(sp, c.Request.URL.String())
-		componentName, _ := deps.Config.Get("DOCKER_NAME").String()
+		componentName, _ := deps.Config.GetServiceName()
 		ext.Component.Set(sp, componentName)
 		defer sp.Finish()
 		if v, err := httputil.DumpRequest(c.Request, true); err == nil {

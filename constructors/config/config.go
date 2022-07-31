@@ -9,9 +9,9 @@ import (
 
 /*func DefaultConfiguration(getter cache2.CacheStorageGetter, builder config.Builder) configuration.Config {*/
 func DefaultConfiguration(builder config.Builder) configuration.Config {
-	dockerName, isExist := os.LookupEnv(consts.DockerNameEnv)
+	serviceName, isExist := os.LookupEnv(consts.ServiceNameEnv)
 	if !isExist {
-		panic("missing DOCKER_NAME environment variable")
+		panic("missing " + consts.ServiceNameEnv + " environment variable")
 	}
 	env, isExist := os.LookupEnv(consts.HeilaEnv)
 	if !isExist {
@@ -19,7 +19,7 @@ func DefaultConfiguration(builder config.Builder) configuration.Config {
 	}
 	//repo := cache.NewCacheVariablesParamsResolver(dockerName, env, "1", getter)
 	//cfg, err := builder.SetEnv(env).SetServiceName(dockerName).SetRepo(repo).Build()
-	cfg, err := builder.SetEnv(env).SetServiceName(dockerName).Build()
+	cfg, err := builder.SetEnv(env).SetServiceName(serviceName).Build()
 	if err != nil {
 		panic(err)
 	}

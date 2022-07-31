@@ -17,7 +17,7 @@ func TracerFxOption() fx.Option {
 }
 
 func JaegerBuilder(lc fx.Lifecycle, config configuration.Config, logger log.Logger) (opentracing.Tracer, error) {
-	dockerName, err := config.Get(consts.DockerNameEnv).String()
+	dockerName, err := config.Get(consts.ServiceNameEnv).String()
 	if err != nil {
 		return nil, err
 	}

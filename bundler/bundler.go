@@ -4,6 +4,7 @@ import (
 	"bitbucket.org/HeilaSystems/debug"
 	"bitbucket.org/HeilaSystems/dependencybundler/constructors/session"
 	"bitbucket.org/HeilaSystems/dependencybundler/interfaces/cache"
+	"bitbucket.org/HeilaSystems/dependencybundler/interfaces/configuration"
 	"bitbucket.org/HeilaSystems/dependencybundler/interfaces/validations"
 	"bitbucket.org/HeilaSystems/validations/cacheValidator"
 	"go.uber.org/fx"
@@ -23,8 +24,8 @@ func CreateApplication(confStruct interface{}, HandlersFunc interface{}, monolit
 		DebugFxOption(),
 		ValidationsFxOption(),
 		MonitoringFxOption(),
-		fx.Provide(func(storage cache.CacheStorageGetter) validations.ValidatorRunner {
-			return cacheValidator.NewCacheValidatorRunner(storage)
+		fx.Provide(func(storage cache.CacheStorageGetter, conf configuration.Config) validations.ValidatorRunner {
+			return cacheValidator.NewCacheValidatorRunner(storage, conf)
 		}),
 		fx.Invoke(HandlersFunc, debug.InitHandlers),
 	)

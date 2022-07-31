@@ -21,7 +21,7 @@ func DefaultTokenClientInterceptors() client.HTTPClientInterceptor {
 }
 
 func DefaultServiceNameToHeader(config configuration.Config)(client.HTTPClientInterceptor,error)  {
-	dockerName , err := config.Get("DOCKER_NAME").String()
+	dockerName , err := config.GetServiceName()
 	if err != nil {
 		return nil, err
 	}

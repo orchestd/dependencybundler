@@ -14,7 +14,7 @@ import (
 func MonitoringFxOption() fx.Option {
 	return fx.Options(
 		fx.Provide(func(config configuration.Config)(monitoring2.Builder,error){
-			name,err :=  config.Get(consts.DockerNameEnv).String()
+			name,err :=  config.Get(consts.ServiceNameEnv).String()
 			if err != nil {
 				return nil,err
 			}

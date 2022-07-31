@@ -35,7 +35,7 @@ func DefaultLogger(deps loggerDeps) log2.Logger {
 
 func (d loggerDeps) selfStaticFieldsContextExtractor(_ context.Context) map[string]interface{} {
 	output := make(map[string]interface{})
-	if dockerName , err := d.Config.Get("DOCKER_NAME").String();err == nil {
+	if dockerName , err := d.Config.GetServiceName();err == nil {
 		output["app"] = dockerName
 	}
 	info :=  depBundler.GetBuildInformation()
