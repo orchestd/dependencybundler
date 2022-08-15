@@ -16,6 +16,7 @@ type Handler server.Handler
 var NewHttpHandler = server.NewHttpHandler
 
 var HandleFunc = http.HandleFunc
+var FileReplyHandleFunc = http.FileReplyHandleFunc
 
 type HttpClient client.HttpClient
 type HTTPClientInterceptor client.HTTPClientInterceptor
