@@ -12,7 +12,7 @@ require (
 	bitbucket.org/HeilaSystems/session v0.17.0
 	bitbucket.org/HeilaSystems/sharedlib v0.9.0
 	bitbucket.org/HeilaSystems/trace v0.0.10
-	bitbucket.org/HeilaSystems/transport v0.14.1
+	bitbucket.org/HeilaSystems/transport v0.14.2
 	bitbucket.org/HeilaSystems/validations v0.4.0
 	github.com/gin-contrib/cors v1.3.1
 	github.com/gin-gonic/gin v1.7.2

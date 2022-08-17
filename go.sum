@@ -104,8 +104,8 @@ bitbucket.org/HeilaSystems/transport v0.7.0/go.mod h1:EkV+IXpL3seAo0Di6yPZkNrd2x
 bitbucket.org/HeilaSystems/transport v0.8.0/go.mod h1:EkV+IXpL3seAo0Di6yPZkNrd2xwnNQF+I1Vi2gA7HRY=
 bitbucket.org/HeilaSystems/transport v0.9.0/go.mod h1:/seY4jQ3ok0+u1PMnNx0tYhU4RxVqC8Q+MhPo76MNEI=
 bitbucket.org/HeilaSystems/transport v0.13.0/go.mod h1:K9KwCPeGw8AqUzox4RVX65D6wuW7N2nHdxGrVj3dtgM=
-bitbucket.org/HeilaSystems/transport v0.14.1 h1:sOhNXI8/RoYkLGKzQ96jPT4rSN7FxImaFuQLPxyYK6w=
-bitbucket.org/HeilaSystems/transport v0.14.1/go.mod h1:K9KwCPeGw8AqUzox4RVX65D6wuW7N2nHdxGrVj3dtgM=
+bitbucket.org/HeilaSystems/transport v0.14.2 h1:RnnawilGFQQi6/gHm/J829Cv1WtzJITt9XnZgULWGA4=
+bitbucket.org/HeilaSystems/transport v0.14.2/go.mod h1:K9KwCPeGw8AqUzox4RVX65D6wuW7N2nHdxGrVj3dtgM=
 bitbucket.org/HeilaSystems/utils v0.0.1 h1:MY4Q8migdhUFaNgxgRV+kpNJJGjipio4XIc11Nbkw/c=
 bitbucket.org/HeilaSystems/utils v0.0.1/go.mod h1:ywKcDVFgVV8S4PxYllt0zT+x5X8GGpEP/3yLz1w37dU=
 bitbucket.org/HeilaSystems/validations v0.1.0/go.mod h1:fs1jlB1J5rnSMKyPESJe6Qpr7aUNb8T4OhmognnGhHI=
