@@ -4,8 +4,9 @@ bitbucket.org/HeilaSystems/cacheStorage v0.13.0/go.mod h1:c0cmdZpOnczxCxmziB8KZO
 bitbucket.org/HeilaSystems/cacheStorage v0.14.0/go.mod h1:c0cmdZpOnczxCxmziB8KZOocFTBh9KbwY18j3/QPulI=
 bitbucket.org/HeilaSystems/cacheStorage v0.16.1/go.mod h1:U58aTzAD+Hsfz3dEfBee+bTSZdmnzti+b1529E5QYzA=
 bitbucket.org/HeilaSystems/cacheStorage v0.16.2/go.mod h1:U58aTzAD+Hsfz3dEfBee+bTSZdmnzti+b1529E5QYzA=
-bitbucket.org/HeilaSystems/cacheStorage v0.17.0 h1:SGvBezNCME1HDk9ecc8gfXNInJNTqp/XkLNSSM9TQEg=
 bitbucket.org/HeilaSystems/cacheStorage v0.17.0/go.mod h1:U58aTzAD+Hsfz3dEfBee+bTSZdmnzti+b1529E5QYzA=
+bitbucket.org/HeilaSystems/cacheStorage v0.18.1 h1:udKi8SnirwuGfhZ/FvukmZcdkOROH7pUZb0zguyPtR4=
+bitbucket.org/HeilaSystems/cacheStorage v0.18.1/go.mod h1:U58aTzAD+Hsfz3dEfBee+bTSZdmnzti+b1529E5QYzA=
 bitbucket.org/HeilaSystems/configurations v0.0.10/go.mod h1:m5N8E37vcdHBVFrURNpKSSx8lUI1ytOfQKng3VMxcmg=
 bitbucket.org/HeilaSystems/configurations v0.0.11/go.mod h1:m5N8E37vcdHBVFrURNpKSSx8lUI1ytOfQKng3VMxcmg=
 bitbucket.org/HeilaSystems/configurations v0.0.12/go.mod h1:Of5+Hoz/HUUdagP3O8QvABiU1iRBB6FCf1MTWwckWHA=
