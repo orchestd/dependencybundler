@@ -13,7 +13,7 @@ require (
 	bitbucket.org/HeilaSystems/sharedlib v0.9.0
 	bitbucket.org/HeilaSystems/trace v0.0.10
 	bitbucket.org/HeilaSystems/transport v0.15.1
-	bitbucket.org/HeilaSystems/validations v0.4.0
+	bitbucket.org/HeilaSystems/validations v0.5.0
 	github.com/gin-contrib/cors v1.3.1
 	github.com/gin-gonic/gin v1.8.1
 	github.com/go-masonry/mortar v0.1.3
