@@ -86,8 +86,8 @@ bitbucket.org/HeilaSystems/session v0.12.0/go.mod h1:6T/jn0LtT/83QRiKI+PFtCMiP7n
 bitbucket.org/HeilaSystems/session v0.15.4/go.mod h1:6T/jn0LtT/83QRiKI+PFtCMiP7n1DR/swuPUFIkXsEw=
 bitbucket.org/HeilaSystems/session v0.16.1/go.mod h1:SPdYyaqZUSn6fbbNWv/61NFY/t3beaCpDUmboiXNQXk=
 bitbucket.org/HeilaSystems/session v0.17.0/go.mod h1:SPdYyaqZUSn6fbbNWv/61NFY/t3beaCpDUmboiXNQXk=
-bitbucket.org/HeilaSystems/session v0.18.0 h1:hDleJo0tqf+fZVqNbjSQkKmvStrV6zJPytetlo9X564=
-bitbucket.org/HeilaSystems/session v0.18.0/go.mod h1:SPdYyaqZUSn6fbbNWv/61NFY/t3beaCpDUmboiXNQXk=
+bitbucket.org/HeilaSystems/session v0.18.1 h1:1pSip+XK8sUImuRWmrdjjb+jDlQ4mwzoKDnD4gCDbo8=
+bitbucket.org/HeilaSystems/session v0.18.1/go.mod h1:SPdYyaqZUSn6fbbNWv/61NFY/t3beaCpDUmboiXNQXk=
 bitbucket.org/HeilaSystems/sharedlib v0.9.0 h1:3s0LKC792A0E+/BXf9N4Lv9Hih6QhiXODBzMl17suvE=
 bitbucket.org/HeilaSystems/sharedlib v0.9.0/go.mod h1:qNRntfHhduPyBsHxsBe7VVJ5bl7nip2eAMqm9KB5rhI=
 bitbucket.org/HeilaSystems/tokenauth v0.1.0/go.mod h1:bktsrJ0qoh99ogT0gp5q/b5MkONzNSkl1eYqGQNID4U=
