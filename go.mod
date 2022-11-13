@@ -3,7 +3,7 @@ module bitbucket.org/HeilaSystems/dependencybundler
 go 1.14
 
 require (
-	bitbucket.org/HeilaSystems/cacheStorage v0.18.1
+	bitbucket.org/HeilaSystems/cacheStorage v0.18.2
 	bitbucket.org/HeilaSystems/configurations v0.9.0
 	bitbucket.org/HeilaSystems/debug v0.0.1
 	bitbucket.org/HeilaSystems/log v0.1.0
