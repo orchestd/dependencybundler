@@ -1,16 +1,14 @@
 package bundler
 
 import (
-	"bitbucket.org/HeilaSystems/dependencybundler/interfaces/configuration"
-	"bitbucket.org/HeilaSystems/dependencybundler/interfaces/log"
-	"bitbucket.org/HeilaSystems/sharedlib/consts"
-	"bitbucket.org/HeilaSystems/trace/bjaeger"
 	"context"
+	"github.com/orchestd/dependencybundler/interfaces/configuration"
+	"github.com/orchestd/dependencybundler/interfaces/log"
+	"github.com/orchestd/sharedlib/consts"
+	"github.com/orchestd/trace/bjaeger"
 
-	"github.com/opentracing/opentracing-go"
 	"go.uber.org/fx"
 )
-
 
 func TracerFxOption() fx.Option {
 	return fx.Provide(JaegerBuilder)

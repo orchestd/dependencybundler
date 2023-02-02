@@ -1,11 +1,11 @@
 package depBundler
 
 import (
-	"bitbucket.org/HeilaSystems/session/models"
-	"bitbucket.org/HeilaSystems/session/sessionresolver"
 	"context"
 	"encoding/json"
 	"fmt"
+	"github.com/orchestd/session/models"
+	"github.com/orchestd/session/sessionresolver"
 	"time"
 )
 

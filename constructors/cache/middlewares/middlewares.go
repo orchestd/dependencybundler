@@ -1,10 +1,10 @@
 package middlewares
 
 import (
-	"bitbucket.org/HeilaSystems/cacheStorage"
-	"bitbucket.org/HeilaSystems/cacheStorage/mongodb/middlewares"
-	"bitbucket.org/HeilaSystems/dependencybundler/interfaces/cache"
-	"bitbucket.org/HeilaSystems/dependencybundler/interfaces/configuration"
+	"github.com/orchestd/cacheStorage"
+	"github.com/orchestd/cacheStorage/mongodb/middlewares"
+	"github.com/orchestd/dependencybundler/interfaces/cache"
+	"github.com/orchestd/dependencybundler/interfaces/configuration"
 	"go.uber.org/fx"
 )
 
@@ -18,5 +18,5 @@ type CacheWrapperDeps struct {
 }
 
 func DefaultCacheWrapper(deps CacheWrapperDeps) (cache.CacheStorageGetterWrapper, cache.CacheStorageSetterWrapper) {
-	return middlewares.CreateCacheGetterWrapper(deps.CacheStorageGetter,deps.GetterMiddlewares...), middlewares.CreateCacheSetterWrapper(deps.CacheStorageSetter, deps.SetterMiddlewares...)
+	return middlewares.CreateCacheGetterWrapper(deps.CacheStorageGetter, deps.GetterMiddlewares...), middlewares.CreateCacheSetterWrapper(deps.CacheStorageSetter, deps.SetterMiddlewares...)
 }

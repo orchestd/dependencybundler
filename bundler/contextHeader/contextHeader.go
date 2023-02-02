@@ -1,5 +1,5 @@
 package contextHeader
 
-import "bitbucket.org/HeilaSystems/session/sessionresolver"
+import "github.com/orchestd/session/sessionresolver"
 
 var AlwaysCopyHeaders = []string{sessionresolver.DataNowKey}

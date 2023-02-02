@@ -1,7 +1,7 @@
 package configuration
 
 import (
-	"bitbucket.org/HeilaSystems/configurations/config"
+	"github.com/orchestd/configurations/config"
 )
 
 type Config config.Config

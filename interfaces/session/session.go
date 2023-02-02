@@ -1,6 +1,6 @@
 package session
 
-import "bitbucket.org/HeilaSystems/session"
+import "github.com/orchestd/session"
 
 type SessionResolver session.SessionResolver
 type SessionRepo session.SessionRepo

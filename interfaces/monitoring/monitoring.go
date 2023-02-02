@@ -1,5 +1,5 @@
 package monitoring
 
-import "bitbucket.org/HeilaSystems/monitoring"
+import "github.com/orchestd/monitoring"
 
 type Metrics monitoring.Metrics

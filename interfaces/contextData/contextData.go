@@ -1,8 +1,8 @@
 package contextData
 
 import (
-	"bitbucket.org/HeilaSystems/session/models"
 	"context"
+	"github.com/orchestd/session/models"
 	"time"
 )
 

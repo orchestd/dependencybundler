@@ -1,7 +1,7 @@
 package log
 
 import (
-	logDep "bitbucket.org/HeilaSystems/log"
+	logDep "github.com/orchestd/log"
 )
 
 type Logger logDep.Logger

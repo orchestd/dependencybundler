@@ -1,11 +1,11 @@
 package bundler
 
 import (
-	constructor "bitbucket.org/HeilaSystems/dependencybundler/constructors/validations"
-	validations2 "bitbucket.org/HeilaSystems/dependencybundler/interfaces/validations"
-	"bitbucket.org/HeilaSystems/validations"
-	"bitbucket.org/HeilaSystems/validations/bvalidator"
-	"bitbucket.org/HeilaSystems/validations/bvalidator/customValidations"
+	constructor "github.com/orchestd/dependencybundler/constructors/validations"
+	validations2 "github.com/orchestd/dependencybundler/interfaces/validations"
+	"github.com/orchestd/validations"
+	"github.com/orchestd/validations/bvalidator"
+	"github.com/orchestd/validations/bvalidator/customValidations"
 	"go.uber.org/fx"
 )
 

@@ -1,18 +1,18 @@
 package bundler
 
 import (
-	dspConstructor "bitbucket.org/HeilaSystems/dependencybundler/constructors/discoveryService"
-	transportConstructor "bitbucket.org/HeilaSystems/dependencybundler/constructors/transport"
-	clientMiddlewares "bitbucket.org/HeilaSystems/dependencybundler/constructors/transport/middlewares/client"
-	serverMiddlewares "bitbucket.org/HeilaSystems/dependencybundler/constructors/transport/middlewares/server"
-	"bitbucket.org/HeilaSystems/dependencybundler/depBundler/middlewares/context"
-	"bitbucket.org/HeilaSystems/dependencybundler/depBundler/middlewares/metrics"
-	"bitbucket.org/HeilaSystems/dependencybundler/depBundler/middlewares/trace"
-	"bitbucket.org/HeilaSystems/dependencybundler/interfaces/transport"
-	"bitbucket.org/HeilaSystems/transport/client"
-	httpClient "bitbucket.org/HeilaSystems/transport/client/http"
-	"bitbucket.org/HeilaSystems/transport/server"
-	"bitbucket.org/HeilaSystems/transport/server/http"
+	dspConstructor "github.com/orchestd/dependencybundler/constructors/discoveryService"
+	transportConstructor "github.com/orchestd/dependencybundler/constructors/transport"
+	clientMiddlewares "github.com/orchestd/dependencybundler/constructors/transport/middlewares/client"
+	serverMiddlewares "github.com/orchestd/dependencybundler/constructors/transport/middlewares/server"
+	"github.com/orchestd/dependencybundler/depBundler/middlewares/context"
+	"github.com/orchestd/dependencybundler/depBundler/middlewares/metrics"
+	"github.com/orchestd/dependencybundler/depBundler/middlewares/trace"
+	"github.com/orchestd/dependencybundler/interfaces/transport"
+	"github.com/orchestd/transport/client"
+	httpClient "github.com/orchestd/transport/client/http"
+	"github.com/orchestd/transport/server"
+	"github.com/orchestd/transport/server/http"
 	"go.uber.org/fx"
 )
 
@@ -25,7 +25,7 @@ const SystemHandlers = "systemHandlers"
 func TransportFxOption(monolithConstructor ...interface{}) fx.Option {
 	var optionArr []fx.Option
 	for _, v := range monolithConstructor {
-		if o, ok := v.(fx.Option); ok{
+		if o, ok := v.(fx.Option); ok {
 			optionArr = append(optionArr, o)
 		} else {
 			optionArr = append(optionArr, fx.Provide(v))

@@ -1,10 +1,10 @@
 package bundler
 
 import (
-	"bitbucket.org/HeilaSystems/configurations/credentials"
-	"bitbucket.org/HeilaSystems/configurations/credentials/credentialsgetter"
+	"github.com/orchestd/dependencybundler/credentials"
+	"github.com/orchestd/dependencybundler/credentials/credentialsgetter"
 
-	credentialsConstructor "bitbucket.org/HeilaSystems/dependencybundler/constructors/credentials"
+	credentialsConstructor "github.com/orchestd/dependencybundler/constructors/credentials"
 	"go.uber.org/fx"
 )
 

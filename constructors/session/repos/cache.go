@@ -1,11 +1,11 @@
 package repos
 
 import (
-	"bitbucket.org/HeilaSystems/dependencybundler/interfaces/cache"
-	"bitbucket.org/HeilaSystems/dependencybundler/interfaces/configuration"
-	"bitbucket.org/HeilaSystems/dependencybundler/interfaces/session"
-	cache2 "bitbucket.org/HeilaSystems/session/sessionresolver/repos/cache"
-	"bitbucket.org/HeilaSystems/sharedlib/consts"
+	"github.com/orchestd/dependencybundler/interfaces/cache"
+	"github.com/orchestd/dependencybundler/interfaces/configuration"
+	"github.com/orchestd/dependencybundler/interfaces/session"
+	cache2 "github.com/orchestd/session/sessionresolver/repos/cache"
+	"github.com/orchestd/sharedlib/consts"
 )
 
 func DefaultCacheSessionRepo(config configuration.Config, getter cache.CacheStorageGetterWrapper, setter cache.CacheStorageSetterWrapper) (session.SessionRepo, error) {
@@ -13,6 +13,6 @@ func DefaultCacheSessionRepo(config configuration.Config, getter cache.CacheStor
 	if err != nil {
 		return nil, err
 	}
-	sessionCacheRepo := cache2.NewSessionCacheRepo(getter ,setter,collectionName,"1" )
-	return sessionCacheRepo,nil
+	sessionCacheRepo := cache2.NewSessionCacheRepo(getter, setter, collectionName, "1")
+	return sessionCacheRepo, nil
 }

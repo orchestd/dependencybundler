@@ -1,6 +1,6 @@
 package cache
 
-import "bitbucket.org/HeilaSystems/cacheStorage"
+import "github.com/orchestd/cacheStorage"
 
 type CacheStorageGetter cacheStorage.CacheStorageGetter
 type CacheStorageSetter cacheStorage.CacheStorageSetter

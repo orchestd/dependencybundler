@@ -1,9 +1,9 @@
 package trace
 
 import (
-	"bitbucket.org/HeilaSystems/log"
-	"bitbucket.org/HeilaSystems/sharedlib/consts"
-	"bitbucket.org/HeilaSystems/trace/bjaeger"
+	"github.com/orchestd/log"
+	"github.com/orchestd/sharedlib/consts"
+	"github.com/orchestd/trace/bjaeger"
 	"go.uber.org/fx"
 )
 

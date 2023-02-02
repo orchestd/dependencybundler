@@ -1,10 +1,10 @@
 package context
 
 import (
-	"bitbucket.org/HeilaSystems/dependencybundler/bundler/contextHeader"
-	"bitbucket.org/HeilaSystems/dependencybundler/interfaces/configuration"
 	"context"
 	"github.com/gin-gonic/gin"
+	"github.com/orchestd/dependencybundler/bundler/contextHeader"
+	"github.com/orchestd/dependencybundler/interfaces/configuration"
 )
 
 func HeadersToContext(config configuration.Config) gin.HandlerFunc {
@@ -18,7 +18,7 @@ func HeadersToContext(config configuration.Config) gin.HandlerFunc {
 		for _, header := range headers {
 			h := c.GetHeader(header)
 			if len(h) > 0 {
-				ctx := context.WithValue(c.Request.Context(),header,h)
+				ctx := context.WithValue(c.Request.Context(), header, h)
 				c.Request = c.Request.WithContext(ctx)
 			}
 		}

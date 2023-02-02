@@ -1,6 +1,6 @@
 package providers
 
-import "bitbucket.org/HeilaSystems/servicereply"
+import "github.com/orchestd/servicereply"
 
 type noDSP struct {
 }

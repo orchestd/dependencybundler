@@ -1,8 +1,8 @@
 package discoveryService
 
 import (
-	transport "bitbucket.org/HeilaSystems/dependencybundler/interfaces/transport"
-	"bitbucket.org/HeilaSystems/transport/discoveryService"
+	transport "github.com/orchestd/dependencybundler/interfaces/transport"
+	"github.com/orchestd/transport/discoveryService"
 	"go.uber.org/fx"
 )
 

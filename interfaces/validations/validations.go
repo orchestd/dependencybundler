@@ -1,9 +1,9 @@
 package validations
 
 import (
-	"bitbucket.org/HeilaSystems/validations"
+	"github.com/orchestd/validations"
 )
-import "bitbucket.org/HeilaSystems/validations/bvalidator/customValidations"
+import "github.com/orchestd/validations/bvalidator/customValidations"
 
 type Validations validations.Validations
 type CustomValidation validations.CustomValidation

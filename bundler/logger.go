@@ -1,13 +1,13 @@
 package bundler
 
 import (
-	"bitbucket.org/HeilaSystems/dependencybundler/constructors/logger"
-	"bitbucket.org/HeilaSystems/dependencybundler/constructors/logger/middlewares"
-	"bitbucket.org/HeilaSystems/dependencybundler/constructors/trace"
-	"bitbucket.org/HeilaSystems/dependencybundler/interfaces/configuration"
-	"bitbucket.org/HeilaSystems/log"
-	"bitbucket.org/HeilaSystems/log/bzerolog"
-	"bitbucket.org/HeilaSystems/sharedlib/consts"
+	"github.com/orchestd/dependencybundler/constructors/logger"
+	"github.com/orchestd/dependencybundler/constructors/logger/middlewares"
+	"github.com/orchestd/dependencybundler/constructors/trace"
+	"github.com/orchestd/dependencybundler/interfaces/configuration"
+	"github.com/orchestd/log"
+	"github.com/orchestd/log/bzerolog"
+	"github.com/orchestd/sharedlib/consts"
 	"go.uber.org/fx"
 )
 
@@ -15,11 +15,11 @@ func LoggerFxOption() fx.Option {
 	return fx.Options(
 		fx.Provide(func(config configuration.Config) log.Builder {
 			defaultLogSetting := bzerolog.LogSettings{
-				LogToFile:         false,
-				FileJsonFormat:    false,
-				LogToConsole:      true,
-				ConsoleJsonFormat: false,
-				CompressLogsFile:  false,
+				LogToFile:           false,
+				FileJsonFormat:      false,
+				LogToConsole:        true,
+				ConsoleJsonFormat:   false,
+				CompressLogsFile:    false,
 				DisableConsoleColor: false,
 			}
 			if fileLog, err := config.Get(consts.LogToFile).Bool(); err == nil {
@@ -50,6 +50,5 @@ func LoggerFxOption() fx.Option {
 		trace.TraceInfoContextExtractorFxOption(),
 
 		fx.Provide(logger.DefaultLogger),
-
 	)
 }

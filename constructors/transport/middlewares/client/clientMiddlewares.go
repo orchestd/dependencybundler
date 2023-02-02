@@ -1,14 +1,14 @@
 package client
 
 import (
-	"bitbucket.org/HeilaSystems/dependencybundler/bundler/contextHeader"
-	"bitbucket.org/HeilaSystems/dependencybundler/interfaces/configuration"
-	"bitbucket.org/HeilaSystems/transport/client"
-	"bitbucket.org/HeilaSystems/transport/client/http/interceptors/contextValuesToHeaders"
+	"github.com/orchestd/dependencybundler/bundler/contextHeader"
+	"github.com/orchestd/dependencybundler/interfaces/configuration"
+	"github.com/orchestd/transport/client"
+	"github.com/orchestd/transport/client/http/interceptors/contextValuesToHeaders"
 )
 
 func DefaultContextValuesToHeaders(config configuration.Config) client.HTTPClientInterceptor {
-	headers , err := config.Get("contextHeaders").StringSlice()
+	headers, err := config.Get("contextHeaders").StringSlice()
 	if err != nil {
 		return contextValuesToHeaders.ContextValuesToHeaders([]string{})
 	}
@@ -20,10 +20,10 @@ func DefaultTokenClientInterceptors() client.HTTPClientInterceptor {
 	return contextValuesToHeaders.TokenClientInterceptors()
 }
 
-func DefaultServiceNameToHeader(config configuration.Config)(client.HTTPClientInterceptor,error)  {
-	dockerName , err := config.GetServiceName()
+func DefaultServiceNameToHeader(config configuration.Config) (client.HTTPClientInterceptor, error) {
+	dockerName, err := config.GetServiceName()
 	if err != nil {
 		return nil, err
 	}
-	return contextValuesToHeaders.ServiceNameToHeader(dockerName),nil
+	return contextValuesToHeaders.ServiceNameToHeader(dockerName), nil
 }

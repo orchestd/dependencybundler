@@ -1,5 +1,5 @@
 package credentials
 
-import "bitbucket.org/HeilaSystems/configurations/credentials"
+import "github.com/orchestd/configurations/credentials"
 
 type CredentialsGetter credentials.CredentialsGetter

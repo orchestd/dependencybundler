@@ -1,8 +1,8 @@
 package session
 
 import (
-	"bitbucket.org/HeilaSystems/dependencybundler/depBundler"
-	"bitbucket.org/HeilaSystems/dependencybundler/interfaces/contextData"
+	"github.com/orchestd/dependencybundler/depBundler"
+	"github.com/orchestd/dependencybundler/interfaces/contextData"
 )
 
 func NewContextData() contextData.ContextDataResolver {

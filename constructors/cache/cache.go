@@ -1,11 +1,11 @@
 package cache
 
 import (
-	"bitbucket.org/HeilaSystems/cacheStorage"
-	"bitbucket.org/HeilaSystems/dependencybundler/interfaces/cache"
-	"bitbucket.org/HeilaSystems/dependencybundler/interfaces/configuration"
-	"bitbucket.org/HeilaSystems/dependencybundler/interfaces/credentials"
 	"context"
+	"github.com/orchestd/cacheStorage"
+	"github.com/orchestd/dependencybundler/interfaces/cache"
+	"github.com/orchestd/dependencybundler/interfaces/configuration"
+	"github.com/orchestd/dependencybundler/interfaces/credentials"
 	"go.uber.org/fx"
 )
 

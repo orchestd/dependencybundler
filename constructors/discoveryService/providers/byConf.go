@@ -1,7 +1,7 @@
 package providers
 
 import (
-	"bitbucket.org/HeilaSystems/servicereply"
+	"github.com/orchestd/servicereply"
 	"os"
 )
 

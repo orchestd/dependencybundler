@@ -1,11 +1,11 @@
 package bundler
 
 import (
-	"bitbucket.org/HeilaSystems/cacheStorage/mongodb"
-	"bitbucket.org/HeilaSystems/dependencybundler/constructors/cache"
-	"bitbucket.org/HeilaSystems/dependencybundler/constructors/cache/middlewares"
-	"bitbucket.org/HeilaSystems/dependencybundler/constructors/cache/middlewares/trace"
-	"bitbucket.org/HeilaSystems/sharedlib/consts"
+	"github.com/orchestd/cacheStorage/mongodb"
+	"github.com/orchestd/dependencybundler/constructors/cache"
+	"github.com/orchestd/dependencybundler/constructors/cache/middlewares"
+	"github.com/orchestd/dependencybundler/constructors/cache/middlewares/trace"
+	"github.com/orchestd/sharedlib/consts"
 	"go.uber.org/fx"
 )
 

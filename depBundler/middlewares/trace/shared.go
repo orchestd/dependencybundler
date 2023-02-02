@@ -1,15 +1,14 @@
 package trace
 
 import (
-	"bitbucket.org/HeilaSystems/dependencybundler/interfaces/configuration"
-	"bitbucket.org/HeilaSystems/dependencybundler/interfaces/log"
 	"bytes"
 	"context"
 	"github.com/gin-gonic/gin"
 	"github.com/go-masonry/mortar/utils"
-	"github.com/opentracing/opentracing-go"
 	"github.com/opentracing/opentracing-go/ext"
 	traceLog "github.com/opentracing/opentracing-go/log"
+	"github.com/orchestd/dependencybundler/interfaces/configuration"
+	"github.com/orchestd/dependencybundler/interfaces/log"
 	"go.uber.org/fx"
 	"google.golang.org/grpc/metadata"
 )
@@ -42,7 +41,6 @@ func (d tracingDeps) newServerSpan(ctx *gin.Context, methodName string) (opentra
 	return opentracing.StartSpanFromContextWithTracer(ctx.Request.Context(), d.Tracer, methodName, ext.RPCServerOption(spanContext), ext.SpanKindRPCServer, httpTag)
 }
 
-
 func (d tracingDeps) extractIncomingCarrier(ctx context.Context) utils.MDTraceCarrier {
 	md, ok := metadata.FromIncomingContext(ctx)
 	if !ok {
@@ -58,7 +56,6 @@ func (d tracingDeps) extractOutgoingCarrier(ctx context.Context) utils.MDTraceCa
 	}
 	return utils.MDTraceCarrier(md.Copy()) // make a copy since this map is not thread safe
 }
-
 
 type bodyLogWriter struct {
 	gin.ResponseWriter

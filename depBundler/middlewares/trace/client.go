@@ -1,11 +1,10 @@
 package trace
 
 import (
-	"bitbucket.org/HeilaSystems/transport/client"
 	"context"
 	"fmt"
-	"github.com/opentracing/opentracing-go"
 	"github.com/opentracing/opentracing-go/ext"
+	"github.com/orchestd/transport/client"
 	"net/http"
 	"net/http/httputil"
 	"reflect"

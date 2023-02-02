@@ -1,13 +1,13 @@
 package depBundler
 
 import (
-	cacheStorageConfiguration "bitbucket.org/HeilaSystems/cacheStorage/configuration"
-	"bitbucket.org/HeilaSystems/configurations/config/envConfiguration"
-	"bitbucket.org/HeilaSystems/configurations/credentials/credentialsConfiguration"
-	logConfiguration "bitbucket.org/HeilaSystems/log/configuration"
-	monitoringConfiguration "bitbucket.org/HeilaSystems/monitoring/configuration"
-	sessionConfiguration "bitbucket.org/HeilaSystems/session/configuration"
-	transportConfiguration "bitbucket.org/HeilaSystems/transport/configuration"
+	cacheStorageConfiguration "github.com/orchestd/cacheStorage/configuration"
+	"github.com/orchestd/configurations/config/envConfiguration"
+	"github.com/orchestd/configurations/credentials/credentialsConfiguration"
+	logConfiguration "github.com/orchestd/log/configuration"
+	monitoringConfiguration "github.com/orchestd/monitoring/configuration"
+	sessionConfiguration "github.com/orchestd/session/configuration"
+	transportConfiguration "github.com/orchestd/transport/configuration"
 )
 
 type DependencyBundlerConfiguration struct {

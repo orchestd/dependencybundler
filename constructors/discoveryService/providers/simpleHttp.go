@@ -1,14 +1,14 @@
 package providers
 
 import (
-	"bitbucket.org/HeilaSystems/dependencybundler/interfaces/configuration"
-	"bitbucket.org/HeilaSystems/dependencybundler/interfaces/transport"
-	"bitbucket.org/HeilaSystems/log"
-	"bitbucket.org/HeilaSystems/servicereply"
-	"bitbucket.org/HeilaSystems/sharedlib/consts"
 	"context"
 	"fmt"
 	"github.com/gin-gonic/gin"
+	"github.com/orchestd/dependencybundler/interfaces/configuration"
+	"github.com/orchestd/dependencybundler/interfaces/transport"
+	"github.com/orchestd/log"
+	"github.com/orchestd/servicereply"
+	"github.com/orchestd/sharedlib/consts"
 )
 
 type simpleHttpDSP struct {

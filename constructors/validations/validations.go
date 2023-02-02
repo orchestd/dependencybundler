@@ -1,8 +1,8 @@
 package validations
 
 import (
-	iValidations "bitbucket.org/HeilaSystems/dependencybundler/interfaces/validations"
-	"bitbucket.org/HeilaSystems/validations"
+	iValidations "github.com/orchestd/dependencybundler/interfaces/validations"
+	"github.com/orchestd/validations"
 	"go.uber.org/fx"
 )
 

@@ -1,15 +1,17 @@
 package log
 
 import (
-	"bitbucket.org/HeilaSystems/dependencybundler/interfaces/log"
-	"bitbucket.org/HeilaSystems/dependencybundler/interfaces/transport"
 	"bytes"
 	"encoding/json"
-	"github.com/gin-gonic/gin"
-	"google.golang.org/api/logging/v2"
+	"github.com/orchestd/dependencybundler/interfaces/transport"
 	"io"
 	"io/ioutil"
 	"time"
+)
+
+import (
+	"github.com/gin-gonic/gin"
+	"github.com/orchestd/dependencybundler/interfaces/log"
 )
 
 type bodyLogWriter struct {
@@ -49,45 +51,45 @@ func GinLogHandlerMiddleware(logger log.Logger) gin.HandlerFunc {
 		//	RemoteIP:                       c.ClientIP(),
 		//}}
 		httpRequest := map[string]interface{}{
-			"response" : jsonmsg,
+			"response": jsonmsg,
 		}
 		if c.Request.Method != "GET" && c.Request.Method != "DELETE" {
 			httpRequest["request"] = reqJson
 		}
 		if d, ok := c.Deadline(); ok {
-			httpRequest["deadline"] =  d
+			httpRequest["deadline"] = d
 		}
 		entry := logger.WithFields(httpRequest)
 		httpRequestStruct := logging.HttpRequest{
-			Latency:                        latency.String(),
-			Protocol:                      	c.Request.Proto,
-			Referer:                        c.Request.Referer(),
-			RemoteIp:                       c.ClientIP(),
-			RequestMethod : c.Request.Method,
-			RequestUrl:                     c.Request.URL.String(),
-			ResponseSize:                   int64(c.Writer.Size()),
-			Status:                         int64(c.Writer.Status()),
-			UserAgent:                      c.Request.UserAgent(),
-			ForceSendFields:                nil,
-			NullFields:                     nil,
+			Latency:         latency.String(),
+			Protocol:        c.Request.Proto,
+			Referer:         c.Request.Referer(),
+			RemoteIp:        c.ClientIP(),
+			RequestMethod:   c.Request.Method,
+			RequestUrl:      c.Request.URL.String(),
+			ResponseSize:    int64(c.Writer.Size()),
+			Status:          int64(c.Writer.Status()),
+			UserAgent:       c.Request.UserAgent(),
+			ForceSendFields: nil,
+			NullFields:      nil,
 		}
-		entry = entry.WithField("httpRequest" , httpRequestStruct)
+		entry = entry.WithField("httpRequest", httpRequestStruct)
 		var errorMsg string
 		if len(c.Errors.String()) > 0 {
-			srvErr,ok := c.Errors[0].Meta.(transport.IHttpLog)
-			if ok{
+			srvErr, ok := c.Errors[0].Meta.(transport.IHttpLog)
+			if ok {
 				errorMsg = srvErr.GetAction()
-				if srvErr.GetLogMessage() != nil{
+				if srvErr.GetLogMessage() != nil {
 					errorMsg += " - " + *srvErr.GetLogMessage()
 				}
 				entry = entry.WithError(c.Errors[0].Err)
 			}
-			entry = entry.WithField("source",srvErr.GetSource()).WithField("logValues",srvErr.GetLogValues())
+			entry = entry.WithField("source", srvErr.GetSource()).WithField("logValues", srvErr.GetLogValues())
 		}
-		if c.Writer.Status() >= 500{
-			entry.Error(c.Request.Context(),errorMsg)
-		}else {
-			entry.Info(c.Request.Context(),"%s finished " , c.FullPath())
+		if c.Writer.Status() >= 500 {
+			entry.Error(c.Request.Context(), errorMsg)
+		} else {
+			entry.Info(c.Request.Context(), "%s finished ", c.FullPath())
 		}
 	}
 }
@@ -96,4 +98,3 @@ var allowedContentTypes = map[string]bool{
 	"application/json": true,
 	"application/xml":  true,
 }
-

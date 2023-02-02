@@ -1,12 +1,12 @@
 package transport
 
 import (
-	"bitbucket.org/HeilaSystems/transport/client"
-	clientHTTP "bitbucket.org/HeilaSystems/transport/client/http"
-	"bitbucket.org/HeilaSystems/transport/discoveryService"
-	"bitbucket.org/HeilaSystems/transport/server"
-	"bitbucket.org/HeilaSystems/transport/server/http"
 	"github.com/gin-gonic/gin"
+	"github.com/orchestd/transport/client"
+	clientHTTP "github.com/orchestd/transport/client/http"
+	"github.com/orchestd/transport/discoveryService"
+	"github.com/orchestd/transport/server"
+	"github.com/orchestd/transport/server/http"
 )
 
 type IRouter gin.IRouter

@@ -1,12 +1,12 @@
 package bundler
 
 import (
-	"bitbucket.org/HeilaSystems/debug"
-	"bitbucket.org/HeilaSystems/dependencybundler/constructors/session"
-	"bitbucket.org/HeilaSystems/dependencybundler/interfaces/cache"
-	"bitbucket.org/HeilaSystems/dependencybundler/interfaces/configuration"
-	"bitbucket.org/HeilaSystems/dependencybundler/interfaces/validations"
-	"bitbucket.org/HeilaSystems/validations/cacheValidator"
+	"github.com/orchestd/debug"
+	"github.com/orchestd/dependencybundler/constructors/session"
+	"github.com/orchestd/dependencybundler/interfaces/cache"
+	"github.com/orchestd/dependencybundler/interfaces/configuration"
+	"github.com/orchestd/dependencybundler/interfaces/validations"
+	"github.com/orchestd/validations/cacheValidator"
 	"go.uber.org/fx"
 )
 

@@ -1,15 +1,15 @@
 package transport
 
 import (
-	discoveryServiceProviders "bitbucket.org/HeilaSystems/dependencybundler/constructors/discoveryService/providers"
-	"bitbucket.org/HeilaSystems/dependencybundler/interfaces/configuration"
-	"bitbucket.org/HeilaSystems/dependencybundler/interfaces/log"
-	transportConstructor "bitbucket.org/HeilaSystems/dependencybundler/interfaces/transport"
-	"bitbucket.org/HeilaSystems/sharedlib/consts"
-	"bitbucket.org/HeilaSystems/transport/client"
-	"bitbucket.org/HeilaSystems/transport/server"
 	"context"
 	"github.com/gin-gonic/gin"
+	discoveryServiceProviders "github.com/orchestd/dependencybundler/constructors/discoveryService/providers"
+	"github.com/orchestd/dependencybundler/interfaces/configuration"
+	"github.com/orchestd/dependencybundler/interfaces/log"
+	transportConstructor "github.com/orchestd/dependencybundler/interfaces/transport"
+	"github.com/orchestd/sharedlib/consts"
+	"github.com/orchestd/transport/client"
+	"github.com/orchestd/transport/server"
 	"go.uber.org/fx"
 	"time"
 )

@@ -1,9 +1,9 @@
 package config
 
 import (
-	"bitbucket.org/HeilaSystems/configurations/config"
-	"bitbucket.org/HeilaSystems/dependencybundler/interfaces/configuration"
-	"bitbucket.org/HeilaSystems/sharedlib/consts"
+	"github.com/orchestd/configurations/config"
+	"github.com/orchestd/dependencybundler/interfaces/configuration"
+	"github.com/orchestd/sharedlib/consts"
 	"os"
 )
 
