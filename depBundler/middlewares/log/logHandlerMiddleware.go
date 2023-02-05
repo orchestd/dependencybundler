@@ -3,15 +3,12 @@ package log
 import (
 	"bytes"
 	"encoding/json"
+	"github.com/gin-gonic/gin"
+	"github.com/orchestd/dependencybundler/interfaces/log"
 	"github.com/orchestd/dependencybundler/interfaces/transport"
 	"io"
 	"io/ioutil"
 	"time"
-)
-
-import (
-	"github.com/gin-gonic/gin"
-	"github.com/orchestd/dependencybundler/interfaces/log"
 )
 
 type bodyLogWriter struct {
