@@ -5,7 +5,7 @@ go 1.14
 require (
 	github.com/orchestd/cacheStorage v0.18.7
 	github.com/orchestd/configurations v0.10.2
-	github.com/orchestd/debug v0.1.4
+	github.com/orchestd/debug v0.1.5
 	github.com/orchestd/log v0.1.1
 	github.com/orchestd/monitoring v0.2.1
 	github.com/orchestd/servicereply v0.0.5
