@@ -3,6 +3,7 @@ package trace
 import (
 	"context"
 	"fmt"
+	"github.com/opentracing/opentracing-go"
 	"github.com/opentracing/opentracing-go/ext"
 	"github.com/orchestd/transport/client"
 	"net/http"
