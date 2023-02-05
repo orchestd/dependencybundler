@@ -11,7 +11,7 @@ require (
 	github.com/orchestd/servicereply v0.0.6
 	github.com/orchestd/session v0.21.10
 	github.com/orchestd/sharedlib v0.13.2
-	github.com/orchestd/trace v0.0.18
+	github.com/orchestd/trace v0.0.19
 	github.com/orchestd/transport v0.15.9
 	github.com/orchestd/validations v0.5.8
 	github.com/gin-contrib/cors v1.3.1
