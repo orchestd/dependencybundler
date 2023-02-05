@@ -5,6 +5,7 @@ import (
 	"context"
 	"github.com/gin-gonic/gin"
 	"github.com/go-masonry/mortar/utils"
+	"github.com/opentracing/opentracing-go"
 	"github.com/opentracing/opentracing-go/ext"
 	traceLog "github.com/opentracing/opentracing-go/log"
 	"github.com/orchestd/dependencybundler/interfaces/configuration"
