@@ -6,6 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/orchestd/dependencybundler/interfaces/log"
 	"github.com/orchestd/dependencybundler/interfaces/transport"
+	"google.golang.org/api/logging/v2"
 	"io"
 	"io/ioutil"
 	"time"
