@@ -3,7 +3,7 @@ module github.com/orchestd/dependencybundler
 go 1.14
 
 require (
-	github.com/orchestd/cacheStorage v0.18.7
+	github.com/orchestd/cacheStorage v0.18.8
 	github.com/orchestd/configurations v0.10.2
 	github.com/orchestd/debug v0.1.7
 	github.com/orchestd/log v0.1.1
