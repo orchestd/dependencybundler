@@ -1,7 +1,6 @@
 package trace
 
 import (
-	"github.com/opentracing/opentracing-go"
 	"github.com/orchestd/cacheStorage"
 	"github.com/orchestd/cacheStorage/mongodb/middlewares/trace"
 	"github.com/orchestd/dependencybundler/interfaces/configuration"
