@@ -5,6 +5,7 @@ import (
 	"github.com/orchestd/cacheStorage/mongodb/middlewares/trace"
 	"github.com/orchestd/dependencybundler/interfaces/configuration"
 	"github.com/orchestd/sharedlib/consts"
+	"github.com/opentracing/opentracing-go"
 	"strings"
 )
 
