@@ -6,7 +6,7 @@ import (
 	"github.com/orchestd/dependencybundler/interfaces/log"
 	"github.com/orchestd/sharedlib/consts"
 	"github.com/orchestd/trace/bjaeger"
-
+	"github.com/opentracing/opentracing-go"
 	"go.uber.org/fx"
 )
 
