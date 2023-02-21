@@ -10,7 +10,7 @@ require (
 	github.com/orchestd/monitoring v0.2.3
 	github.com/orchestd/servicereply v0.0.7
 	github.com/orchestd/session v0.21.16
-	github.com/orchestd/sharedlib v0.13.3
+	github.com/orchestd/sharedlib v0.13.5
 	github.com/orchestd/trace v0.0.23
 	github.com/orchestd/transport v0.15.13
 	github.com/orchestd/validations v0.5.12
