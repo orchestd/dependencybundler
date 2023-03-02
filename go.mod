@@ -1,6 +1,6 @@
 module github.com/orchestd/dependencybundler
 
-go 1.14
+go 1.18
 
 require (
 	github.com/gin-contrib/cors v1.3.1
