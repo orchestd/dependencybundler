@@ -118,6 +118,8 @@ func DefaultTransport(deps transportDeps) (transportConstructor.IRouter, transpo
 			dsp = discoveryServiceProviders.NewConfDSP()
 		case "simple":
 			dsp = discoveryServiceProviders.NewSimpleHttpDSP(client, deps.Conf, deps.Logger)
+		case "templated":
+			dsp = discoveryServiceProviders.NewTemplatedDSP(deps.Conf, deps.Logger)
 		}
 	}
 	//ugly
