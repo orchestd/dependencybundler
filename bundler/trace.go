@@ -16,17 +16,17 @@ func TracerFxOption() fx.Option {
 	return fx.Provide(JaegerBuilder)
 }
 
-func JaegerBuilder(lc fx.Lifecycle, config configuration.Config, logger log.Logger) (opentracing.Tracer, error) {
+func JaegerBuilder(lc fx.Lifecycle, config configuration.Config, logger log.Logger) (opentracing.Tracer, Tracer, error) {
 	dockerName, err := config.Get(consts.ServiceNameEnv).String()
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 	openTracer, err := bjaeger.Builder().
 		SetServiceName(dockerName).
 		AddOptions(bjaeger.BricksLoggerOption(logger)). // verbose logging,
 		Build()
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 	lc.Append(fx.Hook{
 		OnStart: func(ctx context.Context) error {
@@ -36,5 +36,6 @@ func JaegerBuilder(lc fx.Lifecycle, config configuration.Config, logger log.Logg
 			return openTracer.Close(ctx)
 		},
 	})
-	return openTracer.Tracer(), nil
+	t := openTracer.Tracer()
+	return t, Tracer(t), nil
 }
