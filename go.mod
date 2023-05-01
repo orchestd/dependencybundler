@@ -7,7 +7,7 @@ require (
 	github.com/gin-gonic/gin v1.8.1
 	github.com/go-masonry/mortar v0.1.3
 	github.com/opentracing/opentracing-go v1.2.0
-	github.com/orchestd/cacheStorage v0.18.13
+	github.com/orchestd/cacheStorage v0.19.0
 	github.com/orchestd/configurations v0.11.0
 	github.com/orchestd/debug v0.1.11
 	github.com/orchestd/log v0.1.3
