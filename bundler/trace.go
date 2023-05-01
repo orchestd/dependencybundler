@@ -2,13 +2,15 @@ package bundler
 
 import (
 	"context"
+	"github.com/opentracing/opentracing-go"
 	"github.com/orchestd/dependencybundler/interfaces/configuration"
 	"github.com/orchestd/dependencybundler/interfaces/log"
 	"github.com/orchestd/sharedlib/consts"
 	"github.com/orchestd/trace/bjaeger"
-	"github.com/opentracing/opentracing-go"
 	"go.uber.org/fx"
 )
+
+type Tracer opentracing.Tracer
 
 func TracerFxOption() fx.Option {
 	return fx.Provide(JaegerBuilder)
