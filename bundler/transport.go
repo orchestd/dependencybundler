@@ -2,8 +2,10 @@ package bundler
 
 import (
 	"context"
+	"github.com/go-masonry/mortar/utils"
 	"github.com/opentracing/opentracing-go"
 	"github.com/opentracing/opentracing-go/ext"
+	traceLog "github.com/opentracing/opentracing-go/log"
 	dspConstructor "github.com/orchestd/dependencybundler/constructors/discoveryService"
 	transportConstructor "github.com/orchestd/dependencybundler/constructors/transport"
 	clientMiddlewares "github.com/orchestd/dependencybundler/constructors/transport/middlewares/client"
@@ -73,17 +75,26 @@ func TransportFxOption(monolithConstructor ...interface{}) fx.Option {
 	)
 }
 
+func addBodyToSpan(span opentracing.Span, name string, msg interface{}) {
+	bytes, err := utils.MarshalMessageBody(msg)
+	if err == nil {
+		span.LogFields(traceLog.String(name, string(bytes)))
+	} else {
+		span.LogKV(name, msg)
+	}
+}
+
 func RunMethodWithTrace(c context.Context, serviceName, operationName string, tracer opentracing.Tracer, req interface{}, funcToRun func(con context.Context) (interface{}, servicereply.ServiceReply)) servicereply.ServiceReply {
 	sp, _ := opentracing.StartSpanFromContextWithTracer(c, tracer, serviceName+"/"+operationName)
 	defer sp.Finish()
 	ext.DBStatement.Set(sp, serviceName+"/"+operationName)
 	ext.Component.Set(sp, serviceName)
-	sp.SetTag("request", req)
+	addBodyToSpan(sp, "request", req)
 	if r, err := funcToRun(c); err != nil {
 		ext.LogError(sp, err.GetError())
 		return err
 	} else {
-		sp.SetTag("response", r)
+		addBodyToSpan(sp, "response", r)
 	}
 	return nil
 }
