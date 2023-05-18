@@ -5,6 +5,7 @@ import (
 	"github.com/orchestd/dependencybundler/interfaces/configuration"
 	"github.com/orchestd/log"
 	"github.com/orchestd/servicereply"
+	"os"
 	"strings"
 )
 
@@ -34,6 +35,10 @@ func (dsp templatedDSP) Register() (sr servicereply.ServiceReply) {
 }
 
 func (dsp templatedDSP) GetAddress(serviceName string) (sr servicereply.ServiceReply) {
+	if overrideHost := os.Getenv(serviceName + urlKeyword); len(overrideHost) > 0 {
+		return servicereply.NewNil().WithReplyValues(servicereply.ValuesMap{address: overrideHost})
+	}
+
 	host := strings.ReplaceAll(dsp.template, serviceKeyword, serviceName)
 	return servicereply.NewNil().WithReplyValues(servicereply.ValuesMap{address: host})
 }
