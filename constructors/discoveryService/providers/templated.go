@@ -5,19 +5,21 @@ import (
 	"github.com/orchestd/dependencybundler/interfaces/configuration"
 	"github.com/orchestd/log"
 	"github.com/orchestd/servicereply"
+	"os"
 	"strings"
 )
 
 type templatedDSP struct {
-	conf     configuration.Config
-	template string
+	conf                 configuration.Config
+	template             string
+	confOverrideProvider confDSP
 }
 
 const serviceKeyword = "{servicename}"
 
 func NewTemplatedDSP(conf configuration.Config, lg log.Logger) templatedDSP {
 
-	t := templatedDSP{}
+	t := templatedDSP{confOverrideProvider: NewConfDSP()}
 
 	if confTemplate, err := conf.Get("dspTemplate").String(); err != nil {
 		t.template = "http://" + serviceKeyword
@@ -34,6 +36,10 @@ func (dsp templatedDSP) Register() (sr servicereply.ServiceReply) {
 }
 
 func (dsp templatedDSP) GetAddress(serviceName string) (sr servicereply.ServiceReply) {
+	if overrideHost := os.Getenv(serviceName + urlKeyword); len(overrideHost) > 0 {
+		return servicereply.NewNil().WithReplyValues(servicereply.ValuesMap{address: overrideHost})
+	}
+
 	host := strings.ReplaceAll(dsp.template, serviceKeyword, serviceName)
 	return servicereply.NewNil().WithReplyValues(servicereply.ValuesMap{address: host})
 }
