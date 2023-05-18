@@ -335,8 +335,9 @@ github.com/orchestd/session v0.22.0/go.mod h1:s/sOuPUYcSp+F9YOYETAjiNAEC3bld/9ht
 github.com/orchestd/sharedlib v0.13.2/go.mod h1:vJK8mYWeuBHJWftCZhnjIU5xfvdbR0T4WaHXiS1ZpiA=
 github.com/orchestd/sharedlib v0.13.3/go.mod h1:vJK8mYWeuBHJWftCZhnjIU5xfvdbR0T4WaHXiS1ZpiA=
 github.com/orchestd/sharedlib v0.13.4/go.mod h1:vJK8mYWeuBHJWftCZhnjIU5xfvdbR0T4WaHXiS1ZpiA=
-github.com/orchestd/sharedlib v0.14.0 h1:PE4xrw8Ty4XEYyyCopYbjQCxRn/UEyNLHudZc65E3vc=
 github.com/orchestd/sharedlib v0.14.0/go.mod h1:vJK8mYWeuBHJWftCZhnjIU5xfvdbR0T4WaHXiS1ZpiA=
+github.com/orchestd/sharedlib v0.16.0 h1:ObDNlZy2o2qQvCheU3W1/g7xj9uJ6OF5fotQGVt0JOg=
+github.com/orchestd/sharedlib v0.16.0/go.mod h1:vJK8mYWeuBHJWftCZhnjIU5xfvdbR0T4WaHXiS1ZpiA=
 github.com/orchestd/tokenauth v0.4.10/go.mod h1:CpdIsMxb5XRBfrpkPrJ4FFarly5f+phWDP4xW8aZVGk=
 github.com/orchestd/tokenauth v0.4.12/go.mod h1:M2fNHUnagfwWNghwaACj1JpVh9fGrz0hk5TV8L8D7/M=
 github.com/orchestd/tokenauth v0.4.13/go.mod h1:PQHtPmciG70aAibm4oEpyR8mTpLOU8g67JLa4N7bogo=
@@ -349,8 +350,9 @@ github.com/orchestd/trace v0.0.23 h1:5MJWDNmM77WTg84PI8O9ZXrym89wm1sAAirjRczuMDs
 github.com/orchestd/trace v0.0.23/go.mod h1:oWymdKVdgy0Ptp6j7AKPMBE+5g5Fo36yXBbNxR28g2k=
 github.com/orchestd/transport v0.15.11/go.mod h1:GsuylUE9ebeullCTt16ES6N1eUgU5sCTWvj7hnZ8ngI=
 github.com/orchestd/transport v0.15.12/go.mod h1:6BOtxDB2rRhsvJnMdc7kwXgswUk1Wx+75A9XhtOg1Ro=
-github.com/orchestd/transport v0.15.13 h1:2x9gHJv/rGmCr57GAgQjC9tDVRxLPMN4PwSpcm4KZy0=
 github.com/orchestd/transport v0.15.13/go.mod h1:wrOFrDFYAl49ZNcGDCPwht/Vj0+luhm+hwjZ3PD64GM=
+github.com/orchestd/transport v0.16.0 h1:kgA5nNZSCKuOA4i6cFFkDNI00dOZb49mFBOeOia8lPo=
+github.com/orchestd/transport v0.16.0/go.mod h1:wrOFrDFYAl49ZNcGDCPwht/Vj0+luhm+hwjZ3PD64GM=
 github.com/orchestd/utils v0.0.1/go.mod h1:xBPbClyT7bUP8rIH3em9MOxkPPlTKL4ULoQys+g7Yto=
 github.com/orchestd/utils v0.0.2 h1:urZ2kluLwfAh1i9yn7EdYtYy3L6WunD+t8q3ZszCS70=
 github.com/orchestd/utils v0.0.2/go.mod h1:xBPbClyT7bUP8rIH3em9MOxkPPlTKL4ULoQys+g7Yto=
