@@ -16,7 +16,7 @@ require (
 	github.com/orchestd/session v0.22.0
 	github.com/orchestd/sharedlib v0.16.0
 	github.com/orchestd/trace v0.0.23
-	github.com/orchestd/transport v0.15.13
+	github.com/orchestd/transport v0.16.0
 	github.com/orchestd/validations v0.5.12
 	github.com/prometheus/client_golang v1.11.0
 	github.com/uber/jaeger-client-go v2.25.0+incompatible
