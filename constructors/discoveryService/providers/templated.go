@@ -10,16 +10,15 @@ import (
 )
 
 type templatedDSP struct {
-	conf                 configuration.Config
-	template             string
-	confOverrideProvider confDSP
+	conf     configuration.Config
+	template string
 }
 
 const serviceKeyword = "{servicename}"
 
 func NewTemplatedDSP(conf configuration.Config, lg log.Logger) templatedDSP {
 
-	t := templatedDSP{confOverrideProvider: NewConfDSP()}
+	t := templatedDSP{}
 
 	if confTemplate, err := conf.Get("dspTemplate").String(); err != nil {
 		t.template = "http://" + serviceKeyword
