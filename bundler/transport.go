@@ -90,6 +90,7 @@ func RunMethodWithTrace(c context.Context, serviceName, operationName string, tr
 	ext.DBStatement.Set(sp, serviceName+"/"+operationName)
 	ext.Component.Set(sp, serviceName)
 	addBodyToSpan(sp, "request", req)
+	sp.SetTag("token", c.Value("token"))
 	if r, err := funcToRun(c); err != nil {
 		ext.LogError(sp, err.GetError())
 		return err

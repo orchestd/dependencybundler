@@ -20,7 +20,7 @@ func HttpTracingUnaryServerInterceptor(deps tracingDeps) gin.HandlerFunc {
 		}
 		carrier := opentracing.HTTPHeadersCarrier(c.Request.Header)
 		ctx, _ := deps.Tracer.Extract(opentracing.HTTPHeaders, carrier)
-		op := "HTTP " + c.Request.Method +c.Request.URL.String()
+		op := "HTTP " + c.Request.Method + c.Request.URL.String()
 		sp := deps.Tracer.StartSpan(op, ext.RPCServerOption(ctx))
 		ext.HTTPMethod.Set(sp, c.Request.Method)
 		host := c.Request.Host
@@ -34,6 +34,11 @@ func HttpTracingUnaryServerInterceptor(deps tracingDeps) gin.HandlerFunc {
 		defer sp.Finish()
 		if v, err := httputil.DumpRequest(c.Request, true); err == nil {
 			addBodyToSpan(sp, "request", v)
+		}
+
+		token := c.Request.Header.Get("Token")
+		if token != "" {
+			sp.SetTag("token", token)
 		}
 
 		bodyCopy := new(bytes.Buffer)
