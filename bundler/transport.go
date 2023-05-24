@@ -2,6 +2,7 @@ package bundler
 
 import (
 	"context"
+	"fmt"
 	"github.com/go-masonry/mortar/utils"
 	"github.com/opentracing/opentracing-go"
 	"github.com/opentracing/opentracing-go/ext"
@@ -90,6 +91,11 @@ func RunMethodWithTrace(c context.Context, serviceName, operationName string, tr
 	ext.DBStatement.Set(sp, serviceName+"/"+operationName)
 	ext.Component.Set(sp, serviceName)
 	addBodyToSpan(sp, "request", req)
+
+	token := fmt.Sprint(c.Value("token"))
+	if len(token) > 12 {
+		sp.SetTag("token", token[:12])
+	}
 	if r, err := funcToRun(c); err != nil {
 		ext.LogError(sp, err.GetError())
 		return err
