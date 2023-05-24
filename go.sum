@@ -295,8 +295,8 @@ github.com/orchestd/cacheStorage v0.18.10/go.mod h1:ybcu0d8Qdr21TRm5RfpZDh4mZt2w
 github.com/orchestd/cacheStorage v0.18.11/go.mod h1:ybcu0d8Qdr21TRm5RfpZDh4mZt2wC6uf64fATedhTkA=
 github.com/orchestd/cacheStorage v0.18.12/go.mod h1:ybcu0d8Qdr21TRm5RfpZDh4mZt2wC6uf64fATedhTkA=
 github.com/orchestd/cacheStorage v0.18.13/go.mod h1:ybcu0d8Qdr21TRm5RfpZDh4mZt2wC6uf64fATedhTkA=
-github.com/orchestd/cacheStorage v0.20.0 h1:my6cmFeM5qeMLxWOfags0c2JLbKDVOL0gZ8PLIKI4d0=
-github.com/orchestd/cacheStorage v0.20.0/go.mod h1:ybcu0d8Qdr21TRm5RfpZDh4mZt2wC6uf64fATedhTkA=
+github.com/orchestd/cacheStorage v0.20.1 h1:q7gVcAPJJI8ntz+hsWQVIa7VgqRAPKkPfEwQHl++zTE=
+github.com/orchestd/cacheStorage v0.20.1/go.mod h1:ybcu0d8Qdr21TRm5RfpZDh4mZt2wC6uf64fATedhTkA=
 github.com/orchestd/configurations v0.10.2/go.mod h1:xjyr6ZnS77ZUJFJWLWTQ9LgHY23oKAIPehVS6NL51j4=
 github.com/orchestd/configurations v0.10.3/go.mod h1:xjyr6ZnS77ZUJFJWLWTQ9LgHY23oKAIPehVS6NL51j4=
 github.com/orchestd/configurations v0.10.4/go.mod h1:HMgtp18kmzfgOXk+nIHID/TM5ywJKg7KcwKENgWzw20=
