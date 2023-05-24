@@ -94,7 +94,7 @@ func RunMethodWithTrace(c context.Context, serviceName, operationName string, tr
 
 	token := fmt.Sprint(c.Value("token"))
 	if len(token) > 12 {
-		sp.SetTag("token", token)
+		sp.SetTag("token", token[:12])
 	}
 	if r, err := funcToRun(c); err != nil {
 		ext.LogError(sp, err.GetError())
