@@ -5,6 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 	discoveryServiceProviders "github.com/orchestd/dependencybundler/constructors/discoveryService/providers"
 	"github.com/orchestd/dependencybundler/interfaces/configuration"
+	"github.com/orchestd/dependencybundler/interfaces/credentials"
 	"github.com/orchestd/dependencybundler/interfaces/log"
 	"github.com/orchestd/dependencybundler/interfaces/transport"
 	transportConstructor "github.com/orchestd/dependencybundler/interfaces/transport"
@@ -12,6 +13,7 @@ import (
 	"github.com/orchestd/transport/client"
 	"github.com/orchestd/transport/server"
 	"go.uber.org/fx"
+	"net/http"
 	"net/http/pprof"
 	"time"
 )
@@ -22,6 +24,7 @@ type transportDeps struct {
 	ServerBuilder            server.HttpBuilder
 	ClientBuilder            client.HTTPClientBuilder
 	Conf                     configuration.Config
+	Cred                     credentials.CredentialsGetter
 	Logger                   log.Logger
 	ClientInterceptors       []client.HTTPClientInterceptor `group:"clientInterceptors"`
 	ServerDebugInterceptors  []gin.HandlerFunc              `group:"serverDebugInterceptors"`
@@ -70,98 +73,62 @@ func DefaultTransport(deps transportDeps) (transportConstructor.IRouter, transpo
 	deps.SystemHandlers = append(deps.SystemHandlers, transport.NewHttpHandler("POST", "/enable_pprof/", func(c *gin.Context) {
 		type EnablePprof struct {
 			EnableUntil time.Time
+			Pw          string
 		}
+
 		enablePprofObj := EnablePprof{}
 		err := c.BindJSON(&enablePprofObj)
 		if err != nil {
 			c.AbortWithError(500, err)
 		}
+		if deps.Cred.GetCredentials().EnablePprofPw != enablePprofObj.Pw {
+			c.AbortWithStatus(501)
+		}
 		enabledPprofHandlersUntil = enablePprofObj.EnableUntil
 		c.AbortWithStatus(200)
 	})())
-	deps.SystemHandlers = append(deps.SystemHandlers, transport.NewHttpHandler("GET", "/pprof/", func(c *gin.Context) {
+	checkCanRunPprofHandler := func(c *gin.Context, f func(w http.ResponseWriter, r *http.Request)) {
 		if enabledPprofHandlersUntil.After(time.Now()) {
-			pprof.Index(c.Writer, c.Request)
+			f(c.Writer, c.Request)
 		} else {
 			c.AbortWithStatus(404)
 		}
+	}
+	deps.SystemHandlers = append(deps.SystemHandlers, transport.NewHttpHandler("GET", "/pprof/", func(c *gin.Context) {
+		checkCanRunPprofHandler(c, pprof.Index)
 	})())
 	deps.SystemHandlers = append(deps.SystemHandlers, transport.NewHttpHandler("GET", "/pprof/cmdline", func(c *gin.Context) {
-		if enabledPprofHandlersUntil.After(time.Now()) {
-			pprof.Cmdline(c.Writer, c.Request)
-		} else {
-			c.AbortWithStatus(404)
-		}
+		checkCanRunPprofHandler(c, pprof.Cmdline)
 	})())
 	deps.SystemHandlers = append(deps.SystemHandlers, transport.NewHttpHandler("GET", "/pprof/profile", func(c *gin.Context) {
-		if enabledPprofHandlersUntil.After(time.Now()) {
-			pprof.Profile(c.Writer, c.Request)
-		} else {
-			c.AbortWithStatus(404)
-		}
+		checkCanRunPprofHandler(c, pprof.Profile)
 	})())
 	deps.SystemHandlers = append(deps.SystemHandlers, transport.NewHttpHandler("POST", "/pprof/symbol", func(c *gin.Context) {
-		if enabledPprofHandlersUntil.After(time.Now()) {
-			pprof.Symbol(c.Writer, c.Request)
-		} else {
-			c.AbortWithStatus(404)
-		}
+		checkCanRunPprofHandler(c, pprof.Symbol)
 	})())
 	deps.SystemHandlers = append(deps.SystemHandlers, transport.NewHttpHandler("GET", "/pprof/symbol", func(c *gin.Context) {
-		if enabledPprofHandlersUntil.After(time.Now()) {
-			pprof.Symbol(c.Writer, c.Request)
-		} else {
-			c.AbortWithStatus(404)
-		}
+		checkCanRunPprofHandler(c, pprof.Symbol)
 	})())
 	deps.SystemHandlers = append(deps.SystemHandlers, transport.NewHttpHandler("GET", "/pprof/trace", func(c *gin.Context) {
-		if enabledPprofHandlersUntil.After(time.Now()) {
-			pprof.Trace(c.Writer, c.Request)
-		} else {
-			c.AbortWithStatus(404)
-		}
+		checkCanRunPprofHandler(c, pprof.Trace)
 	})())
 	deps.SystemHandlers = append(deps.SystemHandlers, transport.NewHttpHandler("GET", "/pprof/allocs", func(c *gin.Context) {
-		if enabledPprofHandlersUntil.After(time.Now()) {
-			pprof.Handler("allocs").ServeHTTP(c.Writer, c.Request)
-		} else {
-			c.AbortWithStatus(404)
-		}
+		checkCanRunPprofHandler(c, pprof.Handler("allocs").ServeHTTP)
 	})())
 	deps.SystemHandlers = append(deps.SystemHandlers, transport.NewHttpHandler("GET", "/pprof/block", func(c *gin.Context) {
-		if enabledPprofHandlersUntil.After(time.Now()) {
-			pprof.Handler("block").ServeHTTP(c.Writer, c.Request)
-		} else {
-			c.AbortWithStatus(404)
-		}
+		checkCanRunPprofHandler(c, pprof.Handler("block").ServeHTTP)
 	})())
 	deps.SystemHandlers = append(deps.SystemHandlers, transport.NewHttpHandler("GET", "/pprof/goroutine", func(c *gin.Context) {
-		if enabledPprofHandlersUntil.After(time.Now()) {
-			pprof.Handler("goroutine").ServeHTTP(c.Writer, c.Request)
-		} else {
-			c.AbortWithStatus(404)
-		}
+		checkCanRunPprofHandler(c, pprof.Handler("goroutine").ServeHTTP)
 	})())
 	deps.SystemHandlers = append(deps.SystemHandlers, transport.NewHttpHandler("GET", "/pprof/heap", func(c *gin.Context) {
-		if enabledPprofHandlersUntil.After(time.Now()) {
-			pprof.Handler("heap").ServeHTTP(c.Writer, c.Request)
-		} else {
-			c.AbortWithStatus(404)
-		}
+		checkCanRunPprofHandler(c, pprof.Handler("heap").ServeHTTP)
 	})())
 	deps.SystemHandlers = append(deps.SystemHandlers, transport.NewHttpHandler("GET", "/pprof/mutex", func(c *gin.Context) {
-		if enabledPprofHandlersUntil.After(time.Now()) {
-			pprof.Handler("mutex").ServeHTTP(c.Writer, c.Request)
-		} else {
-			c.AbortWithStatus(404)
-		}
+		checkCanRunPprofHandler(c, pprof.Handler("mutex").ServeHTTP)
 	})())
 	deps.SystemHandlers = append(deps.SystemHandlers, transport.NewHttpHandler("GET", "/pprof/threadcreate", func(c *gin.Context) {
-		if enabledPprofHandlersUntil.After(time.Now()) {
-			pprof.Handler("threadcreate").ServeHTTP(c.Writer, c.Request)
-		} else {
-			c.AbortWithStatus(404)
-		}
+		checkCanRunPprofHandler(c, pprof.Handler("threadcreate").ServeHTTP)
 	})())
 
 	if deps.Conf.Get("assetRoots").IsSet() {
