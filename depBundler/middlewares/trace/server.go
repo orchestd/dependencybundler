@@ -38,7 +38,8 @@ func HttpTracingUnaryServerInterceptor(deps tracingDeps) gin.HandlerFunc {
 
 		token := c.Request.Header.Get("Token")
 		if len(token) > 12 {
-			sp.SetTag("token", token[:12])
+			tokenLen := len(token)
+			sp.SetTag("token", token[tokenLen-12:tokenLen])
 		}
 
 		bodyCopy := new(bytes.Buffer)
