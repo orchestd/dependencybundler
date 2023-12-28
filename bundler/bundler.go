@@ -6,6 +6,7 @@ import (
 	"github.com/orchestd/dependencybundler/interfaces/cache"
 	"github.com/orchestd/dependencybundler/interfaces/configuration"
 	"github.com/orchestd/dependencybundler/interfaces/validations"
+	"github.com/orchestd/tokenauth"
 	"github.com/orchestd/validations/cacheValidator"
 	"go.uber.org/fx"
 )
@@ -28,6 +29,7 @@ func CreateApplication(confStruct interface{}, HandlersFunc interface{}, monolit
 			return cacheValidator.NewCacheValidatorRunner(storage, conf)
 		}),
 		fx.Invoke(HandlersFunc, debug.InitHandlers),
+		fx.Provide(tokenauth.NewJwtToken),
 	)
 
 	app.Run()
