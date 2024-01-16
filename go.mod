@@ -2,10 +2,6 @@ module github.com/orchestd/dependencybundler
 
 go 1.18
 
-require github.com/orchestd/nats.io v0.0.0-20231212092442-e8d6ed802a1f
-
-replace github.com/orchestd/nats.io v0.0.0-20231212092442-e8d6ed802a1f => ../../../github.com/orchestd/nats.io
-
 require (
 	github.com/gin-contrib/cors v1.3.1
 	github.com/gin-gonic/gin v1.8.1
@@ -55,9 +51,6 @@ require (
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/montanaflynn/stats v0.0.0-20171201202039-1bf9dbcd8cbe // indirect
-	github.com/nats-io/nats.go v1.31.0 // indirect
-	github.com/nats-io/nkeys v0.4.5 // indirect
-	github.com/nats-io/nuid v1.0.1 // indirect
 	github.com/orchestd/serviceerror v0.4.2 // indirect
 	github.com/orchestd/utils v0.0.2 // indirect
 	github.com/pelletier/go-toml/v2 v2.0.3 // indirect
