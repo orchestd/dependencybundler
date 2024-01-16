@@ -2,6 +2,7 @@ package trace
 
 import (
 	"bytes"
+	"context"
 	"github.com/gin-gonic/gin"
 	"github.com/opentracing/opentracing-go"
 	"github.com/opentracing/opentracing-go/ext"
@@ -9,6 +10,7 @@ import (
 	"io"
 	"io/ioutil"
 	"net/http/httputil"
+	"time"
 )
 
 func HttpTracingUnaryServerInterceptor(deps tracingDeps) gin.HandlerFunc {
@@ -37,9 +39,19 @@ func HttpTracingUnaryServerInterceptor(deps tracingDeps) gin.HandlerFunc {
 		}
 
 		token := c.Request.Header.Get("Token")
-		if len(token) > 12 {
-			tokenLen := len(token)
-			sp.SetTag("token", token[tokenLen-12:tokenLen])
+		if len(token) > 0 {
+			_, protectedData, err := deps.JWToken.ValidateAndGetData(context.Background(), time.Now(), token)
+			if err != nil {
+				deps.Logger.Error(context.Background(), "can't ValidateAndGetData token err:"+err.Error())
+			} else {
+				if journeytoken, ok := protectedData["journeytoken"]; ok {
+					if s, ok := journeytoken.(string); ok {
+						sp.SetTag("journeytoken", s)
+					} else {
+						deps.Logger.Error(context.Background(), "journeytoken is not string")
+					}
+				}
+			}
 		}
 
 		bodyCopy := new(bytes.Buffer)

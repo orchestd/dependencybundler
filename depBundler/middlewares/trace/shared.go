@@ -10,16 +10,17 @@ import (
 	traceLog "github.com/opentracing/opentracing-go/log"
 	"github.com/orchestd/dependencybundler/interfaces/configuration"
 	"github.com/orchestd/dependencybundler/interfaces/log"
+	"github.com/orchestd/tokenauth"
 	"go.uber.org/fx"
 	"google.golang.org/grpc/metadata"
 )
 
 type tracingDeps struct {
 	fx.In
-
-	Logger log.Logger
-	Config configuration.Config
-	Tracer opentracing.Tracer `optional:"true"`
+	JWToken tokenauth.TokenBase
+	Logger  log.Logger
+	Config  configuration.Config
+	Tracer  opentracing.Tracer `optional:"true"`
 }
 
 func addBodyToSpan(span opentracing.Span, name string, msg interface{}) {
