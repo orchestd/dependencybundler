@@ -342,8 +342,9 @@ github.com/orchestd/tokenauth v0.4.10/go.mod h1:CpdIsMxb5XRBfrpkPrJ4FFarly5f+phW
 github.com/orchestd/tokenauth v0.4.12/go.mod h1:M2fNHUnagfwWNghwaACj1JpVh9fGrz0hk5TV8L8D7/M=
 github.com/orchestd/tokenauth v0.4.13/go.mod h1:PQHtPmciG70aAibm4oEpyR8mTpLOU8g67JLa4N7bogo=
 github.com/orchestd/tokenauth v0.4.14/go.mod h1:qZIkV6PmRHmyVipVQ+Y5zsBUkMLbmXcd1ugMYfkY7sY=
-github.com/orchestd/tokenauth v0.4.15 h1:LTL4Y9HAs76jwmytR8D4y22IWBonflcJUchUifXEuDQ=
 github.com/orchestd/tokenauth v0.4.15/go.mod h1:z2w5okq4JDb81pi99tmAssqwSz2TUjULajo38qFekio=
+github.com/orchestd/tokenauth v0.4.16 h1:cUJg9xfFlxdOBfiKagg33XF5jBbHgoWJj8qVivaGesE=
+github.com/orchestd/tokenauth v0.4.16/go.mod h1:z2w5okq4JDb81pi99tmAssqwSz2TUjULajo38qFekio=
 github.com/orchestd/trace v0.0.21/go.mod h1:XR/tJCUlpw1c4pmCS9BSpELxGp4iDRP+YDfIrCGBne4=
 github.com/orchestd/trace v0.0.22/go.mod h1:U0OvOdcbTyX6TcNqxKPKCUH797F87aboyzMO4ZzEHzw=
 github.com/orchestd/trace v0.0.23 h1:5MJWDNmM77WTg84PI8O9ZXrym89wm1sAAirjRczuMDs=
