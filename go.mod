@@ -15,7 +15,7 @@ require (
 	github.com/orchestd/servicereply v0.0.8
 	github.com/orchestd/session v0.22.0
 	github.com/orchestd/sharedlib v0.16.0
-	github.com/orchestd/tokenauth v0.4.15
+	github.com/orchestd/tokenauth v0.4.16
 	github.com/orchestd/trace v0.0.23
 	github.com/orchestd/transport v0.16.1
 	github.com/orchestd/validations v0.5.12
