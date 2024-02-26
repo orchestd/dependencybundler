@@ -7,14 +7,14 @@ require (
 	github.com/gin-gonic/gin v1.8.1
 	github.com/go-masonry/mortar v0.1.3
 	github.com/opentracing/opentracing-go v1.2.0
-	github.com/orchestd/cacheStorage v0.22.0
+	github.com/orchestd/cacheStorage v0.23.0
 	github.com/orchestd/configurations v0.15.0
 	github.com/orchestd/debug v0.1.11
 	github.com/orchestd/log v0.1.3
 	github.com/orchestd/monitoring v0.2.3
 	github.com/orchestd/servicereply v0.0.8
-	github.com/orchestd/session v0.22.0
-	github.com/orchestd/sharedlib v0.16.0
+	github.com/orchestd/session v0.25.0
+	github.com/orchestd/sharedlib v0.19.0
 	github.com/orchestd/tokenauth v0.4.16
 	github.com/orchestd/trace v0.0.23
 	github.com/orchestd/transport v0.16.1
@@ -75,7 +75,7 @@ require (
 	golang.org/x/crypto v0.6.0 // indirect
 	golang.org/x/net v0.6.0 // indirect
 	golang.org/x/oauth2 v0.0.0-20200902213428-5d25da1a8d43 // indirect
-	golang.org/x/sync v0.0.0-20220722155255-886fb9371eb4 // indirect
+	golang.org/x/sync v0.1.0 // indirect
 	golang.org/x/sys v0.5.0 // indirect
 	golang.org/x/text v0.13.0 // indirect
 	google.golang.org/appengine v1.6.6 // indirect
