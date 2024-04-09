@@ -10,6 +10,7 @@ import (
 	"io"
 	"io/ioutil"
 	"net/http/httputil"
+	"net/url"
 	"time"
 )
 
@@ -22,7 +23,8 @@ func HttpTracingUnaryServerInterceptor(deps tracingDeps) gin.HandlerFunc {
 		}
 		carrier := opentracing.HTTPHeadersCarrier(c.Request.Header)
 		ctx, _ := deps.Tracer.Extract(opentracing.HTTPHeaders, carrier)
-		op := "HTTP " + c.Request.Method + c.Request.URL.String()
+		URLQueryUnescape, _ := url.QueryUnescape(c.Request.URL.String())
+		op := "HTTP " + c.Request.Method + URLQueryUnescape
 		sp := deps.Tracer.StartSpan(op, ext.RPCServerOption(ctx))
 		ext.HTTPMethod.Set(sp, c.Request.Method)
 		host := c.Request.Host
@@ -30,7 +32,7 @@ func HttpTracingUnaryServerInterceptor(deps tracingDeps) gin.HandlerFunc {
 			host = c.Request.URL.Host
 		}
 		ext.PeerHostname.Set(sp, host)
-		ext.HTTPUrl.Set(sp, c.Request.URL.String())
+		ext.HTTPUrl.Set(sp, URLQueryUnescape)
 		componentName, _ := deps.Config.GetServiceName()
 		ext.Component.Set(sp, componentName)
 		defer sp.Finish()
