@@ -333,8 +333,8 @@ github.com/orchestd/session v0.21.14/go.mod h1:ZJFO9GVSM54b8KP7CMu3BxjvO65EUfDr2
 github.com/orchestd/session v0.21.15/go.mod h1:zoT6caRQTFJB25KXQoWjAKzTu98XFebWX8ZAarFiEEI=
 github.com/orchestd/session v0.21.16/go.mod h1:Mlpi0HnpXuRkunDDKuXbrLsZCkKh7V++xsqilgMtI0Y=
 github.com/orchestd/session v0.22.0/go.mod h1:s/sOuPUYcSp+F9YOYETAjiNAEC3bld/9htCdj3w+rOY=
-github.com/orchestd/session v0.25.0 h1:K5w3Yz0LZ/VqwZVT5edV0OiinwlGxvx7ELXbl27173o=
-github.com/orchestd/session v0.25.0/go.mod h1:J+23Vttw+HVx5d5Mnxg5/FHWj7vZKrxFSoMG3EDbo7s=
+github.com/orchestd/session v0.25.1 h1:wZNii+QXf6uOu6W4qrnV4L9ij6F8/1WG1B1ER3aDF8s=
+github.com/orchestd/session v0.25.1/go.mod h1:J+23Vttw+HVx5d5Mnxg5/FHWj7vZKrxFSoMG3EDbo7s=
 github.com/orchestd/sharedlib v0.13.2/go.mod h1:vJK8mYWeuBHJWftCZhnjIU5xfvdbR0T4WaHXiS1ZpiA=
 github.com/orchestd/sharedlib v0.13.3/go.mod h1:vJK8mYWeuBHJWftCZhnjIU5xfvdbR0T4WaHXiS1ZpiA=
 github.com/orchestd/sharedlib v0.13.4/go.mod h1:vJK8mYWeuBHJWftCZhnjIU5xfvdbR0T4WaHXiS1ZpiA=
