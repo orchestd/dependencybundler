@@ -13,7 +13,7 @@ require (
 	github.com/orchestd/log v0.1.3
 	github.com/orchestd/monitoring v0.2.3
 	github.com/orchestd/servicereply v0.0.8
-	github.com/orchestd/session v0.25.0
+	github.com/orchestd/session v0.25.1
 	github.com/orchestd/sharedlib v0.19.0
 	github.com/orchestd/tokenauth v0.4.16
 	github.com/orchestd/trace v0.0.23
