@@ -7,13 +7,14 @@ import (
 	"github.com/orchestd/dependencybundler/depBundler/middlewares/trace"
 	"github.com/orchestd/dependencybundler/interfaces/configuration"
 	"github.com/orchestd/dependencybundler/interfaces/log"
+	"github.com/orchestd/tokenauth"
 )
 
 func DefaultLogHandlerMiddleware(logImpl log.Logger) gin.HandlerFunc {
 	return log2.GinLogHandlerMiddleware(logImpl)
 }
-func DefaultHeadersToContext(conf configuration.Config) gin.HandlerFunc {
-	return context.HeadersToContext(conf)
+func DefaultHeadersToContext(conf configuration.Config, jwToken tokenauth.TokenBase, logger log.Logger) gin.HandlerFunc {
+	return context.HeadersToContext(conf, jwToken, logger)
 }
 func DefaultBasicRequestId() gin.HandlerFunc {
 	return trace.RequestId()
