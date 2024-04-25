@@ -3,6 +3,7 @@ package trace
 import (
 	"bytes"
 	"context"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/go-masonry/mortar/utils"
 	"github.com/opentracing/opentracing-go"
@@ -13,6 +14,7 @@ import (
 	"github.com/orchestd/tokenauth"
 	"go.uber.org/fx"
 	"google.golang.org/grpc/metadata"
+	"time"
 )
 
 type tracingDeps struct {
@@ -67,4 +69,23 @@ type bodyLogWriter struct {
 func (w bodyLogWriter) Write(b []byte) (int, error) {
 	w.body.Write(b)
 	return w.ResponseWriter.Write(b)
+}
+
+func GetJourneyTokenFromRequestToken(c *gin.Context, jwToken tokenauth.TokenBase) (bool, string, error) {
+	token := c.Request.Header.Get("Token")
+	if len(token) > 0 {
+		_, protectedData, err := jwToken.ValidateAndGetData(context.Background(), time.Now(), token)
+		if err != nil {
+			return false, "", fmt.Errorf("can't ValidateAndGetData token err:" + err.Error())
+		} else {
+			if journeytoken, ok := protectedData["journeytoken"]; ok {
+				if s, ok := journeytoken.(string); ok {
+					return true, s, nil
+				} else {
+					return false, "", fmt.Errorf("journeytoken is not string")
+				}
+			}
+		}
+	}
+	return false, "", nil
 }
