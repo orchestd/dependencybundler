@@ -40,17 +40,22 @@ func HttpTracingUnaryServerInterceptor(deps tracingDeps) gin.HandlerFunc {
 			addBodyToSpan(sp, "request", v)
 		}
 
-		token := c.Request.Header.Get("Token")
-		if len(token) > 0 {
-			_, protectedData, err := deps.JWToken.ValidateAndGetData(context.Background(), time.Now(), token)
-			if err != nil {
-				deps.Logger.Error(context.Background(), "can't ValidateAndGetData token err:"+err.Error())
-			} else {
-				if journeytoken, ok := protectedData["journeytoken"]; ok {
-					if s, ok := journeytoken.(string); ok {
-						sp.SetTag("journeytoken", s)
-					} else {
-						deps.Logger.Error(context.Background(), "journeytoken is not string")
+		if c.Request.URL.Query().Has("journeytoken") {
+			journeytoken := c.Request.URL.Query().Get("journeytoken")
+			sp.SetTag("journeytoken", journeytoken)
+		} else {
+			token := c.Request.Header.Get("Token")
+			if len(token) > 0 {
+				_, protectedData, err := deps.JWToken.ValidateAndGetData(context.Background(), time.Now(), token)
+				if err != nil {
+					deps.Logger.Error(context.Background(), "can't ValidateAndGetData token err:"+err.Error())
+				} else {
+					if journeytoken, ok := protectedData["journeytoken"]; ok {
+						if s, ok := journeytoken.(string); ok {
+							sp.SetTag("journeytoken", s)
+						} else {
+							deps.Logger.Error(context.Background(), "journeytoken is not string")
+						}
 					}
 				}
 			}
