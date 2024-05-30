@@ -62,7 +62,7 @@ func TransportFxOption(monolithConstructor ...interface{}) fx.Option {
 		fx.Provide(fx.Annotated{Group: ApiInterceptors, Target: serverMiddlewares.DefaultHeadersToContext}),
 		fx.Provide(fx.Annotated{Group: ApiInterceptors, Target: serverMiddlewares.DefaultBasicRequestId}),
 		fx.Provide(fx.Annotated{Group: ApiInterceptors, Target: serverMiddlewares.DefaultJwtToken}),
-		fx.Provide(fx.Annotated{Group: ApiInterceptors, Target: serverMiddlewares.DefaultLogHandlerMiddleware}),
+		//fx.Provide(fx.Annotated{Group: ApiInterceptors, Target: serverMiddlewares.DefaultLogHandlerMiddleware}),
 		fx.Provide(fx.Annotated{Group: ApiInterceptors, Target: trace.HttpTracingUnaryServerInterceptor}),
 		fx.Provide(fx.Annotated{Group: ApiInterceptors, Target: middlewaresContext.CallerToContext}),
 		fx.Provide(fx.Annotated{Group: ApiInterceptors, Target: metrics.AverageRequestDurationMetric}),
