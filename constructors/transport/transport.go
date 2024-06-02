@@ -2,7 +2,9 @@ package transport
 
 import (
 	"context"
+	"fmt"
 	"github.com/gin-gonic/gin"
+	"github.com/mitchellh/go-ps"
 	discoveryServiceProviders "github.com/orchestd/dependencybundler/constructors/discoveryService/providers"
 	"github.com/orchestd/dependencybundler/interfaces/configuration"
 	"github.com/orchestd/dependencybundler/interfaces/credentials"
@@ -15,6 +17,12 @@ import (
 	"go.uber.org/fx"
 	"net/http"
 	"net/http/pprof"
+	"os"
+	"regexp"
+	"runtime"
+	"sort"
+	"strconv"
+	"strings"
 	"time"
 )
 
@@ -129,6 +137,79 @@ func DefaultTransport(deps transportDeps) (transportConstructor.IRouter, transpo
 	})())
 	deps.SystemHandlers = append(deps.SystemHandlers, transport.NewHttpHandler("GET", "/pprof/threadcreate", func(c *gin.Context) {
 		checkCanRunPprofHandler(c, pprof.Handler("threadcreate").ServeHTTP)
+	})())
+	deps.SystemHandlers = append(deps.SystemHandlers, transport.NewHttpHandler("GET", "/pprof/meminfo", func(c *gin.Context) {
+		checkCanRunPprofHandler(c, func(w http.ResponseWriter, r *http.Request) {
+			var m runtime.MemStats
+			runtime.ReadMemStats(&m)
+
+			bToMb := func(b uint64) string {
+				return fmt.Sprintf("%.2f", float32(b)/1024/1024)
+			}
+			kbToMb := func(b uint64) string {
+				return fmt.Sprintf("%.2f", float32(b)/1024)
+			}
+
+			getKb := func(in string) string {
+				reg, _ := regexp.Compile("[a-zA-Z ]+")
+				in = reg.ReplaceAllString(in, "")
+				return strings.Replace(in, ":\t", "", -1)
+			}
+
+			type processInfo struct {
+				Pid        int
+				Executable string
+				Memory     int
+			}
+
+			w.Write([]byte(fmt.Sprintf("Alloc = %v MiB", bToMb(m.Alloc))))
+			w.Write([]byte(fmt.Sprintf("\tTotalAlloc = %v MiB", bToMb(m.TotalAlloc))))
+			w.Write([]byte(fmt.Sprintf("\tSys = %v MiB", bToMb(m.Sys))))
+			w.Write([]byte("\n \n \n"))
+
+			processList, err := ps.Processes()
+			if err != nil {
+				w.Write([]byte("cannot get Processes error:" + err.Error()))
+				return
+			}
+
+			topProcesses := []processInfo{}
+
+			for _, process := range processList {
+				pStatus, err := os.ReadFile("/proc/" + fmt.Sprint(process.Pid()) + "/status")
+				if err != nil {
+					w.Write([]byte("cannot get proc " + fmt.Sprint(process.Pid()) + " status error:" + err.Error()))
+					continue
+				}
+				lines := strings.Split(string(pStatus), "\n")
+				for _, line := range lines {
+					if strings.Index(line, "kB") == -1 || strings.Index(line, "VmRSS") == -1 {
+						continue
+					}
+					kbStr := getKb(line)
+					kb, err := strconv.Atoi(kbStr)
+					if err != nil {
+						continue
+					}
+					topProcesses = append(topProcesses, processInfo{
+						Pid:        process.Pid(),
+						Executable: process.Executable(),
+						Memory:     kb,
+					})
+					break
+				}
+			}
+
+			sort.Slice(topProcesses, func(i, j int) bool {
+				return topProcesses[i].Memory > topProcesses[j].Memory
+			})
+
+			topProcesses = topProcesses[:9]
+
+			for _, tp := range topProcesses {
+				w.Write([]byte(fmt.Sprintf("%v(%v) memory - %v MiB\n", tp.Executable, tp.Pid, kbToMb(uint64(tp.Memory)))))
+			}
+		})
 	})())
 
 	if deps.Conf.Get("assetRoots").IsSet() {
