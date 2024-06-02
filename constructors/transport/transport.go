@@ -204,7 +204,12 @@ func DefaultTransport(deps transportDeps) (transportConstructor.IRouter, transpo
 				return topProcesses[i].Memory > topProcesses[j].Memory
 			})
 
-			topProcesses = topProcesses[:9]
+			top := 10
+			if len(topProcesses) < top {
+				top = len(topProcesses)
+			}
+
+			topProcesses = topProcesses[:top]
 
 			for _, tp := range topProcesses {
 				w.Write([]byte(fmt.Sprintf("%v(%v) memory - %v MiB\n", tp.Executable, tp.Pid, kbToMb(uint64(tp.Memory)))))
