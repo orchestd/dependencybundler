@@ -14,8 +14,8 @@ import (
 )
 
 func LoggerFxOption() fx.Option {
-	disabledLogger := os.Getenv("disabledLogger")
-	if disabledLogger == "true" {
+	disableLogger := os.Getenv("disableLogger")
+	if disableLogger == "true" {
 		return fx.Options(
 			fx.Provide(emptyLogger.NewEmptyLogger),
 		)
