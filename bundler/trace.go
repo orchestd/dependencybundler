@@ -14,8 +14,8 @@ import (
 type Tracer opentracing.Tracer
 
 func TracerFxOption() fx.Option {
-	turnoffTrace := os.Getenv("turnoffTrace")
-	if turnoffTrace == "true" {
+	disableTracer := os.Getenv("disableTracer")
+	if disableTracer == "true" {
 		return fx.Provide(func() (opentracing.Tracer, Tracer) {
 			return nil, nil
 		})
