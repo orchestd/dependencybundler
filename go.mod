@@ -8,7 +8,7 @@ require (
 	github.com/go-masonry/mortar v0.1.3
 	github.com/mitchellh/go-ps v1.0.0
 	github.com/opentracing/opentracing-go v1.2.0
-	github.com/orchestd/cacheStorage v0.23.0
+	github.com/orchestd/cacheStorage v0.24.0
 	github.com/orchestd/configurations v0.15.0
 	github.com/orchestd/debug v0.1.11
 	github.com/orchestd/log v0.1.3
