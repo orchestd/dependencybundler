@@ -8,11 +8,18 @@ import (
 	"github.com/orchestd/sharedlib/consts"
 	"github.com/orchestd/trace/bjaeger"
 	"go.uber.org/fx"
+	"os"
 )
 
 type Tracer opentracing.Tracer
 
 func TracerFxOption() fx.Option {
+	disableTracer := os.Getenv("disableTracer")
+	if disableTracer == "true" {
+		return fx.Provide(func() (opentracing.Tracer, Tracer) {
+			return nil, nil
+		})
+	}
 	return fx.Provide(JaegerBuilder)
 }
 

@@ -1,6 +1,7 @@
 package bundler
 
 import (
+	"github.com/orchestd/dependencybundler/constructors/emptyLogger"
 	"github.com/orchestd/dependencybundler/constructors/logger"
 	"github.com/orchestd/dependencybundler/constructors/logger/middlewares"
 	"github.com/orchestd/dependencybundler/constructors/trace"
@@ -9,9 +10,16 @@ import (
 	"github.com/orchestd/log/bzerolog"
 	"github.com/orchestd/sharedlib/consts"
 	"go.uber.org/fx"
+	"os"
 )
 
 func LoggerFxOption() fx.Option {
+	disableLogger := os.Getenv("disableLogger")
+	if disableLogger == "true" {
+		return fx.Options(
+			fx.Provide(emptyLogger.NewEmptyLogger),
+		)
+	}
 	return fx.Options(
 		fx.Provide(func(config configuration.Config) log.Builder {
 			defaultLogSetting := bzerolog.LogSettings{
