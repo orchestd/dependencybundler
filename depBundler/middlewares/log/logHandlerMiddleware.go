@@ -9,6 +9,7 @@ import (
 	"google.golang.org/api/logging/v2"
 	"io"
 	"io/ioutil"
+	"os"
 	"time"
 )
 
@@ -24,6 +25,12 @@ func (w bodyLogWriter) Write(b []byte) (int, error) {
 
 func GinLogHandlerMiddleware(logger log.Logger) gin.HandlerFunc {
 	return func(c *gin.Context) {
+		disableLogger := os.Getenv("disableLogger")
+		if disableLogger == "true" {
+			c.Next()
+			return
+		}
+
 		bodyCopy := new(bytes.Buffer)
 		io.Copy(bodyCopy, c.Request.Body)
 		bodyData := bodyCopy.Bytes()

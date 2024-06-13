@@ -11,11 +11,16 @@ import (
 	"io/ioutil"
 	"net/http/httputil"
 	"net/url"
+	"os"
 )
 
 func HttpTracingUnaryServerInterceptor(deps tracingDeps) gin.HandlerFunc {
 	return func(c *gin.Context) {
-
+		disableTracer := os.Getenv("disableTracer")
+		if disableTracer == "true" {
+			c.Next()
+			return
+		}
 		if deps.Tracer == nil {
 			c.Next()
 			return
