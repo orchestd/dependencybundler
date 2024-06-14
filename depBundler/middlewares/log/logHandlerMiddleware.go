@@ -34,7 +34,7 @@ func GinLogHandlerMiddleware(logger log.Logger) gin.HandlerFunc {
 		bodyCopy := new(bytes.Buffer)
 		io.Copy(bodyCopy, c.Request.Body)
 		bodyData := bodyCopy.Bytes()
-
+		c.Request.Body.Close()
 		c.Request.Body = ioutil.NopCloser(bytes.NewReader(bodyData))
 		blw := &bodyLogWriter{body: bytes.NewBuffer([]byte{}), ResponseWriter: c.Writer}
 		c.Writer = blw
