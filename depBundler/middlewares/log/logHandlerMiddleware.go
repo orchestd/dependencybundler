@@ -41,21 +41,19 @@ func GinLogHandlerMiddleware(logger log.Logger) gin.HandlerFunc {
 		c.Writer = blw
 		reqJson := json.RawMessage(bodyData)
 		start := time.Now().UTC()
-		//path := c.Request.URL.Path
+
 		c.Next()
+
+		if disableLogger == "partially" {
+			return
+		}
 
 		rawBody := blw.body
 		jsonmsg := json.RawMessage(string(rawBody.Bytes()))
 
 		end := time.Now().UTC()
 		latency := end.Sub(start)
-		//gEntry := logging.Entry{HTTPRequest:&logging.HTTPRequest{
-		//	Request:                        c.Request,
-		//	Status:                         c.Writer.Status(),
-		//	ResponseSize:                   int64(c.Writer.Size()),
-		//	Latency:                        latency,
-		//	RemoteIP:                       c.ClientIP(),
-		//}}
+
 		httpRequest := map[string]interface{}{
 			"response": jsonmsg,
 		}
