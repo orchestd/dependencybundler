@@ -2,13 +2,11 @@ package log
 
 import (
 	"bytes"
-	"encoding/json"
 	"github.com/gin-gonic/gin"
 	"github.com/orchestd/dependencybundler/interfaces/log"
 	"github.com/orchestd/dependencybundler/interfaces/transport"
 	"google.golang.org/api/logging/v2"
-	"io"
-	"io/ioutil"
+	"net/http/httputil"
 	"os"
 	"time"
 )
@@ -31,15 +29,12 @@ func GinLogHandlerMiddleware(logger log.Logger) gin.HandlerFunc {
 			return
 		}
 
-		bodyCopy := new(bytes.Buffer)
-		io.Copy(bodyCopy, c.Request.Body)
-		bodyData := bodyCopy.Bytes()
-		c.Request.Body.Close()
-		c.Request.Body = ioutil.NopCloser(bytes.NewReader(bodyData))
-		defer c.Request.Body.Close()
-		blw := &bodyLogWriter{body: bytes.NewBuffer([]byte{}), ResponseWriter: c.Writer}
+		reqJson, _ := httputil.DumpRequest(c.Request, true)
+		blw := &bodyLogWriter{
+			body:           new(bytes.Buffer),
+			ResponseWriter: c.Writer,
+		}
 		c.Writer = blw
-		reqJson := json.RawMessage(bodyData)
 		start := time.Now().UTC()
 
 		c.Next()
@@ -48,14 +43,11 @@ func GinLogHandlerMiddleware(logger log.Logger) gin.HandlerFunc {
 			return
 		}
 
-		rawBody := blw.body
-		jsonmsg := json.RawMessage(string(rawBody.Bytes()))
-
 		end := time.Now().UTC()
 		latency := end.Sub(start)
 
 		httpRequest := map[string]interface{}{
-			"response": jsonmsg,
+			"response": blw.body.Bytes(),
 		}
 		if c.Request.Method != "GET" && c.Request.Method != "DELETE" {
 			httpRequest["request"] = reqJson
