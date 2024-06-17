@@ -14,6 +14,16 @@ func NewLoggerWithExtraFields(logger Logger, extraFields []string) Logger {
 	return loggerWithExtraFields{logger, extraFields}
 }
 
+func (l loggerWithExtraFields) log(ctx context.Context, level log.Level, format string, args ...interface{}) {
+	skipAdditionalFrames := 2 // stack starts from 2 callers up
+
+	if fields, ok := l.contextExtraValuesFields(ctx); ok {
+		l.Logger.WithFields(fields).Custom(ctx, level, skipAdditionalFrames, format, args...)
+	} else {
+		l.Logger.Custom(ctx, level, skipAdditionalFrames, format, args...)
+	}
+}
+
 func (l loggerWithExtraFields) Debug(ctx context.Context, format string, args ...interface{}) {
 	l.log(ctx, log.DebugLevel, format, args...)
 }
@@ -28,14 +38,6 @@ func (l loggerWithExtraFields) Warn(ctx context.Context, format string, args ...
 
 func (l loggerWithExtraFields) Error(ctx context.Context, format string, args ...interface{}) {
 	l.log(ctx, log.ErrorLevel, format, args...)
-}
-
-func (l loggerWithExtraFields) log(ctx context.Context, level log.Level, format string, args ...interface{}) {
-	if fields, ok := l.contextExtraValuesFields(ctx); ok {
-		l.Logger.WithFields(fields).Custom(ctx, level, 2, format, args...)
-	} else {
-		l.Logger.Custom(ctx, level, 2, format, args...)
-	}
 }
 
 func (l loggerWithExtraFields) contextExtraValuesFields(ctx context.Context) (map[string]interface{}, bool) {
