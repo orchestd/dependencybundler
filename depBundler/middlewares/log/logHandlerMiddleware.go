@@ -30,10 +30,11 @@ func GinLogHandlerMiddleware(logger log.Logger) gin.HandlerFunc {
 		}
 
 		reqJson, _ := httputil.DumpRequest(c.Request, true)
-
-		blw := &bodyLogWriter{body: bytes.NewBuffer([]byte{}), ResponseWriter: c.Writer}
+		blw := &bodyLogWriter{
+			body:           new(bytes.Buffer),
+			ResponseWriter: c.Writer,
+		}
 		c.Writer = blw
-		//reqJson := json.RawMessage(bodyData)
 		start := time.Now().UTC()
 
 		c.Next()
