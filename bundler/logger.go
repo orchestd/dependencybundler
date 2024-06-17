@@ -13,7 +13,7 @@ import (
 	"os"
 )
 
-func LoggerFxOption(loggerConstructor logger.NewLogger) fx.Option {
+func LoggerFxOption() fx.Option {
 	disableLogger := os.Getenv("disableLogger")
 	if disableLogger == "true" {
 		return fx.Options(
@@ -57,6 +57,6 @@ func LoggerFxOption(loggerConstructor logger.NewLogger) fx.Option {
 
 		trace.TraceInfoContextExtractorFxOption(),
 
-		fx.Provide(loggerConstructor),
+		fx.Provide(logger.ExtraFieldsLogger),
 	)
 }
