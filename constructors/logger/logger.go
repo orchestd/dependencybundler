@@ -12,8 +12,6 @@ import (
 
 const compensateDefaultLogger = 1
 
-type NewLogger func(deps LoggerDeps) log2.Logger
-
 type LoggerDeps struct {
 	fx.In
 	Config            configuration.Config
