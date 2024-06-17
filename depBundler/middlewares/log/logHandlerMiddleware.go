@@ -7,8 +7,7 @@ import (
 	"github.com/orchestd/dependencybundler/interfaces/log"
 	"github.com/orchestd/dependencybundler/interfaces/transport"
 	"google.golang.org/api/logging/v2"
-	"io"
-	"io/ioutil"
+	"net/http/httputil"
 	"os"
 	"time"
 )
@@ -31,12 +30,8 @@ func GinLogHandlerMiddleware(logger log.Logger) gin.HandlerFunc {
 			return
 		}
 
-		bodyCopy := new(bytes.Buffer)
-		io.Copy(bodyCopy, c.Request.Body)
-		bodyData := bodyCopy.Bytes()
-		c.Request.Body.Close()
-		c.Request.Body = ioutil.NopCloser(bytes.NewReader(bodyData))
-		defer c.Request.Body.Close()
+		bodyData, _ := httputil.DumpRequest(c.Request, true)
+
 		blw := &bodyLogWriter{body: bytes.NewBuffer([]byte{}), ResponseWriter: c.Writer}
 		c.Writer = blw
 		reqJson := json.RawMessage(bodyData)
