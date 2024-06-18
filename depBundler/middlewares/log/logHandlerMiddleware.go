@@ -23,8 +23,8 @@ func (w bodyLogWriter) Write(b []byte) (int, error) {
 
 func GinLogHandlerMiddleware(logger log.Logger) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		disableReqRespLogger := os.Getenv("disableReqRespLogger")
-		if disableReqRespLogger == "true" {
+		useReqRespLogger := os.Getenv("useReqRespLogger")
+		if useReqRespLogger != "true" {
 			c.Next()
 			return
 		}
