@@ -23,8 +23,8 @@ func (w bodyLogWriter) Write(b []byte) (int, error) {
 
 func GinLogHandlerMiddleware(logger log.Logger) gin.HandlerFunc {
 	return func(c *gin.Context) {
-		disableLogger := os.Getenv("disableLogger")
-		if disableLogger == "true" {
+		disableReqRespLogger := os.Getenv("disableReqRespLogger")
+		if disableReqRespLogger == "true" {
 			c.Next()
 			return
 		}
@@ -38,10 +38,6 @@ func GinLogHandlerMiddleware(logger log.Logger) gin.HandlerFunc {
 		start := time.Now().UTC()
 
 		c.Next()
-
-		if disableLogger == "partially" {
-			return
-		}
 
 		end := time.Now().UTC()
 		latency := end.Sub(start)
