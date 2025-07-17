@@ -20,7 +20,7 @@ require (
 	github.com/orchestd/sharedlib v0.19.0
 	github.com/orchestd/tokenauth v0.4.16
 	github.com/orchestd/trace v0.0.23
-	github.com/orchestd/transport v0.20.0
+	github.com/orchestd/transport v0.20.1
 	github.com/orchestd/validations v0.6.0
 	github.com/prometheus/client_golang v1.11.0
 	github.com/uber/jaeger-client-go v2.25.0+incompatible
