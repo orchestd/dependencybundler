@@ -3,6 +3,8 @@ package providers
 import (
 	"context"
 	"fmt"
+	"os"
+
 	"github.com/gin-gonic/gin"
 	"github.com/orchestd/dependencybundler/interfaces/configuration"
 	"github.com/orchestd/dependencybundler/interfaces/transport"
@@ -21,11 +23,17 @@ type simpleHttpDSP struct {
 }
 
 const discoveryServiceName = "discoveryService"
-const discoveryServiceAddress = "http://127.0.0.1:8500" //TODO : env
 const address = "address"
+const discoveryServiceAddressUrl = "discoveryServiceAddressUrl"
+
+var discoveryServiceAddress = "http://127.0.0.1:8500"
 
 func NewSimpleHttpDSP(client transport.HttpClient, conf configuration.Config, logger log.Logger) simpleHttpDSP { //serviceName string,port string
 	errBase := "NewSimpleHttpDSP: "
+
+	if addressEnv := os.Getenv(discoveryServiceAddressUrl); addressEnv != "" {
+		discoveryServiceAddress = addressEnv
+	}
 
 	s := simpleHttpDSP{client: client, logger: logger}
 
