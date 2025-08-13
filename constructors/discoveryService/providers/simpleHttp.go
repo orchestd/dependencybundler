@@ -21,11 +21,16 @@ type simpleHttpDSP struct {
 }
 
 const discoveryServiceName = "discoveryService"
-const discoveryServiceAddress = "http://127.0.0.1:8500" //TODO : env
 const address = "address"
+
+var discoveryServiceAddress = "http://127.0.0.1:8500"
 
 func NewSimpleHttpDSP(client transport.HttpClient, conf configuration.Config, logger log.Logger) simpleHttpDSP { //serviceName string,port string
 	errBase := "NewSimpleHttpDSP: "
+
+	if addressEnv, err := conf.Get("discoveryServiceAddress").String(); err != nil {
+		discoveryServiceAddress = addressEnv
+	}
 
 	s := simpleHttpDSP{client: client, logger: logger}
 
