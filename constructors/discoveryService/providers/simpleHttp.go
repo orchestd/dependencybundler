@@ -9,6 +9,7 @@ import (
 	"github.com/orchestd/log"
 	"github.com/orchestd/servicereply"
 	"github.com/orchestd/sharedlib/consts"
+	"os"
 )
 
 type simpleHttpDSP struct {
@@ -28,7 +29,7 @@ var discoveryServiceAddress = "http://127.0.0.1:8500"
 func NewSimpleHttpDSP(client transport.HttpClient, conf configuration.Config, logger log.Logger) simpleHttpDSP { //serviceName string,port string
 	errBase := "NewSimpleHttpDSP: "
 
-	if addressEnv, err := conf.Get("discoveryServiceAddress").String(); err != nil {
+	if addressEnv := os.Getenv("discoveryServiceAddressUrl"); addressEnv != "" {
 		discoveryServiceAddress = addressEnv
 	}
 
