@@ -3,15 +3,17 @@ package trace
 import (
 	"bytes"
 	"context"
-	"github.com/gin-gonic/gin"
-	"github.com/opentracing/opentracing-go"
-	"github.com/opentracing/opentracing-go/ext"
-	"github.com/uber/jaeger-client-go"
 	"io"
 	"io/ioutil"
 	"net/http/httputil"
 	"net/url"
 	"os"
+
+	"github.com/gin-gonic/gin"
+	"github.com/opentracing/opentracing-go"
+	"github.com/opentracing/opentracing-go/ext"
+	"github.com/orchestd/servicereply"
+	"github.com/uber/jaeger-client-go"
 )
 
 func HttpTracingUnaryServerInterceptor(deps tracingDeps) gin.HandlerFunc {
@@ -84,6 +86,14 @@ func HttpTracingUnaryServerInterceptor(deps tracingDeps) gin.HandlerFunc {
 			c.Errors.String()
 			if c.Errors[0].Err != nil {
 				ext.LogError(sp, c.Errors[0].Err)
+			}
+		}
+
+		if s := c.Request.Context().Value("traceValues"); s != nil {
+			if traceValues, ok := s.(servicereply.ValuesMap); ok {
+				for k, v := range traceValues {
+					sp.SetTag(k, v)
+				}
 			}
 		}
 

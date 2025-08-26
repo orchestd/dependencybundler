@@ -334,8 +334,9 @@ github.com/orchestd/serviceerror v0.4.2 h1:slCHpnfuOj3ZJT7IdefFywDQh80ihDSyoFRW7
 github.com/orchestd/serviceerror v0.4.2/go.mod h1:gRUjqW1UxmE/gaUFZgF3eVmYuIm1Znw/nPwLZx0P7/Y=
 github.com/orchestd/servicereply v0.0.6/go.mod h1:TppC/gKP9QT1SUmlZc3nwugYPWqLX+0t6A7CRSR9Roc=
 github.com/orchestd/servicereply v0.0.7/go.mod h1:TppC/gKP9QT1SUmlZc3nwugYPWqLX+0t6A7CRSR9Roc=
-github.com/orchestd/servicereply v0.0.8 h1:K44zafZZXWW1TiHONmKf8pJtuRaKPwonUDvn8Ofyd78=
 github.com/orchestd/servicereply v0.0.8/go.mod h1:TppC/gKP9QT1SUmlZc3nwugYPWqLX+0t6A7CRSR9Roc=
+github.com/orchestd/servicereply v0.2.0 h1:Pj29PandjrLUuNKE49cDdHcnh6UPSuMmSKUnaaWsHZM=
+github.com/orchestd/servicereply v0.2.0/go.mod h1:TppC/gKP9QT1SUmlZc3nwugYPWqLX+0t6A7CRSR9Roc=
 github.com/orchestd/session v0.21.12/go.mod h1:5YyuKhhg2tTy4QR02sHlNiFyGyol4s38CvF71BWhtYA=
 github.com/orchestd/session v0.21.14/go.mod h1:ZJFO9GVSM54b8KP7CMu3BxjvO65EUfDr2S/g2sNTHnQ=
 github.com/orchestd/session v0.21.15/go.mod h1:zoT6caRQTFJB25KXQoWjAKzTu98XFebWX8ZAarFiEEI=
@@ -365,8 +366,8 @@ github.com/orchestd/transport v0.15.11/go.mod h1:GsuylUE9ebeullCTt16ES6N1eUgU5sC
 github.com/orchestd/transport v0.15.12/go.mod h1:6BOtxDB2rRhsvJnMdc7kwXgswUk1Wx+75A9XhtOg1Ro=
 github.com/orchestd/transport v0.15.13/go.mod h1:wrOFrDFYAl49ZNcGDCPwht/Vj0+luhm+hwjZ3PD64GM=
 github.com/orchestd/transport v0.16.1/go.mod h1:wrOFrDFYAl49ZNcGDCPwht/Vj0+luhm+hwjZ3PD64GM=
-github.com/orchestd/transport v0.21.0 h1:9Z/jtfG6CYYggIFuEWKlKX9+M68ktlHqy6ujYZNHM98=
-github.com/orchestd/transport v0.21.0/go.mod h1:UoElhs8U6udjus8ZUf698EUkcksSpAkcywJxhHB9bKg=
+github.com/orchestd/transport v0.22.0 h1:wWqqLD7Mit4eDNuLGr5QoP03j1ik82M7WtGYlxgG+bA=
+github.com/orchestd/transport v0.22.0/go.mod h1:qFIDg1s5VTIgGfG9qIN0P2L2MXgYjtWCFmMqpnYmzOg=
 github.com/orchestd/utils v0.0.1/go.mod h1:xBPbClyT7bUP8rIH3em9MOxkPPlTKL4ULoQys+g7Yto=
 github.com/orchestd/utils v0.0.2 h1:urZ2kluLwfAh1i9yn7EdYtYy3L6WunD+t8q3ZszCS70=
 github.com/orchestd/utils v0.0.2/go.mod h1:xBPbClyT7bUP8rIH3em9MOxkPPlTKL4ULoQys+g7Yto=
