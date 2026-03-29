@@ -368,6 +368,7 @@ github.com/orchestd/transport v0.15.13/go.mod h1:wrOFrDFYAl49ZNcGDCPwht/Vj0+luhm
 github.com/orchestd/transport v0.16.1/go.mod h1:wrOFrDFYAl49ZNcGDCPwht/Vj0+luhm+hwjZ3PD64GM=
 github.com/orchestd/transport v0.22.1 h1:KpFOeSiZUpTuAeWkON7wk9F2tYLBsKAiYb2eA+2po98=
 github.com/orchestd/transport v0.22.1/go.mod h1:qFIDg1s5VTIgGfG9qIN0P2L2MXgYjtWCFmMqpnYmzOg=
+github.com/orchestd/transport v0.23.0/go.mod h1:qFIDg1s5VTIgGfG9qIN0P2L2MXgYjtWCFmMqpnYmzOg=
 github.com/orchestd/utils v0.0.1/go.mod h1:xBPbClyT7bUP8rIH3em9MOxkPPlTKL4ULoQys+g7Yto=
 github.com/orchestd/utils v0.0.2 h1:urZ2kluLwfAh1i9yn7EdYtYy3L6WunD+t8q3ZszCS70=
 github.com/orchestd/utils v0.0.2/go.mod h1:xBPbClyT7bUP8rIH3em9MOxkPPlTKL4ULoQys+g7Yto=
