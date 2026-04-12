@@ -311,6 +311,7 @@ github.com/orchestd/configurations v0.10.4/go.mod h1:HMgtp18kmzfgOXk+nIHID/TM5yw
 github.com/orchestd/configurations v0.15.0/go.mod h1:HMgtp18kmzfgOXk+nIHID/TM5ywJKg7KcwKENgWzw20=
 github.com/orchestd/configurations v0.17.0 h1:Ik2t1ZrMazdn30SKopIrq7yIbZ0Zt/j7c37xiFAbmkM=
 github.com/orchestd/configurations v0.17.0/go.mod h1:HMgtp18kmzfgOXk+nIHID/TM5ywJKg7KcwKENgWzw20=
+github.com/orchestd/configurations v0.18.0/go.mod h1:HMgtp18kmzfgOXk+nIHID/TM5ywJKg7KcwKENgWzw20=
 github.com/orchestd/debug v0.1.9/go.mod h1:658v6RjIl6tDbmMQE8vPMOj4D6ydFHMZJ+ronJCyHz8=
 github.com/orchestd/debug v0.1.10/go.mod h1:kDp4WcOpc6MXlx+Y6YqhyPkrwjfE2SVgHsxiBl7zwoM=
 github.com/orchestd/debug v0.1.11 h1:sqz683pnmQuERE+seYXDge/KXkpF9xW0Rkln6TjJXEo=
