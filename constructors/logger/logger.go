@@ -12,14 +12,14 @@ import (
 
 const compensateDefaultLogger = 1
 
-type loggerDeps struct {
+type LoggerDeps struct {
 	fx.In
 	Config            configuration.Config
 	LoggerBuilder     log.Builder
 	ContextExtractors []log.ContextExtractor `group:"loggerContextExtractors"`
 }
 
-func DefaultLogger(deps loggerDeps) log2.Logger {
+func DefaultLogger(deps LoggerDeps) log2.Logger {
 	var logLevel = log.DebugLevel
 	if levelValue := deps.Config.Get(consts.MinimumSeverityLevel); levelValue.IsSet() {
 		if key, err := levelValue.String(); err == nil {
@@ -32,7 +32,7 @@ func DefaultLogger(deps loggerDeps) log2.Logger {
 	return log.CreateMortarLogger(builder, append(deps.ContextExtractors, deps.selfStaticFieldsContextExtractor)...)
 }
 
-func (d loggerDeps) selfStaticFieldsContextExtractor(_ context.Context) map[string]interface{} {
+func (d LoggerDeps) selfStaticFieldsContextExtractor(_ context.Context) map[string]interface{} {
 	output := make(map[string]interface{})
 	if dockerName, err := d.Config.GetServiceName(); err == nil {
 		output["app"] = dockerName

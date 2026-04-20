@@ -57,6 +57,6 @@ func LoggerFxOption() fx.Option {
 
 		trace.TraceInfoContextExtractorFxOption(),
 
-		fx.Provide(logger.DefaultLogger),
+		fx.Provide(logger.ExtraFieldsLogger),
 	)
 }
