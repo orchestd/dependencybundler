@@ -4,6 +4,8 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"time"
+
 	"github.com/gin-gonic/gin"
 	"github.com/go-masonry/mortar/utils"
 	"github.com/opentracing/opentracing-go"
@@ -11,10 +13,10 @@ import (
 	traceLog "github.com/opentracing/opentracing-go/log"
 	"github.com/orchestd/dependencybundler/interfaces/configuration"
 	"github.com/orchestd/dependencybundler/interfaces/log"
+	"github.com/orchestd/dependencybundler/interfaces/transport"
 	"github.com/orchestd/tokenauth"
 	"go.uber.org/fx"
 	"google.golang.org/grpc/metadata"
-	"time"
 )
 
 type tracingDeps struct {
@@ -22,6 +24,7 @@ type tracingDeps struct {
 	JWToken tokenauth.TokenBase
 	Logger  log.Logger
 	Config  configuration.Config
+	Client  transport.HttpClient
 	Tracer  opentracing.Tracer `optional:"true"`
 }
 

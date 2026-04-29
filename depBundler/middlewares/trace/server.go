@@ -3,11 +3,16 @@ package trace
 import (
 	"bytes"
 	"context"
+	"fmt"
 	"io"
-	"io/ioutil"
+	"mime"
+	"mime/multipart"
+	"net/http"
 	"net/http/httputil"
+	"net/textproto"
 	"net/url"
 	"os"
+	"sort"
 
 	"github.com/gin-gonic/gin"
 	"github.com/opentracing/opentracing-go"
@@ -42,8 +47,10 @@ func HttpTracingUnaryServerInterceptor(deps tracingDeps) gin.HandlerFunc {
 		componentName, _ := deps.Config.GetServiceName()
 		ext.Component.Set(sp, componentName)
 		defer sp.Finish()
-		if v, err := httputil.DumpRequest(c.Request, true); err == nil {
-			addBodyToSpan(sp, "request", v)
+
+		_, requestTracePayload, err := getRequestTracePayload(c.Request, deps)
+		if err == nil {
+			addBodyToSpan(sp, "request", requestTracePayload)
 		}
 
 		if c.Request.URL.Query().Has("journeytoken") {
@@ -59,11 +66,6 @@ func HttpTracingUnaryServerInterceptor(deps tracingDeps) gin.HandlerFunc {
 			}
 		}
 
-		bodyCopy := new(bytes.Buffer)
-		io.Copy(bodyCopy, c.Request.Body)
-
-		bodyData := bodyCopy.Bytes()
-		c.Request.Body = ioutil.NopCloser(bytes.NewReader(bodyData))
 		blw := &bodyLogWriter{body: bytes.NewBuffer([]byte{}), ResponseWriter: c.Writer}
 		c.Writer = blw
 
@@ -106,4 +108,188 @@ func HttpTracingUnaryServerInterceptor(deps tracingDeps) gin.HandlerFunc {
 		addBodyToSpan(sp, "response-headers", c.Writer.Header())
 		addBodyToSpan(sp, "response", rawBody.Bytes())
 	}
+}
+
+func getRequestTracePayload(req *http.Request, deps tracingDeps) ([]byte, interface{}, error) {
+	bodyData, err := readAndRestoreRequestBody(req)
+	if err != nil {
+		return nil, nil, err
+	}
+
+	if isMultipartFormRequest(req) {
+		reqDump, err := buildMultipartTraceDump(req, bodyData, deps)
+		return bodyData, reqDump, err
+	}
+
+	reqDump, err := httputil.DumpRequest(cloneRequestWithBody(req, bodyData), true)
+	if err != nil {
+		return bodyData, nil, err
+	}
+
+	return bodyData, reqDump, nil
+}
+
+func readAndRestoreRequestBody(req *http.Request) ([]byte, error) {
+	if req.Body == nil {
+		return nil, nil
+	}
+
+	bodyData, err := io.ReadAll(req.Body)
+	if err != nil {
+		return nil, err
+	}
+
+	req.Body = io.NopCloser(bytes.NewReader(bodyData))
+
+	return bodyData, nil
+}
+
+func isMultipartFormRequest(req *http.Request) bool {
+	contentType := req.Header.Get("Content-Type")
+	if contentType == "" {
+		return false
+	}
+
+	mediaType, _, err := mime.ParseMediaType(contentType)
+	if err != nil {
+		return false
+	}
+
+	return mediaType == "multipart/form-data"
+}
+
+func buildMultipartTraceDump(req *http.Request, bodyData []byte, deps tracingDeps) ([]byte, error) {
+	clonedRequest := cloneRequestWithBody(req, bodyData)
+	if err := clonedRequest.ParseMultipartForm(32 << 20); err != nil {
+		return nil, err
+	}
+	if clonedRequest.MultipartForm == nil {
+		return httputil.DumpRequest(clonedRequest, true)
+	}
+	defer clonedRequest.MultipartForm.RemoveAll()
+
+	traceBody := bytes.NewBuffer(nil)
+	traceWriter := multipart.NewWriter(traceBody)
+
+	if boundary, ok := getMultipartBoundary(req); ok {
+		if err := traceWriter.SetBoundary(boundary); err != nil {
+			return nil, fmt.Errorf("set multipart boundary: %w", err)
+		}
+	}
+
+	for _, fieldName := range extractKeys(clonedRequest.MultipartForm.Value) {
+		for _, value := range clonedRequest.MultipartForm.Value[fieldName] {
+			if err := traceWriter.WriteField(fieldName, value); err != nil {
+				return nil, fmt.Errorf("write multipart field %q: %w", fieldName, err)
+			}
+		}
+	}
+
+	for _, fieldName := range extractKeys(clonedRequest.MultipartForm.File) {
+		files := clonedRequest.MultipartForm.File[fieldName]
+		sort.SliceStable(files, func(i, j int) bool {
+			return files[i].Filename < files[j].Filename
+		})
+
+		for _, file := range files {
+			part, err := traceWriter.CreatePart(buildMultipartTracePartHeader(fieldName, file))
+			if err != nil {
+				return nil, fmt.Errorf("create multipart file part %q: %w", file.Filename, err)
+			}
+
+			if _, err := io.WriteString(part, saveFile(file, deps)); err != nil {
+				return nil, fmt.Errorf("write multipart file link %q: %w", file.Filename, err)
+			}
+
+		}
+	}
+
+	if err := traceWriter.Close(); err != nil {
+		return nil, fmt.Errorf("close multipart trace writer: %w", err)
+	}
+
+	traceRequest := cloneRequestWithBody(req, traceBody.Bytes())
+	traceRequest.Header.Set("Content-Type", traceWriter.FormDataContentType())
+
+	return httputil.DumpRequest(traceRequest, true)
+}
+
+func saveFile(fileHeader *multipart.FileHeader, deps tracingDeps) string {
+	type UploadToBucketResponse struct {
+		Data struct {
+			UploadedTo string `json:"uploadedTo"`
+		} `json:"data"`
+	}
+
+	saveFileForTrace, _ := deps.Config.Get("saveFileForTrace").Bool()
+	if saveFileForTrace {
+		file, err := fileHeader.Open()
+		if err != nil {
+			deps.Logger.Error(context.Background(), "cannot open file: "+err.Error())
+			return "error saving file"
+		}
+
+		fileBytes, err := io.ReadAll(file)
+		closeErr := file.Close()
+		if err != nil {
+			deps.Logger.Error(context.Background(), "cannot read file: "+err.Error())
+			return "error saving file"
+		}
+		if closeErr != nil {
+			deps.Logger.Error(context.Background(), "cannot close file: "+closeErr.Error())
+			return "error saving file"
+		}
+
+		req := map[string]interface{}{
+			"fileName": fileHeader.Filename,
+			"content":  fileBytes,
+		}
+		bucketUrl, err := deps.Config.Get("bucketUrl").String()
+		if err != nil {
+			deps.Logger.Error(context.Background(), "can't get bucketUrl from conf: "+err.Error())
+			return "error saving file"
+		}
+		err = deps.Client.ExternalPost(context.Background(), req, bucketUrl, "google/storage/byte", &req, nil, "json")
+		if err != nil {
+			deps.Logger.Error(context.Background(), "can't save file to bucket service: "+err.Error())
+			return "error saving file"
+		}
+	}
+	return "saveFileForTrace is not true"
+}
+
+func cloneRequestWithBody(req *http.Request, bodyData []byte) *http.Request {
+	clonedRequest := req.Clone(req.Context())
+	clonedRequest.Body = io.NopCloser(bytes.NewReader(bodyData))
+	clonedRequest.ContentLength = int64(len(bodyData))
+
+	return clonedRequest
+}
+
+func buildMultipartTracePartHeader(fieldName string, file *multipart.FileHeader) textproto.MIMEHeader {
+	header := make(textproto.MIMEHeader, len(file.Header))
+	for k, v := range file.Header {
+		header[k] = append([]string(nil), v...)
+	}
+
+	return header
+}
+
+func getMultipartBoundary(req *http.Request) (string, bool) {
+	_, params, err := mime.ParseMediaType(req.Header.Get("Content-Type"))
+	if err != nil {
+		return "", false
+	}
+
+	boundary, ok := params["boundary"]
+	return boundary, ok
+}
+
+func extractKeys[T any](data map[string]T) []string {
+	keys := make([]string, 0, len(data))
+	for key := range data {
+		keys = append(keys, key)
+	}
+
+	return keys
 }
