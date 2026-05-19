@@ -4,6 +4,8 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"time"
+
 	"github.com/gin-gonic/gin"
 	"github.com/go-masonry/mortar/utils"
 	"github.com/opentracing/opentracing-go"
@@ -14,7 +16,6 @@ import (
 	"github.com/orchestd/tokenauth"
 	"go.uber.org/fx"
 	"google.golang.org/grpc/metadata"
-	"time"
 )
 
 type tracingDeps struct {

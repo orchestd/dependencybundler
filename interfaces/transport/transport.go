@@ -24,5 +24,7 @@ type IHttpLog http.IHttpLog
 type DiscoveryServiceProvider discoveryService.DiscoveryServiceProvider
 type HttpServerSettings http.HttpServerSettings
 
+type UploadedFile http.UploadedFile
+
 const ContentTypeJSON = clientHTTP.ContentTypeJSON
 const ContentTypeXML = clientHTTP.ContentTypeXML
