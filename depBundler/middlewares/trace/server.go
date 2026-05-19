@@ -191,17 +191,17 @@ func buildMultipartTraceDump(req *http.Request, bodyData []byte, deps tracingDep
 			return files[i].Filename < files[j].Filename
 		})
 
-		for _, file := range files {
+		/*for _, file := range files {
 			part, err := traceWriter.CreatePart(buildMultipartTracePartHeader(fieldName, file))
 			if err != nil {
 				return nil, fmt.Errorf("create multipart file part %q: %w", file.Filename, err)
 			}
 
-			if _, err := io.WriteString(part, saveFile(file, deps)); err != nil {
-				return nil, fmt.Errorf("write multipart file link %q: %w", file.Filename, err)
-			}
+				if _, err := io.WriteString(part, saveFile(file, deps)); err != nil {
+					return nil, fmt.Errorf("write multipart file link %q: %w", file.Filename, err)
+				}
 
-		}
+		}*/
 	}
 
 	if err := traceWriter.Close(); err != nil {
@@ -214,50 +214,51 @@ func buildMultipartTraceDump(req *http.Request, bodyData []byte, deps tracingDep
 	return httputil.DumpRequest(traceRequest, true)
 }
 
-func saveFile(fileHeader *multipart.FileHeader, deps tracingDeps) string {
-	type UploadToBucketResponse struct {
-		Data struct {
-			UploadedTo string `json:"uploadedTo"`
-		} `json:"data"`
+/*
+	func saveFile(fileHeader *multipart.FileHeader, deps tracingDeps) string {
+		type UploadToBucketResponse struct {
+			Data struct {
+				UploadedTo string `json:"uploadedTo"`
+			} `json:"data"`
+		}
+
+		saveFileForTrace, _ := deps.Config.Get("saveFileForTrace").Bool()
+		if saveFileForTrace {
+			file, err := fileHeader.Open()
+			if err != nil {
+				deps.Logger.Error(context.Background(), "cannot open file: "+err.Error())
+				return "error saving file"
+			}
+
+			fileBytes, err := io.ReadAll(file)
+			closeErr := file.Close()
+			if err != nil {
+				deps.Logger.Error(context.Background(), "cannot read file: "+err.Error())
+				return "error saving file"
+			}
+			if closeErr != nil {
+				deps.Logger.Error(context.Background(), "cannot close file: "+closeErr.Error())
+				return "error saving file"
+			}
+
+			req := map[string]interface{}{
+				"fileName": fileHeader.Filename,
+				"content":  fileBytes,
+			}
+			bucketUrl, err := deps.Config.Get("bucketUrl").String()
+			if err != nil {
+				deps.Logger.Error(context.Background(), "can't get bucketUrl from conf: "+err.Error())
+				return "error saving file"
+			}
+			err = deps.Client.ExternalPost(context.Background(), req, bucketUrl, "google/storage/byte", &req, nil, "json")
+			if err != nil {
+				deps.Logger.Error(context.Background(), "can't save file to bucket service: "+err.Error())
+				return "error saving file"
+			}
+		}
+		return "saveFileForTrace is not true"
 	}
-
-	saveFileForTrace, _ := deps.Config.Get("saveFileForTrace").Bool()
-	if saveFileForTrace {
-		file, err := fileHeader.Open()
-		if err != nil {
-			deps.Logger.Error(context.Background(), "cannot open file: "+err.Error())
-			return "error saving file"
-		}
-
-		fileBytes, err := io.ReadAll(file)
-		closeErr := file.Close()
-		if err != nil {
-			deps.Logger.Error(context.Background(), "cannot read file: "+err.Error())
-			return "error saving file"
-		}
-		if closeErr != nil {
-			deps.Logger.Error(context.Background(), "cannot close file: "+closeErr.Error())
-			return "error saving file"
-		}
-
-		req := map[string]interface{}{
-			"fileName": fileHeader.Filename,
-			"content":  fileBytes,
-		}
-		bucketUrl, err := deps.Config.Get("bucketUrl").String()
-		if err != nil {
-			deps.Logger.Error(context.Background(), "can't get bucketUrl from conf: "+err.Error())
-			return "error saving file"
-		}
-		err = deps.Client.ExternalPost(context.Background(), req, bucketUrl, "google/storage/byte", &req, nil, "json")
-		if err != nil {
-			deps.Logger.Error(context.Background(), "can't save file to bucket service: "+err.Error())
-			return "error saving file"
-		}
-	}
-	return "saveFileForTrace is not true"
-}
-
+*/
 func cloneRequestWithBody(req *http.Request, bodyData []byte) *http.Request {
 	clonedRequest := req.Clone(req.Context())
 	clonedRequest.Body = io.NopCloser(bytes.NewReader(bodyData))
