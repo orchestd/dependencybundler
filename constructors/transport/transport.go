@@ -3,6 +3,16 @@ package transport
 import (
 	"context"
 	"fmt"
+	"net/http"
+	"net/http/pprof"
+	"os"
+	"regexp"
+	"runtime"
+	"sort"
+	"strconv"
+	"strings"
+	"time"
+
 	"github.com/gin-gonic/gin"
 	"github.com/mitchellh/go-ps"
 	discoveryServiceProviders "github.com/orchestd/dependencybundler/constructors/discoveryService/providers"
@@ -15,15 +25,6 @@ import (
 	"github.com/orchestd/transport/client"
 	"github.com/orchestd/transport/server"
 	"go.uber.org/fx"
-	"net/http"
-	"net/http/pprof"
-	"os"
-	"regexp"
-	"runtime"
-	"sort"
-	"strconv"
-	"strings"
-	"time"
 )
 
 type transportDeps struct {
@@ -46,6 +47,7 @@ type AssetRoot struct {
 	UrlPath     string
 	FolderPath  string
 	AllowOnProd bool
+	ContentType string
 }
 
 func DefaultTransport(deps transportDeps) (transportConstructor.IRouter, transportConstructor.HttpClient) {
@@ -72,7 +74,7 @@ func DefaultTransport(deps transportDeps) (transportConstructor.IRouter, transpo
 	}
 	deps.ClientBuilder = deps.ClientBuilder.SetConfig(deps.Conf)
 
-	var staticHandlers = make(map[string]string)
+	var staticHandlers = []map[string]string{}
 
 	var assetRoots []AssetRoot
 
@@ -224,7 +226,7 @@ func DefaultTransport(deps transportDeps) (transportConstructor.IRouter, transpo
 		} else {
 			for _, a := range assetRoots {
 				if a.AllowOnProd {
-					staticHandlers[a.UrlPath] = a.FolderPath
+					staticHandlers = append(staticHandlers, map[string]string{"urlPath": a.UrlPath, "folderPath": a.FolderPath, "contentType": a.ContentType})
 				}
 			}
 		}
@@ -238,7 +240,7 @@ func DefaultTransport(deps transportDeps) (transportConstructor.IRouter, transpo
 		}
 		for _, a := range assetRoots {
 			if !a.AllowOnProd {
-				staticHandlers[a.UrlPath] = a.FolderPath
+				staticHandlers = append(staticHandlers, map[string]string{"urlPath": a.UrlPath, "folderPath": a.FolderPath, "contentType": a.ContentType})
 			}
 		}
 	}
