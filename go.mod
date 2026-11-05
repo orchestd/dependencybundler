@@ -10,7 +10,7 @@ require (
 	github.com/go-masonry/mortar v0.1.3
 	github.com/mitchellh/go-ps v1.0.0
 	github.com/opentracing/opentracing-go v1.2.0
-	github.com/orchestd/cacheStorage v0.24.0
+	github.com/orchestd/cacheStorage v0.25.0
 	github.com/orchestd/configurations v0.19.1
 	github.com/orchestd/debug v0.1.11
 	github.com/orchestd/log v0.1.3
@@ -20,7 +20,7 @@ require (
 	github.com/orchestd/sharedlib v0.19.0
 	github.com/orchestd/tokenauth v0.4.16
 	github.com/orchestd/trace v0.0.23
-	github.com/orchestd/transport v0.25.0
+	github.com/orchestd/transport v0.26.0
 	github.com/orchestd/validations v0.6.0
 	github.com/prometheus/client_golang v1.11.0
 	github.com/uber/jaeger-client-go v2.25.0+incompatible
